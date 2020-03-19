@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-undef */
-import React, { useState } from 'react'
-import { Text, View, Image, TouchableOpacity, ActivityIndicator, StyleSheet } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Text, View, Image, TouchableOpacity, ActivityIndicator, StyleSheet, AsyncStorage, Alert } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
@@ -66,23 +68,66 @@ const styles = StyleSheet.create({
 
 export default () => {
   const [isLoggedin, setLoggedinStatus] = useState(false)
+  const [isFetching, setIsFetching] = useState(true)
   const [userData, setUserData] = useState(null)
   const [isImageLoading, setImageLoadStatus] = useState(false)
 
+  useEffect(() => {
+    if (!isLoggedin) {
+      fetchUserData()
+        .catch(e => console.log(e))
+    }
+  }, [isLoggedin])
+
+  const fetchUserData = async () => {
+    try {
+      const token = await AsyncStorage.getItem('@FacebookOAuthKey:accessToken')
+      console.log('token', token)
+      if (token) {
+        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
+        const data = await response.json()
+        if (data.error) {
+          setIsFetching(false)
+          Alert.alert(data.error.message)
+          return null
+        }
+        console.log('data ===>', data)
+        if (data) {
+          setLoggedinStatus(true)
+          setUserData(data)
+        }
+        setIsFetching(false)
+      }
+    } catch (error) {
+      Alert.alert(error.message)
+    }
+    return null
+  }
+
+  const logout = () => {
+    AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
+    setLoggedinStatus(false)
+    setUserData(null)
+    setImageLoadStatus(false)
+  }
+
   return (
-    isLoggedin ?
-      userData &&
-      <View style={styles.container}>
-        <Image
-          style={{ width: 200, height: 200, borderRadius: 50 }}
-          source={{ uri: userData.picture.data.url }}
-          onLoadEnd={() => setImageLoadStatus(true)} />
-        <ActivityIndicator size="large" color="#0000ff" animating={!isImageLoading} style={{ position: 'absolute' }} />
-        <Text style={{ fontSize: 22, marginVertical: 10 }}>Hi {userData.name}!</Text>
-        <TouchableOpacity style={styles.logoutBtn} onPress={() => logout()}><Text style={{ color: '#fff' }}>Logout</Text>
-        </TouchableOpacity>
-      </View>
-      : <Login setUserData={setUserData} setLoggedinStatus={setLoggedinStatus} />
-    // : <Main />
+    isFetching
+      ? <View style={styles.container}><Text>Loading...</Text></View>
+      : isLoggedin
+        ? userData
+          ? <View style={styles.container}>
+            <Image
+              style={{ width: 200, height: 200, borderRadius: 50 }}
+              source={{ uri: userData.picture.data.url }}
+              onLoadEnd={() => setImageLoadStatus(true)} />
+            <ActivityIndicator size="large" color="#0000ff" animating={!isImageLoading} style={{ position: 'absolute' }} />
+            <Text style={{ fontSize: 22, marginVertical: 10 }}>Hi {userData.name}!</Text>
+            <TouchableOpacity style={styles.logoutBtn} onPress={() => logout()}><Text style={{ color: '#fff' }}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+          : <View style={styles.container}><Text>Error</Text></View>
+        : <Login fetchUserData={fetchUserData} setLoggedinStatus={setLoggedinStatus} setIsFetching={setIsFetching} />
   )
+  // : <Main />
 }
