@@ -94,7 +94,7 @@ const ModalStackScreen = () => (
       component={QR}
       options={{ headerShown: false }}
     />
-    <ModalStack.Screen name="Update" component={UpdateStatus} options={{ title: 'อัพเดท', headerShown: false }} />
+    <ModalStack.Screen name="Update" component={UpdateStatus} options={{ cardStyle: { backgroundColor: 'transparent' }, title: 'อัพเดท', headerShown: false }} />
   </ModalStack.Navigator>
 )
 

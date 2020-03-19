@@ -11,7 +11,7 @@ import {
 import { COLOR } from '../../constants/theme'
 
 let value = 0
-const ACTION_TIMER = 400
+const ACTION_TIMER = 5000
 const COLORS = [COLOR.UPDATING_HEALTH, COLOR.UPDATING_HEALTH]
 
 const AnimatedButtonPress = ({ navigation }) => {
@@ -78,18 +78,23 @@ const AnimatedButtonPress = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback
-        onPressIn={() => handlePressIn()}
-        onPressOut={() => handlePressOut()}
-      >
-        <View style={{ ...styles.button, ...styles.updateButton, borderColor: COLOR.HEALTH }} onLayout={(e) => getButtonWidthLayout(e)}>
-          <Animated.View style={[styles.bgFill, getProgressStyles()]} />
-          <Text style={{ ...styles.textStyle, color: COLOR.HEALTH, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
-        </View>
-      </TouchableWithoutFeedback>
-      <>
-        <Text>{textComplete}</Text>
-      </>
+      <View style={styles.actionSection}>
+        <Text style={{ ...styles.statusTitle, color: COLOR.HEALTH }}>ยืนยันว่าคุณหายแล้ว</Text>
+        <Text style={{ ...styles.statusSubTitle }}>ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย</Text>
+        <Text style={{ ...styles.statusSubTitle }}>พบเจอในช่วงเวลา 14 วัน</Text>
+        <TouchableWithoutFeedback
+          onPressIn={() => handlePressIn()}
+          onPressOut={() => handlePressOut()}
+        >
+          <View style={{ ...styles.button, ...styles.updateButton, borderColor: COLOR.HEALTH }} onLayout={(e) => getButtonWidthLayout(e)}>
+            <Animated.View style={[styles.bgFill, getProgressStyles()]} />
+            <Text style={{ ...styles.textStyle, color: COLOR.HEALTH, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
+          </View>
+        </TouchableWithoutFeedback>
+        <>
+          <Text>{textComplete}</Text>
+        </>
+      </View>
       <Button onPress={() => navigation.navigate('QR')} titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }} buttonStyle={{ ...styles.button, borderColor: COLOR.GRAY }} title='ปิดหน้านี้' />
       <Modal
         isVisible={isVisible}
@@ -104,17 +109,26 @@ const AnimatedButtonPress = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </View >
   )
 }
 
 const styles = StyleSheet.create({
+  actionSection: {
+    flex: 1,
+    // borderColor: 'red',
+    // backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
+    paddingTop: 50,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     backgroundColor: COLOR.BLACK,
+    // zIndex: 10000,
   },
   updateButton: {
     padding: 20,
@@ -132,6 +146,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Kanit-Medium',
     fontSize: 16,
     marginTop: 20,
+  },
+  statusTitle: {
+    fontFamily: 'Kanit-Regular',
+    fontSize: 30,
+  },
+  statusSubTitle: {
+    fontFamily: 'Kanit-Regular',
+    fontSize: 18,
+    color: COLOR.WHITE,
   },
   text: {
     backgroundColor: 'transparent',
