@@ -75,6 +75,7 @@ export default () => {
   useEffect(() => {
     if (!isLoggedin) {
       fetchUserData()
+        .then(() => setIsFetching(false))
         .catch(e => console.log(e))
     }
   }, [isLoggedin])
@@ -82,7 +83,6 @@ export default () => {
   const fetchUserData = async () => {
     try {
       const token = await AsyncStorage.getItem('@FacebookOAuthKey:accessToken')
-      console.log('token', token)
       if (token) {
         const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
         const data = await response.json()
@@ -91,24 +91,17 @@ export default () => {
           Alert.alert(data.error.message)
           return null
         }
-        console.log('data ===>', data)
         if (data) {
           setLoggedinStatus(true)
           setUserData(data)
+          // setIsFetching(false)
         }
-        setIsFetching(false)
+        // setIsFetching(false)
       }
     } catch (error) {
       Alert.alert(error.message)
     }
     return null
-  }
-
-  const logout = () => {
-    AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
-    setLoggedinStatus(false)
-    setUserData(null)
-    setImageLoadStatus(false)
   }
 
   return (
