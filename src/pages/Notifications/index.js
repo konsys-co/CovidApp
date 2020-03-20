@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, TouchableHighlight } from 'react-native'
+import { StyleSheet, View, ScrollView, TouchableHighlight, Text } from 'react-native'
 import moment from 'moment'
+import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
 import { STATUS } from '../../constants/userStatus'
 
@@ -8,8 +9,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    // marginHorizontal: 14,
-    paddingTop: 56,
+    width: '100%',
+  },
+  background: {
+    paddingTop: 72,
   },
   text: {
     textAlign: 'center'
@@ -23,11 +26,13 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  dateText: {
+  titleText: {
+    fontFamily: 'Kanit-Regular',
     alignSelf: 'flex-start',
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 16,
+    paddingLeft: 20,
+    marginBottom: 22
   }
 })
 
@@ -143,16 +148,19 @@ const MOCK_DATA = [
 const Notifications = () => (
   <ScrollView style={{ backgroundColor: '#fff' }} >
     <View style={styles.container}>
-      {MOCK_DATA.map(({ id, name, imgURL, status, timestamp }) => (
-        <TouchableHighlight index={id} underlayColor="#F1F1F1" onPress={() => {}} style={{ width: '100%' }}>
-          <NotificationCard
-            name={name}
-            imgURL={imgURL}
-            dateTime={timestamp}
-            status={status}
-          />
-        </TouchableHighlight>
-      ))}
+      <GradientBackground status={STATUS.NORMAL} style={styles.background}>
+        <Text style={styles.titleText}>แจ้งเตือน</Text>
+        {MOCK_DATA.map(({ id, name, imgURL, status, timestamp }) => (
+          <TouchableHighlight key={id} underlayColor="#F1F1F1" onPress={() => {}} style={{ width: '100%' }}>
+            <NotificationCard
+              name={name}
+              imgURL={imgURL}
+              dateTime={timestamp}
+              status={status}
+            />
+          </TouchableHighlight>
+        ))}
+      </GradientBackground>
     </View>
   </ScrollView>
 )

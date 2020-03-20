@@ -42,7 +42,9 @@ const Main = ({ userData }) => {
           inactiveTintColor: 'gray',
         }}
       >
-        <BottomTab.Screen name='QR' component={() => <QR userData={userData} />} />
+        <BottomTab.Screen name='QR'>
+          {() => <QR userData={userData} />}
+        </BottomTab.Screen>
         <BottomTab.Screen name='Scanner' component={Scanner} />
         <BottomTab.Screen name='Contacts' component={Contacts} />
         <BottomTab.Screen name='Notifications' component={Notifications} />

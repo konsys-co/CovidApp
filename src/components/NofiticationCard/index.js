@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     width: '100%',
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 22,
   },
   avatar: {
     width: 50,
