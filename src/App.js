@@ -13,8 +13,8 @@ import { NORMAL } from './constants/userStatus'
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
 import Contacts from './pages/Contacts'
-import Menu from './pages/Menu'
 import Login from './pages/Login'
+import Notifications from './pages/Notifications'
 
 const BottomTab = createBottomTabNavigator()
 
@@ -31,8 +31,8 @@ const Main = ({ userData }) => {
               return <Ionicons name='md-qr-scanner' size={size} color={color} />
             } if (route.name === 'Contacts') {
               return <AntDesign name='contacts' size={size} color={color} />
-            } if (route.name === 'Menu') {
-              return <Ionicons name='md-menu' size={size} color={color} />
+            } if (route.name === 'Notifications') {
+              return <AntDesign name="bells" size={size} color={color} />
             }
             return null
           },
@@ -42,10 +42,12 @@ const Main = ({ userData }) => {
           inactiveTintColor: 'gray',
         }}
       >
-        <BottomTab.Screen name='QR' component={() => <QR userData={userData} />} />
+        <BottomTab.Screen name='QR'>
+          {() => <QR userData={userData} />}
+        </BottomTab.Screen>
         <BottomTab.Screen name='Scanner' component={Scanner} />
         <BottomTab.Screen name='Contacts' component={Contacts} />
-        <BottomTab.Screen name='Menu' component={Menu} />
+        <BottomTab.Screen name='Notifications' component={Notifications} />
       </BottomTab.Navigator>
     </NavigationContainer>
   )

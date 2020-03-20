@@ -1,18 +1,17 @@
 import React from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
-import { Button } from 'react-native-elements'
 import { COLOR } from '../../constants/theme'
+import { DARK, TEXT } from '../../constants/userStatus'
 
 const styles = StyleSheet.create({
   cardWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     width: '100%',
-    paddingVertical: 16,
-    paddingHorizontal: 10,
-    marginVertical: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 22,
   },
   avatar: {
     width: 50,
@@ -29,7 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     // fontWeight: '400',
     fontFamily: 'Kanit-Regular',
-    color: COLOR.BUTTER,
   },
   subtitle: {
     fontSize: 15,
@@ -45,7 +43,7 @@ export default ({ name, dateTime, location, imgURL, status }) => (
       <View style={{ marginLeft: 10, justifyContent: 'space-around' }}>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.title}>{name} อัพเดทสถานะเป็น </Text>
-          <Text style={styles.statusText}>{status}</Text>
+          <Text style={[styles.statusText, { color: DARK[status] }]}>{TEXT[status]}</Text>
         </View>
         <Text style={{ ...styles.subtitle, marginRight: 8 }}>{dateTime}</Text>
       </View>
