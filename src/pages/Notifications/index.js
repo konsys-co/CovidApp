@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, ScrollView, TouchableHighlight } from 'react-native'
 import moment from 'moment'
 import NotificationCard from '../../components/NofiticationCard'
-import { STATUS } from '../../constants/status'
+import { STATUS } from '../../constants/userStatus'
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +64,7 @@ const MOCK_DATA = [
     id: '4',
     timestamp: moment().fromNow(),
     name: 'John Doe',
-    status: STATUS.RECOVERED,
+    status: STATUS.HEALED,
     imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
   },
   {
@@ -99,7 +99,7 @@ const MOCK_DATA = [
     id: '9',
     timestamp: moment().fromNow(),
     name: 'John Doe',
-    status: STATUS.RECOVERED,
+    status: STATUS.HEALED,
     imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
   },
   {
@@ -134,7 +134,7 @@ const MOCK_DATA = [
     id: '14',
     timestamp: moment().fromNow(),
     name: 'John Doe',
-    status: STATUS.RECOVERED,
+    status: STATUS.HEALED,
     imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
     
   },

@@ -13,7 +13,6 @@ import { NORMAL } from './constants/userStatus'
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
 import Contacts from './pages/Contacts'
-// import Menu from './pages/Menu'
 import Login from './pages/Login'
 import Notifications from './pages/Notifications'
 
