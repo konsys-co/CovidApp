@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 })
 
 const Contacts = ({ navigation }) => {
-  const status = 'RISK'
+  const status = 'RISK' // TODO: Fetch from server later.
   return (
     <ScrollView>
       <View style={styles.container}>

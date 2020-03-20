@@ -16,7 +16,7 @@ let value = 0
 const ACTION_TIMER = 5000
 
 const AnimatedButtonPress = ({ navigation }) => {
-  const status = 'INFECTED'
+  const status = 'INFECTED' // TODO: Fetch from server later.
   const isInfected = status === STATUS.STATUS.INFECTED
 
   const actionColor = isInfected ? STATUS.DARK.HEALED : STATUS.DARK.INFECTED
