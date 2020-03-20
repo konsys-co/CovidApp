@@ -75,10 +75,13 @@
 	<string>Allow CovidAppExpo to access your reminders</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Kanit-Light.ttf</string>
-		<string>Kanit-Medium.ttf</string>
 		<string>Kanit-Regular.ttf</string>
-		<string>Kanit-SemiBold.ttf</string>
+		<string>SukhumvitSet-Bold.ttf</string>
+		<string>SukhumvitSet-Light.ttf</string>
+		<string>SukhumvitSet-Medium.ttf</string>
+		<string>SukhumvitSet-SemiBold.ttf</string>
+		<string>SukhumvitSet-Text.ttf</string>
+		<string>SukhumvitSet-Thin.ttf</string>
 	</array>
 </dict>
 </plist>

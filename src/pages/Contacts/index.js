@@ -5,21 +5,16 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import ContactCard from '../../components/ContactCard'
 import NotificationCard from '../../components/NofiticationCard'
+import GradientBackground from '../../components/background'
 
 const Stack = createStackNavigator()
-
-/**
- * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
- * https://akveo.github.io/eva-icons
- */
-// const HeartIcon = style => <Icon {...style} name="heart" />
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
     alignItems: 'center',
-    marginHorizontal: 24,
-    paddingTop: 56,
+    backgroundColor: '#fff',
   },
   text: {
     textAlign: 'center'
@@ -36,79 +31,83 @@ const styles = StyleSheet.create({
   dateText: {
     alignSelf: 'flex-start',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Kanit-Regular',
     marginTop: 16,
   }
 })
 
-const Contacts = ({ navigation }) => (
-  <ScrollView>
-    <View style={{ backgroundColor: '#fff' }}>
+const Contacts = ({ navigation }) => {
+  const status = 'RISK' // TODO: Fetch from server later.
+  return (
+    <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.dateText}>{moment().fromNow()}</Text>
-        <NotificationCard
-          name='Supasit'
-          dateTime={moment().fromNow()}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-          status='เฝ้าระวัง'
-        />
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <Text style={styles.dateText}>{moment('2020/03/17').fromNow()}</Text>
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <Text style={styles.dateText}>{moment('2020/03/16').fromNow()}</Text>
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <Text style={styles.dateText}>{moment('2020/03/15').fromNow()}</Text>
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <Text style={styles.dateText}>{moment('2020/03/10').fromNow()}</Text>
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
-        <ContactCard
-          name='Supasit'
-          dateTime={moment().format('HH:mm')}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-        />
+        <GradientBackground status={status} style={{ paddingTop: 72, paddingHorizontal: 20 }}>
+          <Text style={styles.dateText}>{moment().fromNow()}</Text>
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <Text style={styles.dateText}>{moment('2020/03/17').fromNow()}</Text>
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <Text style={styles.dateText}>{moment('2020/03/16').fromNow()}</Text>
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <Text style={styles.dateText}>{moment('2020/03/15').fromNow()}</Text>
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <Text style={styles.dateText}>{moment('2020/03/10').fromNow()}</Text>
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+          <ContactCard
+            name='Supasit'
+            dateTime={moment().format('HH:mm')}
+            imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
+            location='Ari'
+            status={status}
+          />
+        </GradientBackground>
       </View>
-    </View>
-  </ScrollView>
-)
+    </ScrollView>
+  )
+}
 
 export default () => (
   // <NavigationContainer independent>
