@@ -2,6 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Text, Image } from 'react-native'
 import { Button } from 'react-native-elements'
 import { COLOR } from '../../constants/theme'
+import { NORMAL } from '../../constants/userStatus'
 
 const styles = StyleSheet.create({
   cardWrapper: {
@@ -30,19 +31,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    // fontWeight: '300',
-    fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.NORMAL,
+    fontFamily: 'Kanit-Regular',
+    color: COLOR.TEXT_GRAY,
   },
   subtitle: {
+    color: COLOR.TEXT_GRAY,
     fontSize: 16,
-    // fontWeight: '100',
-    fontFamily: 'SukhumvitSet-SemiBold',
+    fontFamily: 'Kanit-Regular',
   },
   textStyle: {
-    color: COLOR.DARK_GRAY,
-    fontFamily: 'SukhumvitSet-SemiBold',
-    // fontSize: 14,
+    color: COLOR.TEXT_GRAY,
+    fontFamily: 'Kanit-Regular',
     paddingHorizontal: 8,
   },
   button: {
@@ -57,13 +56,13 @@ export default ({ name, dateTime, location, imgURL, status }) => (
     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Image style={styles.avatar} source={{ uri: imgURL }} />
       <View style={{ marginLeft: 10, justifyContent: 'space-around' }}>
-        <Text style={styles.title}>{name}</Text>
+        <Text style={{ ...styles.title, color: NORMAL[status] }}>{name}</Text>
         <View style={{ flexDirection: 'row' }}>
           <Text style={{ ...styles.subtitle, marginRight: 8, fontWeight: '400' }}>{dateTime}</Text>
           <Text style={styles.subtitle}>{location}</Text>
         </View>
       </View>
     </View>
-    <Button title='เจออีกครั้ง' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.NORMAL }} />
+    <Button title='เจออีกครั้ง' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: NORMAL[status] }} />
   </View>
 )

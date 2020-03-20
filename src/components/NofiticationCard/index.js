@@ -19,21 +19,21 @@ const styles = StyleSheet.create({
     borderRadius: 50 / 2,
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     // fontWeight: '400',
-    fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.DARK_GRAY,
+    fontFamily: 'Kanit-Regular',
+    color: COLOR.TEXT_GRAY,
   },
   statusText: {
-    fontSize: 18,
+    fontSize: 16,
     // fontWeight: '400',
-    fontFamily: 'SukhumvitSet-SemiBold',
+    fontFamily: 'Kanit-Regular',
   },
   statusNormal: {
     color: COLOR.NORMAL,
   },
   statusRisk: {
-    color: COLOR.RISK,
+    color: COLOR.BUTTER,
   },
   statusInfected: {
     color: COLOR.INFECTED,
@@ -45,9 +45,9 @@ const styles = StyleSheet.create({
     color: COLOR.DARK_GRAY
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 15,
     // fontWeight: '100',
-    fontFamily: 'SukhumvitSet-SemiBold',
+    fontFamily: 'Kanit-Regular',
   },
 })
 
