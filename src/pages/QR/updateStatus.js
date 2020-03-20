@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginVertical: 16,
-    backgroundColor: '#00000000',
+    backgroundColor: 'transparent',
     borderWidth: 3,
     width: 300,
     borderRadius: 10,
