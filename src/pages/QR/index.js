@@ -106,7 +106,9 @@ export default ({ userData }) => (
         component={ModalStackScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Profile" component={({ navigation }) => <Profile userData={userData} navigation={navigation} />} options={{ title: 'ข้อมูลส่วนตัว', headerShown: false }} />
+      <Stack.Screen name="Profile" options={{ title: 'ข้อมูลส่วนตัว', headerShown: false }}>
+        {({ navigation }) => <Profile userData={userData} navigation={navigation} />}
+      </Stack.Screen>
       {/* <Stack.Screen name="Update" component={UpdateStatus} options={{ title: 'อัพเดท', headerShown: false }} /> */}
     </Stack.Navigator>
   </NavigationContainer>

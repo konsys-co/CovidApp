@@ -12,42 +12,46 @@ import { COLOR } from './constants/theme'
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
 import Contacts from './pages/Contacts'
-import Menu from './pages/Menu'
+// import Menu from './pages/Menu'
 import Login from './pages/Login'
+import Notifications from './pages/Notifications'
 
 const BottomTab = createBottomTabNavigator()
 
-const Main = ({ userData }) => {
-  return (
-    <NavigationContainer>
-      <BottomTab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            if (route.name === 'QR') {
-              return <FontAwesome5 name='qrcode' size={size} color={color} />
-            } if (route.name === 'Scanner') {
-              return <Ionicons name='md-qr-scanner' size={size} color={color} />
-            } if (route.name === 'Contacts') {
-              return <AntDesign name='contacts' size={size} color={color} />
-            } if (route.name === 'Menu') {
-              return <Ionicons name='md-menu' size={size} color={color} />
-            }
-            return null
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: COLOR.NORMAL,
-          inactiveTintColor: 'gray',
-        }}
-      >
-        <BottomTab.Screen name='QR' component={() => <QR userData={userData} />} />
-        <BottomTab.Screen name='Scanner' component={Scanner} />
-        <BottomTab.Screen name='Contacts' component={Contacts} />
-        <BottomTab.Screen name='Menu' component={Menu} />
-      </BottomTab.Navigator>
-    </NavigationContainer>
-  )
-}
+const Main = ({ userData }) => (
+  <NavigationContainer>
+    <BottomTab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          if (route.name === 'QR') {
+            return <FontAwesome5 name='qrcode' size={size} color={color} />
+          } if (route.name === 'Scanner') {
+            return <Ionicons name='md-qr-scanner' size={size} color={color} />
+          } if (route.name === 'Contacts') {
+            return <AntDesign name='contacts' size={size} color={color} />
+          // } if (route.name === 'Menu') {
+          //   return <Ionicons name='md-menu' size={size} color={color} />
+          } if (route.name === 'Notifications') {
+            return <AntDesign name="bells" size={size} color={color} />
+          }
+          return null
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: COLOR.NORMAL,
+        inactiveTintColor: 'gray',
+      }}
+    >
+      <BottomTab.Screen name='QR'>
+        {() => <QR userData={userData} />}
+      </BottomTab.Screen>
+      <BottomTab.Screen name='Scanner' component={Scanner} />
+      <BottomTab.Screen name='Contacts' component={Contacts} />
+      {/* <BottomTab.Screen name='Menu' component={Menu} /> */}
+      <BottomTab.Screen name='Notifications' component={Notifications} />
+    </BottomTab.Navigator>
+  </NavigationContainer>
+)
 
 const styles = StyleSheet.create({
   container: {

@@ -46,13 +46,6 @@ const Contacts = ({ navigation }) => (
     <View style={{ backgroundColor: '#fff' }}>
       <View style={styles.container}>
         <Text style={styles.dateText}>{moment().fromNow()}</Text>
-        <NotificationCard
-          name='Supasit'
-          dateTime={moment().fromNow()}
-          imgURL='https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-          location='Ari'
-          status='เฝ้าระวัง'
-        />
         <ContactCard
           name='Supasit'
           dateTime={moment().format('HH:mm')}
