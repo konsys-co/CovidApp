@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
 // import * as Facebook from 'expo-facebook'
 import { COLOR } from './constants/theme'
+import { NORMAL } from './constants/userStatus'
 
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
@@ -18,6 +19,7 @@ import Login from './pages/Login'
 const BottomTab = createBottomTabNavigator()
 
 const Main = ({ userData }) => {
+  const status = 'NORMAL' // TODO: Fetch from server later.
   return (
     <NavigationContainer>
       <BottomTab.Navigator
@@ -36,7 +38,7 @@ const Main = ({ userData }) => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: COLOR.BLUE,
+          activeTintColor: NORMAL[status],
           inactiveTintColor: 'gray',
         }}
       >

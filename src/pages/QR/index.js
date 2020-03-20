@@ -8,7 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import GradientBackground from '../../components/background'
 
 import Profile from './profile'
-import UpdateStatus from './update-status'
+import UpdateStatus from './updateStatus'
 import { COLOR } from '../../constants/theme'
 import * as STATUS from '../../constants/userStatus'
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontFamily: 'Kanit-Regular',
-    fontSize: 30,
+    fontSize: 25,
     marginBottom: 20,
   },
   button: {

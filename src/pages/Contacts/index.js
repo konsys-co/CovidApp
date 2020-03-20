@@ -6,15 +6,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import ContactCard from '../../components/ContactCard'
 import NotificationCard from '../../components/NofiticationCard'
 import GradientBackground from '../../components/background'
-import * as STATUS from '../../constants/userStatus'
 
 const Stack = createStackNavigator()
-
-/**
- * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
- * https://akveo.github.io/eva-icons
- */
-// const HeartIcon = style => <Icon {...style} name="heart" />
 
 const styles = StyleSheet.create({
   container: {
