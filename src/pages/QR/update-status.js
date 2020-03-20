@@ -9,22 +9,24 @@ import {
   TouchableWithoutFeedback
 } from 'react-native'
 import { COLOR } from '../../constants/theme'
+import GradientBackground from '../../components/background'
+import * as STATUS from '../../constants/userStatus'
 
 let value = 0
 const ACTION_TIMER = 5000
-const COLORS = [COLOR.PALE_MINT, COLOR.PALE_MINT]
 
 const AnimatedButtonPress = ({ navigation }) => {
+  const status = 'NORMAL'
+  const isInfected = status === STATUS.STATUS.INFECTED
+
+  const actionColor = isInfected ? STATUS.DARK.HEALED : STATUS.DARK.INFECTED
+  const COLORS = [isInfected ? STATUS.NORMAL.HEALED : STATUS.NORMAL.INFECTED, isInfected ? STATUS.NORMAL.HEALED : STATUS.NORMAL.INFECTED]
+
   const [pressAction, setPressAction] = useState(new Animated.Value(0))
   const [textComplete, setTextComplete] = useState('')
   const [buttonWidth, setButtonWidth] = useState(0)
   const [buttonHeight, setButtonHeight] = useState()
   const [isVisible, setIsVisible] = useState(false)
-
-  // const deviceWidth = Dimensions.get('window').width
-  // const deviceHeight = Platform.OS === 'ios'
-  //   ? Dimensions.get('window').height
-  //   : require('react-native-extra-dimensions-android').get('REAL_WINDOW_HEIGHT')
 
   useEffect(() => {
     // eslint-disable-next-line no-return-assign
@@ -78,37 +80,39 @@ const AnimatedButtonPress = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.actionSection}>
-        <Text style={{ ...styles.statusTitle, color: COLOR.MINT }}>ยืนยันว่าคุณหายแล้ว</Text>
-        <Text style={{ ...styles.statusSubTitle }}>ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย</Text>
-        <Text style={{ ...styles.statusSubTitle }}>พบเจอในช่วงเวลา 14 วัน</Text>
-        <TouchableWithoutFeedback
-          onPressIn={() => handlePressIn()}
-          onPressOut={() => handlePressOut()}
-        >
-          <View style={{ ...styles.button, ...styles.updateButton, borderColor: COLOR.MINT }} onLayout={(e) => getButtonWidthLayout(e)}>
-            <Animated.View style={[styles.bgFill, getProgressStyles()]} />
-            <Text style={{ ...styles.textStyle, color: COLOR.MINT, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
-          </View>
-        </TouchableWithoutFeedback>
-        <>
-          <Text>{textComplete}</Text>
-        </>
-      </View>
-      <Button onPress={() => navigation.navigate('QR')} titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }} buttonStyle={{ ...styles.button, borderColor: COLOR.BACKGROUND_GRAY }} title='ปิดหน้านี้' />
-      <Modal
-        isVisible={isVisible}
-        onBackdropPress={() => setIsVisible(false)}
-        onBackButtonPress={() => setIsVisible(false)}
-      >
-        <View style={{ flex: 0.5, backgroundColor: 'white', borderRadius: 15 }}>
-          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={styles.title}>อัพเดทสถานะ</Text>
-            <Text style={{ ...styles.title, color: COLOR.MINT, fontSize: 30 }}>รักษาหายแล้ว</Text>
-            <Button onPress={() => setIsVisible(false)} titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }} title='กลับ' />
-          </View>
+      <GradientBackground status={status} dark>
+        <View style={styles.actionSection}>
+          <Text style={{ ...styles.statusTitle, color: actionColor }}>{isInfected ? 'ยืนยันว่าคุณหายแล้ว' : 'ยืนยันว่าคุณเป็น COVID-19 '}</Text>
+          <Text style={{ ...styles.statusSubTitle }}>ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย</Text>
+          <Text style={{ ...styles.statusSubTitle }}>พบเจอในช่วงเวลา 14 วัน</Text>
+          <TouchableWithoutFeedback
+            onPressIn={() => handlePressIn()}
+            onPressOut={() => handlePressOut()}
+          >
+            <View style={{ ...styles.button, ...styles.updateButton, borderColor: actionColor }} onLayout={(e) => getButtonWidthLayout(e)}>
+              <Animated.View style={[styles.bgFill, getProgressStyles()]} />
+              <Text style={{ ...styles.textStyle, color: value > 0 ? COLOR.WHITE : actionColor, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <>
+            <Text>{textComplete}</Text>
+          </>
         </View>
-      </Modal>
+        <Button onPress={() => navigation.navigate('QR')} titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }} buttonStyle={{ ...styles.button, borderColor: COLOR.TEXT_GRAY }} title='ปิดหน้านี้' />
+        <Modal
+          isVisible={isVisible}
+          onBackdropPress={() => setIsVisible(false)}
+          onBackButtonPress={() => setIsVisible(false)}
+        >
+          <View style={{ flex: 0.5, backgroundColor: 'white', borderRadius: 15 }}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              <Text style={styles.title}>อัพเดทสถานะ</Text>
+              <Text style={{ ...styles.title, color: COLOR.MINT, fontSize: 30 }}>รักษาหายแล้ว</Text>
+              <Button onPress={() => setIsVisible(false)} titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }} title='กลับ' />
+            </View>
+          </View>
+        </Modal>
+      </GradientBackground>
     </View >
   )
 }
@@ -116,19 +120,16 @@ const AnimatedButtonPress = ({ navigation }) => {
 const styles = StyleSheet.create({
   actionSection: {
     flex: 1,
-    // borderColor: 'red',
-    // backgroundColor: 'red',
     justifyContent: 'center',
     alignItems: 'center',
   },
   container: {
-    paddingTop: 56,
+    // paddingTop: 56,
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: COLOR.TEXT_GRAY,
-    // zIndex: 10000,
   },
   updateButton: {
     padding: 20,
@@ -143,16 +144,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    fontFamily: 'SukhumvitSet-SemiBold',
+    fontFamily: 'Kanit-Regular',
     fontSize: 16,
     marginTop: 20,
   },
   statusTitle: {
-    fontFamily: 'SukhumvitSet-SemiBold',
+    fontFamily: 'Kanit-Regular',
     fontSize: 30,
   },
   statusSubTitle: {
-    fontFamily: 'SukhumvitSet-SemiBold',
+    fontFamily: 'Kanit-Regular',
     fontSize: 18,
     color: COLOR.WHITE,
   },
@@ -162,10 +163,8 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: '#000',
-    fontFamily: 'SukhumvitSet-SemiBold',
-    // fontWeight: '400',
+    fontFamily: 'Kanit-Regular',
     fontSize: 20,
-    // height: 80,
   },
   bgFill: {
     position: 'absolute',
