@@ -143,16 +143,16 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   title: {
-    fontFamily: 'Kanit-Medium',
+    fontFamily: 'SukhumvitSet-SemiBold',
     fontSize: 16,
     marginTop: 20,
   },
   statusTitle: {
-    fontFamily: 'Kanit-Regular',
+    fontFamily: 'SukhumvitSet-SemiBold',
     fontSize: 30,
   },
   statusSubTitle: {
-    fontFamily: 'Kanit-Regular',
+    fontFamily: 'SukhumvitSet-SemiBold',
     fontSize: 18,
     color: COLOR.WHITE,
   },
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: '#000',
-    fontFamily: 'Kanit-Regular',
+    fontFamily: 'SukhumvitSet-SemiBold',
     // fontWeight: '400',
     fontSize: 20,
     // height: 80,

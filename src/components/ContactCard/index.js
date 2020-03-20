@@ -30,19 +30,19 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: '300',
-    fontFamily: 'Kanit-Regular',
+    // fontWeight: '300',
+    fontFamily: 'SukhumvitSet-SemiBold',
     color: COLOR.NORMAL,
   },
   subtitle: {
     fontSize: 16,
-    fontWeight: '100',
-    fontFamily: 'Kanit-Light',
+    // fontWeight: '100',
+    fontFamily: 'SukhumvitSet-SemiBold',
   },
   textStyle: {
     color: COLOR.DARK_GRAY,
-    fontFamily: 'Kanit-Regular',
-    fontSize: 14,
+    fontFamily: 'SukhumvitSet-SemiBold',
+    // fontSize: 14,
     paddingHorizontal: 8,
   },
   button: {

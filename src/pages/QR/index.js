@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   title: {
-    fontFamily: 'Kanit-Medium',
+    fontFamily: 'SukhumvitSet-SemiBold',
     fontSize: 40,
     marginTop: 20,
   },
   subtitle: {
-    fontFamily: 'Kanit-Regular',
+    fontFamily: 'SukhumvitSet-SemiBold',
     fontSize: 30,
     marginBottom: 20,
   },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: '#000',
-    fontFamily: 'Kanit-Regular',
+    fontFamily: 'SukhumvitSet-SemiBold',
     // fontWeight: '400',
     fontSize: 20,
     // height: 80,

@@ -21,20 +21,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: '400',
-    fontFamily: 'Kanit-Regular',
+    // fontWeight: '400',
+    fontFamily: 'SukhumvitSet-SemiBold',
     color: COLOR.DARK_GRAY,
   },
   statusText: {
     fontSize: 18,
-    fontWeight: '400',
-    fontFamily: 'Kanit-Regular',
+    // fontWeight: '400',
+    fontFamily: 'SukhumvitSet-SemiBold',
     color: COLOR.RISK,
   },
   subtitle: {
     fontSize: 16,
-    fontWeight: '100',
-    fontFamily: 'Kanit-Light',
+    // fontWeight: '100',
+    fontFamily: 'SukhumvitSet-SemiBold',
   },
 })
 

@@ -1,9 +1,9 @@
 export const COLOR = {
-  NORMAL: '#41e4f0',
+  NORMAL: '#00c9e5',
   UPDATING_HEALTH: '#47ed4f',
-  HEALTH: '#06bd0f',
-  INFECTED: '#c90c28',
-  RISK: '#e37a02',
+  HEALTH: '#18b16a',
+  INFECTED: '#e51e00',
+  RISK: '#d08d00',
   WHITE: '#efefef',
   GRAY: '#555',
   DARK_GRAY: '#333',

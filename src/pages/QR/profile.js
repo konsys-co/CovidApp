@@ -1,9 +1,16 @@
 import React from 'react'
 import moment from 'moment'
-import { Text, View, StyleSheet, Image } from 'react-native'
+import { Text, View, StyleSheet, Image, Button, AsyncStorage } from 'react-native'
 // import { useNavigation } from '@react-navigation/native'
 import { Icon } from 'react-native-elements'
 import { COLOR } from '../../constants/theme'
+
+const logout = () => {
+  AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
+  // setLoggedinStatus(false)
+  // setUserData(null)
+  // setImageLoadStatus(false)
+}
 
 export default ({ userData, navigation }) => (
   <View style={styles.container}>
@@ -50,6 +57,7 @@ export default ({ userData, navigation }) => (
           <Text style={{ ...styles.body, color: COLOR.HEALTH }}>19</Text>
         </View>
       </View>
+      <Button onPress={() => logout()} title='ออกจากระบบ' />
     </View>
   </View>
 )
@@ -77,19 +85,19 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: '300',
-    fontFamily: 'Kanit-Regular',
+    // fontWeight: '300',
+    fontFamily: 'SukhumvitSet-SemiBold',
     color: COLOR.NORMAL,
   },
   subtitle: {
     fontSize: 16,
-    fontWeight: '100',
-    fontFamily: 'Kanit-Light',
+    // fontWeight: '100',
+    fontFamily: 'SukhumvitSet-SemiBold',
   },
   body: {
     fontSize: 17,
-    fontWeight: '400',
-    fontFamily: 'Kanit-Regular',
+    // fontWeight: '400',
+    fontFamily: 'SukhumvitSet-SemiBold',
     color: COLOR.DARK_GRAY
   },
   spaceBetweenRow: {
