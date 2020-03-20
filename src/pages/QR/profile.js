@@ -1,10 +1,11 @@
 import React from 'react'
 import moment from 'moment'
 import { Text, View, StyleSheet, Image } from 'react-native'
+// import { useNavigation } from '@react-navigation/native'
 import { Icon } from 'react-native-elements'
 import { COLOR } from '../../constants/theme'
 
-export default ({ navigation }) => (
+export default ({ userData, navigation }) => (
   <View style={styles.container}>
     <View style={styles.spaceBetweenRow}>
       <>
@@ -15,9 +16,9 @@ export default ({ navigation }) => (
     <View style={{ width: '100%' }}>
       <View style={styles.cardWrapper}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Image style={styles.avatar} source={{ uri: 'https://i.pinimg.com/236x/fe/4e/05/fe4e054a7ea613d5b93436a6118847ce.jpg' }} />
+          <Image style={styles.avatar} source={{ uri: userData.picture.data.url }} />
           <View style={{ marginLeft: 20, justifyContent: 'space-around' }}>
-            <Text style={styles.title}>Supasit</Text>
+            <Text style={styles.title}>{userData.name}</Text>
             <Text style={styles.subtitle}>เริ่มใช้งานเมื่อ {moment().fromNow()}</Text>
           </View>
         </View>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 64,
+    paddingTop: 56,
     backgroundColor: '#fff',
   },
   cardWrapper: {

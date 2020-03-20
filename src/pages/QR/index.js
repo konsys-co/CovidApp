@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'center',
-    paddingTop: 64,
+    paddingTop: 56,
     alignItems: 'center',
     backgroundColor: '#fff',
   },
@@ -98,7 +98,7 @@ const ModalStackScreen = () => (
   </ModalStack.Navigator>
 )
 
-export default () => (
+export default ({ userData }) => (
   <NavigationContainer independent>
     <Stack.Navigator>
       <Stack.Screen
@@ -106,7 +106,7 @@ export default () => (
         component={ModalStackScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Profile" component={Profile} options={{ title: 'ข้อมูลส่วนตัว' }} />
+      <Stack.Screen name="Profile" component={({ navigation }) => <Profile userData={userData} navigation={navigation} />} options={{ title: 'ข้อมูลส่วนตัว', headerShown: false }} />
       {/* <Stack.Screen name="Update" component={UpdateStatus} options={{ title: 'อัพเดท', headerShown: false }} /> */}
     </Stack.Navigator>
   </NavigationContainer>

@@ -17,7 +17,7 @@ import Login from './pages/Login'
 
 const BottomTab = createBottomTabNavigator()
 
-const Main = () => {
+const Main = ({ userData }) => {
   return (
     <NavigationContainer>
       <BottomTab.Navigator
@@ -40,7 +40,7 @@ const Main = () => {
           inactiveTintColor: 'gray',
         }}
       >
-        <BottomTab.Screen name='QR' component={QR} />
+        <BottomTab.Screen name='QR' component={() => <QR userData={userData} />} />
         <BottomTab.Screen name='Scanner' component={Scanner} />
         <BottomTab.Screen name='Contacts' component={Contacts} />
         <BottomTab.Screen name='Menu' component={Menu} />
@@ -116,18 +116,8 @@ export default () => {
       ? <View style={styles.container}><Text>Loading...</Text></View>
       : isLoggedin
         ? userData
-          ? <View style={styles.container}>
-            <Image
-              style={{ width: 200, height: 200, borderRadius: 50 }}
-              source={{ uri: userData.picture.data.url }}
-              onLoadEnd={() => setImageLoadStatus(true)} />
-            <ActivityIndicator size="large" color="#0000ff" animating={!isImageLoading} style={{ position: 'absolute' }} />
-            <Text style={{ fontSize: 22, marginVertical: 10 }}>Hi {userData.name}!</Text>
-            <TouchableOpacity style={styles.logoutBtn} onPress={() => logout()}><Text style={{ color: '#fff' }}>Logout</Text>
-            </TouchableOpacity>
-          </View>
+          ? <Main userData={userData} />
           : <View style={styles.container}><Text>Error</Text></View>
         : <Login fetchUserData={fetchUserData} setLoggedinStatus={setLoggedinStatus} setIsFetching={setIsFetching} />
   )
-  // : <Main />
 }

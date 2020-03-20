@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    marginHorizontal: 24
+    marginHorizontal: 24,
+    paddingTop: 56,
   },
   text: {
     textAlign: 'center'
@@ -115,7 +116,7 @@ export default () => (
     <Stack.Screen
       name="Home"
       component={Contacts}
-      options={{ title: 'รายชื่อคนที่พบ' }}
+      options={{ title: 'รายชื่อคนที่พบ', headerShown: false }}
     />
   </Stack.Navigator>
   // </NavigationContainer>
