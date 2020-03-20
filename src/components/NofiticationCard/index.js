@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     // fontWeight: '400',
     fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.DARK_GRAY,
+    color: COLOR.TEXT_GRAY,
   },
   statusText: {
     fontSize: 18,
     // fontWeight: '400',
     fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.RISK,
+    color: COLOR.BUTTER,
   },
   subtitle: {
     fontSize: 16,

@@ -31,9 +31,9 @@ export default ({ userData, navigation }) => (
         </View>
       </View>
       <View style={{ flexDirection: 'row' }}>
-        <View style={{ borderBottomColor: COLOR.GRAY, borderBottomWidth: 1, flex: 1, height: 15 }} />
+        <View style={{ borderBottomColor: COLOR.BACKGROUND_GRAY, borderBottomWidth: 1, flex: 1, height: 15 }} />
         <Text style={{ ...styles.body, paddingHorizontal: 8 }}>ประวัติการแสกน</Text>
-        <View style={{ borderBottomColor: COLOR.GRAY, borderBottomWidth: 1, flex: 1, height: 15 }} />
+        <View style={{ borderBottomColor: COLOR.BACKGROUND_GRAY, borderBottomWidth: 1, flex: 1, height: 15 }} />
       </View>
       <View style={{ flexDirection: 'column', width: '100%', }}>
         <View style={styles.spaceBetweenRow}>
@@ -42,19 +42,19 @@ export default ({ userData, navigation }) => (
         </View>
         <View style={styles.spaceBetweenRow}>
           <Text style={styles.body}>สุขภาพปกติ</Text>
-          <Text style={{ ...styles.body, color: COLOR.NORMAL }}>75</Text>
+          <Text style={{ ...styles.body, color: COLOR.BLUE }}>75</Text>
         </View>
         <View style={styles.spaceBetweenRow}>
           <Text style={styles.body}>เฝ้าระวัง</Text>
-          <Text style={{ ...styles.body, color: COLOR.RISK }}>10</Text>
+          <Text style={{ ...styles.body, color: COLOR.BUTTER }}>10</Text>
         </View>
         <View style={styles.spaceBetweenRow}>
           <Text style={styles.body}>มีเชื้อ COVID-19</Text>
-          <Text style={{ ...styles.body, color: COLOR.INFECTED }}>5</Text>
+          <Text style={{ ...styles.body, color: COLOR.COPPER }}>5</Text>
         </View>
         <View style={styles.spaceBetweenRow}>
           <Text style={styles.body}>รักษาหายแล้ว</Text>
-          <Text style={{ ...styles.body, color: COLOR.HEALTH }}>19</Text>
+          <Text style={{ ...styles.body, color: COLOR.MINT }}>19</Text>
         </View>
       </View>
       <Button onPress={() => logout()} title='ออกจากระบบ' />
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     // fontWeight: '300',
     fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.NORMAL,
+    color: COLOR.BLUE,
   },
   subtitle: {
     fontSize: 16,
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     // fontWeight: '400',
     fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.DARK_GRAY
+    color: COLOR.TEXT_GRAY
   },
   spaceBetweenRow: {
     flexDirection: 'row',

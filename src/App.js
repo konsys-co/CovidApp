@@ -36,7 +36,7 @@ const Main = ({ userData }) => {
           },
         })}
         tabBarOptions={{
-          activeTintColor: COLOR.NORMAL,
+          activeTintColor: COLOR.BLUE,
           inactiveTintColor: 'gray',
         }}
       >

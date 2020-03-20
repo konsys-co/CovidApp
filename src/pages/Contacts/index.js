@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   dateText: {
     alignSelf: 'flex-start',
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'SukhumvitSet-SemiBold',
     marginTop: 16,
   }
 })

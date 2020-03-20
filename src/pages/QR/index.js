@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
 
 const QR = ({ navigation }) => (
   <View style={styles.container}>
-    <Text style={{ ...styles.title, color: COLOR.NORMAL }}>สุขภาพปกติ</Text>
+    <Text style={{ ...styles.title, color: COLOR.BLUE }}>สุขภาพปกติ</Text>
     <Text style={styles.subtitle}>แสกนเพื่อบันทึกว่าเราเจอกัน</Text>
     <View
       style={{
-        shadowColor: COLOR.NORMAL,
+        shadowColor: COLOR.BLUE,
         shadowOffset: {
           width: 0,
           height: 12,
@@ -81,9 +81,9 @@ const QR = ({ navigation }) => (
         logoBackgroundColor='transparent'
       />
     </View>
-    <Button title='ดูข้อมูลส่วนตัว' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.NORMAL, marginTop: 40 }} onPress={() => navigation.navigate('Profile', { name: 'Jane' })} />
-    <Button title='ฉันตรวจพบ COVID-19' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.INFECTED }} onPress={() => navigation.navigate('Update', { name: 'Jane' })} />
-    {/* <Button title='ฉันรักษาหายแล้ว' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.HEALTH }} onPress={() => navigation.navigate('Profile', { name: 'Jane' })} /> */}
+    <Button title='ดูข้อมูลส่วนตัว' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.BLUE, marginTop: 40 }} onPress={() => navigation.navigate('Profile', { name: 'Jane' })} />
+    <Button title='ฉันตรวจพบ COVID-19' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.COPPER }} onPress={() => navigation.navigate('Update', { name: 'Jane' })} />
+    {/* <Button title='ฉันรักษาหายแล้ว' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }} onPress={() => navigation.navigate('Profile', { name: 'Jane' })} /> */}
   </View>
 )
 

@@ -12,7 +12,7 @@ import { COLOR } from '../../constants/theme'
 
 let value = 0
 const ACTION_TIMER = 5000
-const COLORS = [COLOR.UPDATING_HEALTH, COLOR.UPDATING_HEALTH]
+const COLORS = [COLOR.PALE_MINT, COLOR.PALE_MINT]
 
 const AnimatedButtonPress = ({ navigation }) => {
   const [pressAction, setPressAction] = useState(new Animated.Value(0))
@@ -79,23 +79,23 @@ const AnimatedButtonPress = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.actionSection}>
-        <Text style={{ ...styles.statusTitle, color: COLOR.HEALTH }}>ยืนยันว่าคุณหายแล้ว</Text>
+        <Text style={{ ...styles.statusTitle, color: COLOR.MINT }}>ยืนยันว่าคุณหายแล้ว</Text>
         <Text style={{ ...styles.statusSubTitle }}>ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย</Text>
         <Text style={{ ...styles.statusSubTitle }}>พบเจอในช่วงเวลา 14 วัน</Text>
         <TouchableWithoutFeedback
           onPressIn={() => handlePressIn()}
           onPressOut={() => handlePressOut()}
         >
-          <View style={{ ...styles.button, ...styles.updateButton, borderColor: COLOR.HEALTH }} onLayout={(e) => getButtonWidthLayout(e)}>
+          <View style={{ ...styles.button, ...styles.updateButton, borderColor: COLOR.MINT }} onLayout={(e) => getButtonWidthLayout(e)}>
             <Animated.View style={[styles.bgFill, getProgressStyles()]} />
-            <Text style={{ ...styles.textStyle, color: COLOR.HEALTH, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
+            <Text style={{ ...styles.textStyle, color: COLOR.MINT, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
           </View>
         </TouchableWithoutFeedback>
         <>
           <Text>{textComplete}</Text>
         </>
       </View>
-      <Button onPress={() => navigation.navigate('QR')} titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }} buttonStyle={{ ...styles.button, borderColor: COLOR.GRAY }} title='ปิดหน้านี้' />
+      <Button onPress={() => navigation.navigate('QR')} titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }} buttonStyle={{ ...styles.button, borderColor: COLOR.BACKGROUND_GRAY }} title='ปิดหน้านี้' />
       <Modal
         isVisible={isVisible}
         onBackdropPress={() => setIsVisible(false)}
@@ -104,8 +104,8 @@ const AnimatedButtonPress = ({ navigation }) => {
         <View style={{ flex: 0.5, backgroundColor: 'white', borderRadius: 15 }}>
           <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text style={styles.title}>อัพเดทสถานะ</Text>
-            <Text style={{ ...styles.title, color: COLOR.HEALTH, fontSize: 30 }}>รักษาหายแล้ว</Text>
-            <Button onPress={() => setIsVisible(false)} titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.HEALTH }} title='กลับ' />
+            <Text style={{ ...styles.title, color: COLOR.MINT, fontSize: 30 }}>รักษาหายแล้ว</Text>
+            <Button onPress={() => setIsVisible(false)} titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }} title='กลับ' />
           </View>
         </View>
       </Modal>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: COLOR.BLACK,
+    backgroundColor: COLOR.TEXT_GRAY,
     // zIndex: 10000,
   },
   updateButton: {

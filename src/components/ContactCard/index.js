@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     // fontWeight: '300',
     fontFamily: 'SukhumvitSet-SemiBold',
-    color: COLOR.NORMAL,
+    color: COLOR.BLUE,
   },
   subtitle: {
     fontSize: 16,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontFamily: 'SukhumvitSet-SemiBold',
   },
   textStyle: {
-    color: COLOR.DARK_GRAY,
+    color: COLOR.TEXT_GRAY,
     fontFamily: 'SukhumvitSet-SemiBold',
     // fontSize: 14,
     paddingHorizontal: 8,
@@ -64,6 +64,6 @@ export default ({ name, dateTime, location, imgURL, status }) => (
         </View>
       </View>
     </View>
-    <Button title='เจออีกครั้ง' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.NORMAL }} />
+    <Button title='เจออีกครั้ง' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.BLUE }} />
   </View>
 )
