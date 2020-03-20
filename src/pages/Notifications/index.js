@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, TouchableHighlight, Text } from 'react-native'
 import moment from 'moment'
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
 import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
 import { STATUS } from '../../constants/userStatus'
@@ -36,133 +38,53 @@ const styles = StyleSheet.create({
   }
 })
 
-const MOCK_DATA = [
+// TODO: filter by user
+const GET_NOTIFICATIONS = gql`
   {
-    id: '0',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.NORMAL,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '1',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.NORMAL,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '2',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.RISK,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '3',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.INFECTED,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '4',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.HEALED,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '5',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.NORMAL,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '6',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.NORMAL,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '7',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.RISK,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '8',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.INFECTED,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '9',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.HEALED,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '10',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.NORMAL,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '11',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.NORMAL,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '12',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.RISK,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '13',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.INFECTED,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-  },
-  {
-    id: '14',
-    timestamp: moment().fromNow(),
-    name: 'John Doe',
-    status: STATUS.HEALED,
-    imgURL: 'https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg'
-    
-  },
-]
+    notifications(limit: 30) {
+      notifier
+      actor
+      timestamps
+      title
+      description
+      type
+      read
+      _id
+      updatedAt
+      createdAt
+    }
+  }
+`
 
-const Notifications = () => (
-  <ScrollView style={{ backgroundColor: '#fff' }} >
-    <View style={styles.container}>
-      <GradientBackground status={STATUS.NORMAL} style={styles.background}>
-        <Text style={styles.titleText}>แจ้งเตือน</Text>
-        {MOCK_DATA.map(({ id, name, imgURL, status, timestamp }) => (
-          <TouchableHighlight key={id} underlayColor="#F1F1F1" onPress={() => {}} style={{ width: '100%' }}>
-            <NotificationCard
-              name={name}
-              imgURL={imgURL}
-              dateTime={timestamp}
-              status={status}
-            />
-          </TouchableHighlight>
-        ))}
-      </GradientBackground>
-    </View>
-  </ScrollView>
-)
+// TODO: implement with real data (for now the type of all is "infectedAlert")
+const mapTypeToStatus = type => STATUS.INFECTED
+
+const Notifications = () => {
+  const { loading, error, data } = useQuery(GET_NOTIFICATIONS)
+
+  if (error) return (<Text>Error!!!</Text>)
+
+  return (
+    <ScrollView style={{ backgroundColor: '#fff' }} >
+      <View style={styles.container}>
+        <GradientBackground status={STATUS.NORMAL} style={styles.background}>
+          <Text style={styles.titleText}>แจ้งเตือน</Text>
+          {loading ? <Text>Loading...</Text> : (
+            data.notifications.map(({ _id, actor, type, timestamps }) => (
+              <TouchableHighlight key={_id} underlayColor="#F1F1F1" onPress={() => {}} style={{ width: '100%' }}>
+                <NotificationCard
+                  name={actor.substring(15, actor.length -1)}
+                  imgURL="https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg"
+                  dateTime={moment().from(timestamps)}
+                  status={mapTypeToStatus(type)}
+                />
+              </TouchableHighlight>
+            ))
+          )}
+        </GradientBackground>
+      </View>
+    </ScrollView>
+  )
+}
 
 export default Notifications
