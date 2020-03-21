@@ -6,6 +6,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 target 'CovidAppExpo' do
   rnPrefix = "../node_modules/react-native"
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
   # React Native and its dependencies
   pod 'FBLazyVector', :path => "#{rnPrefix}/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "#{rnPrefix}/Libraries/FBReactNativeSpec"
@@ -43,4 +45,8 @@ target 'CovidAppExpo' do
 
   # react-native-cli autolinking
   use_native_modules!
+
+
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
+
 end
