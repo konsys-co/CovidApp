@@ -49,7 +49,7 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>Allow CovidAppExpo to access your calendar</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow CovidAppExpo to use the camera</string>
+	<string>Allow CovidAppExpo to use the camera for scanner QR contact</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Allow CovidAppExpo experiences to access your contacts</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
