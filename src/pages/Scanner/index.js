@@ -66,6 +66,7 @@ const QRScanner = () => {
               alignSelf: 'center',
               justifyContent: 'center',
               marginTop: '-16%',
+              // borderRadius: 12,
             }}
             showMarker
             markerStyle={{

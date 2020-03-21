@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Alert, AsyncStorage } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Alert, AsyncStorage, Image } from 'react-native'
 import * as Facebook from 'expo-facebook'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { COLOR } from '../../constants/theme'
+import logo from '../../../assets/images/logo.png'
 
 const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
   facebookLogIn = async () => {
@@ -32,6 +33,7 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
 
   return (
     <View style={styles.container}>
+      <Image source={logo} style={{ width: 180, height: 180, marginBottom: 24 }} />
       <Text style={styles.title}>ติดยัง?</Text>
       <LinearGradient
         colors={[COLOR.BLUE, COLOR.MINT]}
@@ -61,7 +63,7 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
         }}
         >เงื่อนไขในการใช้งาน</Text>
       </View>
-    </View>
+    </View >
   )
 }
 

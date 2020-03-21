@@ -6,11 +6,14 @@ import {
   Animated,
   View,
   Text,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Image,
 } from 'react-native'
 import { COLOR } from '../../constants/theme'
 import GradientBackground from '../../components/background'
 import * as STATUS from '../../constants/userStatus'
+import cureImg from '../../../assets/images/cure.png'
+import infectedImg from '../../../assets/images/infected.png'
 
 let value = 0
 const ACTION_TIMER = 5000
@@ -82,6 +85,7 @@ const AnimatedButtonPress = ({ navigation }) => {
     <View style={styles.container}>
       <GradientBackground status={status} dark>
         <View style={styles.actionSection}>
+          <Image source={isInfected ? cureImg : infectedImg} style={{ width: 150, height: 150, marginBottom: 40 }} />
           <Text style={{ ...styles.statusTitle, color: actionColor }}>{isInfected ? 'ยืนยันว่าคุณหายแล้ว' : 'ยืนยันว่าคุณเป็น COVID-19 '}</Text>
           <Text style={{ ...styles.statusSubTitle }}>ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย</Text>
           <Text style={{ ...styles.statusSubTitle }}>พบเจอในช่วงเวลา 14 วัน</Text>
