@@ -1,26 +1,16 @@
 import React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Linking } from 'react-native'
+import { StyleSheet, View, Text, Linking } from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
 import * as STATUS from '../../constants/userStatus'
+import GradientBackground from '../../components/background'
 
 const styles = StyleSheet.create({
-  centerText: {
+  container: {
     flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 16,
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: '#fff',
   },
   title: {
     fontFamily: 'Kanit-Regular',
@@ -40,23 +30,51 @@ const QRScanner = () => {
   }
 
   return (
-    <QRCodeScanner
-      onRead={onSuccess}
-      flashMode={Camera.Constants.FlashMode.auto}
-      topContent={
-        <View>
-          <Text style={{ ...styles.title, color: STATUS.NORMAL.NORMAL }}>
-            {STATUS.TEXT.NORMAL}
-          </Text>
-          <Text style={styles.subtitle}>แสกนเพื่อบันทึกว่าเราเจอกัน</Text>
+    <View style={styles.container}>
+      <GradientBackground status="NORMAL">
+        <Text style={{ ...styles.title, color: STATUS.NORMAL.NORMAL }}>
+          {STATUS.TEXT.NORMAL}
+        </Text>
+        <Text style={styles.subtitle}>แสกนเพื่อบันทึกว่าเราเจอกัน</Text>
+        <View
+          style={{
+            shadowColor: STATUS.DARK.NORMAL,
+            shadowOffset: {
+              width: 0,
+              height: 12,
+            },
+            shadowOpacity: 0.58,
+            shadowRadius: 16.0,
+            elevation: 24,
+            width: '80%',
+            height: '70%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#fff',
+            // borderRadius: 12,
+          }}>
+          <QRCodeScanner
+            reactivate
+            onRead={onSuccess}
+            flashMode={Camera.Constants.FlashMode.auto}
+            containerStyle={{
+              width: '100%',
+            }}
+            cameraStyle={{
+              width: '100%',
+              height: '126%',
+              alignSelf: 'center',
+              justifyContent: 'center',
+              marginTop: '-16%',
+            }}
+            showMarker
+            markerStyle={{
+              borderColor: '#fff',
+            }}
+          />
         </View>
-      }
-      bottomContent={
-        <TouchableOpacity style={styles.buttonTouchable}>
-          <Text style={styles.buttonText}>OK. Got it!</Text>
-        </TouchableOpacity>
-      }
-    />
+      </GradientBackground>
+    </View>
   )
 }
 
