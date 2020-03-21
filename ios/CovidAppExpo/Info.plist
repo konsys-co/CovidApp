@@ -76,6 +76,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Kanit-Regular.ttf</string>
+		<string>Kanit-Medium.ttf</string>
+		<string>Kanit-Light.ttf</string>
+		<string>Kanit-SemiBold.ttf</string>
 		<string>SukhumvitSet-Bold.ttf</string>
 		<string>SukhumvitSet-Light.ttf</string>
 		<string>SukhumvitSet-Medium.ttf</string>
