@@ -62,7 +62,10 @@ const mapTypeToStatus = type => STATUS.INFECTED
 const Notifications = () => {
   const { loading, error, data } = useQuery(GET_NOTIFICATIONS)
 
-  if (error) return (<Text>Error!!!</Text>)
+  if (error) return (<Text>Error!!! {JSON.stringify(error)}</Text>)
+
+  // TODO: delete this
+  console.log('Notifications data', data)
 
   return (
     <ScrollView style={{ backgroundColor: '#fff' }} >

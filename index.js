@@ -1,16 +1,29 @@
 import React from 'react'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, AsyncStorage } from 'react-native'
 import { HttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { ApolloProvider } from '@apollo/react-hooks'
 import App from './src/App'
 import { name as appName } from './app.json'
 
-// TODO: integrate with production uri
-const link = new HttpLink({ uri: 'http://localhost:3000/graphql' })
+const link = new HttpLink({ uri: 'https://tidyoung.devspree.xyz/graphql' })
 const cache = new InMemoryCache()
-const client = new ApolloClient({ link, cache  })
+
+const linkContext = setContext(async (_, { headers }) => {
+  // get the authentication token from AsyncStorage if it exists
+  const token = await AsyncStorage.getItem('@TidyoungUserToken:accessToken')
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    }
+  }
+})
+
+const client = new ApolloClient({ link: linkContext.concat(link), cache  })
 
 const Root = () => (
   <ApolloProvider client={client}>
