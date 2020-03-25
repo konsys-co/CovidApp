@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
 import React, { useState } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Alert, AsyncStorage, Image } from 'react-native'
@@ -21,6 +22,21 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
         permissions: ['public_profile'],
       })
       if (type === 'success') {
+        const loginRes = await fetch('https://tidyoung.devspree.xyz/account/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            grant_type: 'facebook',
+            token 
+          })
+        })
+        const loginResJson = await loginRes.json()
+        const { access_token, refresh_token, token_type  } = loginResJson
+        await AsyncStorage.multiSet(
+          ['@TidyoungUserToken:accessToken', access_token],
+          ['@TidyoungUserToken:refreshToken', refresh_token],
+          ['@TidyoungUserToken:tokenTypr', token_type]
+        )
         await AsyncStorage.setItem('@FacebookOAuthKey:accessToken', token)
         fetchUserData()
       } else {
