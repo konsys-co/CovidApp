@@ -106,6 +106,7 @@ android {
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [appAuthRedirectScheme: 'com.example.app']
+        missingDimensionStrategy 'react-native-camera', 'general'
     }
     splits {
         abi {
