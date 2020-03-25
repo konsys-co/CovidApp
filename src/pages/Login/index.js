@@ -10,7 +10,7 @@ import logo from '../../../assets/images/logo.png'
 const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
   facebookLogIn = async () => {
     try {
-      await Facebook.initializeAsync('324984161652492')
+      await Facebook.initializeAsync('2557659367809347')
       const {
         type,
         token,
