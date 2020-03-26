@@ -1,7 +1,13 @@
 /* eslint-disable camelcase */
-/* eslint-disable no-undef */
-import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native'
+import React from 'react'
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Alert,
+} from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Facebook from 'expo-facebook'
 import { FontAwesome5 } from '@expo/vector-icons'
@@ -9,33 +15,35 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { COLOR } from '../../constants/theme'
 import logo from '../../../assets/images/logo.png'
 
-const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
-  facebookLogIn = async () => {
+const LoginPage = ({ fetchUserData }) => {
+  const facebookLogIn = async () => {
     try {
       await Facebook.initializeAsync('2557659367809347')
-      const {
-        type,
-        token,
-        expires,
-        permissions,
-        declinedPermissions,
-      } = await Facebook.logInWithReadPermissionsAsync({
+      const { type, token } = await Facebook.logInWithReadPermissionsAsync({
         permissions: ['public_profile'],
       })
       if (type === 'success') {
-        const loginRes = await fetch('https://tidyoung.devspree.xyz/account/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            grant_type: 'facebook',
-            token 
-          })
-        })
-        const { access_token, refresh_token, token_type  } = await loginRes.json()
+        // eslint-disable-next-line no-undef
+        const loginRes = await fetch(
+          'https://tidyoung.devspree.xyz/account/login',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              grant_type: 'facebook',
+              token,
+            }),
+          },
+        )
+        const {
+          access_token,
+          refresh_token,
+          token_type,
+        } = await loginRes.json()
         await AsyncStorage.multiSet([
           ['@TidyoungUserToken:accessToken', access_token],
           ['@TidyoungUserToken:refreshToken', refresh_token],
-          ['@TidyoungUserToken:tokenTypr', token_type]
+          ['@TidyoungUserToken:tokenTypr', token_type],
         ])
         await AsyncStorage.setItem('@FacebookOAuthKey:accessToken', token)
         fetchUserData()
@@ -43,13 +51,16 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
         // type === 'cancel'
       }
     } catch ({ message }) {
-      alert(`Facebook Login Error: ${message}`)
+      Alert.alert(`Facebook Login Error: ${message}`)
     }
   }
 
   return (
     <View style={styles.container}>
-      <Image source={logo} style={{ width: 180, height: 180, marginBottom: 24 }} />
+      <Image
+        source={logo}
+        style={{ width: 180, height: 180, marginBottom: 24 }}
+      />
       <Text style={styles.title}>ติดยัง?</Text>
       <LinearGradient
         colors={[COLOR.BLUE, COLOR.MINT]}
@@ -57,8 +68,12 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
         end={{ x: 0, y: 0 }}
         style={{ height: 1, width: '60%', marginTop: 40 }}
       />
-      <Text style={{ ...styles.subTitle, marginTop: 16 }}>สแกนเมื่อเจอเพื่อน</Text>
-      <Text style={{ ...styles.subTitle, marginBottom: 16 }}>แจ้งเตือนเมื่อเพื่อนเป็น</Text>
+      <Text style={{ ...styles.subTitle, marginTop: 16 }}>
+        สแกนเมื่อเจอเพื่อน
+      </Text>
+      <Text style={{ ...styles.subTitle, marginBottom: 16 }}>
+        แจ้งเตือนเมื่อเพื่อนเป็น
+      </Text>
       <LinearGradient
         colors={[COLOR.BLUE, COLOR.MINT]}
         start={{ x: 1, y: 0 }}
@@ -66,20 +81,22 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
         style={{ height: 1, width: '60%', marginBottom: 64 }}
       />
       <TouchableOpacity style={styles.loginBtn} onPress={() => facebookLogIn()}>
-        <FontAwesome5 name='facebook' size={32} color={COLOR.WHITE} />
+        <FontAwesome5 name="facebook" size={32} color={COLOR.WHITE} />
         <Text style={styles.textButton}>เริ่มใช้งาน</Text>
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', marginTop: 12 }}>
         <Text style={{ ...styles.label }}>เมื่อเข้าสู่ระบบ ฉันยอมรับ</Text>
-        <Text style={{
-          ...styles.label,
-          textDecorationLine: 'underline',
-          textDecorationStyle: 'solid',
-          textDecorationColor: '#000'
-        }}
-        >เงื่อนไขในการใช้งาน</Text>
+        <Text
+          style={{
+            ...styles.label,
+            textDecorationLine: 'underline',
+            textDecorationStyle: 'solid',
+            textDecorationColor: '#000',
+          }}>
+          เงื่อนไขในการใช้งาน
+        </Text>
       </View>
-    </View >
+    </View>
   )
 }
 
@@ -128,7 +145,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Kanit-Regular',
     fontSize: 24,
     marginLeft: 16,
-  }
+  },
 })
 
 export default LoginPage
