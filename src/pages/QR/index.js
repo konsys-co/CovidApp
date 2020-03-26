@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import QRCode from 'react-native-qrcode-svg'
 import { Button } from 'react-native-elements'
-import { LinearGradient } from 'expo-linear-gradient'
 import GradientBackground from '../../components/background'
 
 import Profile from './profile'
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
     // fontWeight: '400',
     fontSize: 20,
     // height: 80,
-  }
+  },
 })
 
 const QR = ({ navigation }) => {
@@ -54,7 +53,9 @@ const QR = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <GradientBackground status={status}>
-        <Text style={{ ...styles.title, color: STATUS.NORMAL[status] }}>{STATUS.TEXT[status]}</Text>
+        <Text style={{ ...styles.title, color: STATUS.NORMAL[status] }}>
+          {STATUS.TEXT[status]}
+        </Text>
         <Text style={styles.subtitle}>แสกนเพื่อบันทึกว่าเราเจอกัน</Text>
         <View
           style={{
@@ -64,7 +65,7 @@ const QR = ({ navigation }) => {
               height: 12,
             },
             shadowOpacity: 0.58,
-            shadowRadius: 16.00,
+            shadowRadius: 16.0,
             elevation: 24,
             width: 300,
             height: 300,
@@ -72,46 +73,60 @@ const QR = ({ navigation }) => {
             alignItems: 'center',
             backgroundColor: '#fff',
             borderRadius: 12,
-          }}
-        >
+          }}>
           <QRCode
-            value='some string value'
-            color='#222'
-            backgroundColor='white'
+            value="some string value"
+            color="#222"
+            backgroundColor="white"
             // style={{ flex: 0.8 }}
             size={250}
             // logo={{ uri: 'https://cdn4.iconfinder.com/data/icons/social-icon-4/842/facebook-512.png' }} // or logo={{uri: base64logo}}
             logoMargin={2}
             logoSize={20}
             logoBorderRadius={10}
-            logoBackgroundColor='transparent'
+            logoBackgroundColor="transparent"
           />
         </View>
         <Button
-          title='ดูข้อมูลส่วนตัว'
+          title="ดูข้อมูลส่วนตัว"
           titleStyle={styles.textStyle}
-          buttonStyle={{ ...styles.button, borderColor: STATUS.NORMAL[status], marginTop: 40 }}
+          buttonStyle={{
+            ...styles.button,
+            borderColor: STATUS.NORMAL[status],
+            marginTop: 40,
+          }}
           onPress={() => navigation.navigate('Profile', { name: 'Jane' })}
         />
         <Button
           title={isInfected ? 'ฉันรักษาหายแล้ว' : 'ฉันตรวจพบ COVID-19'}
           titleStyle={styles.textStyle}
-          buttonStyle={{ ...styles.button, borderColor: isInfected ? COLOR.MINT : COLOR.COPPER }}
+          buttonStyle={{
+            ...styles.button,
+            borderColor: isInfected ? COLOR.MINT : COLOR.COPPER,
+          }}
           onPress={() => navigation.navigate('Update', { name: 'Jane' })}
         />
       </GradientBackground>
-    </View >
+    </View>
   )
 }
 
 const ModalStackScreen = () => (
-  <ModalStack.Navigator mode='modal'>
+  <ModalStack.Navigator mode="modal">
     <ModalStack.Screen
       name="QR"
       component={QR}
       options={{ headerShown: false }}
     />
-    <ModalStack.Screen name="Update" component={UpdateStatus} options={{ cardStyle: { backgroundColor: 'transparent' }, title: 'อัพเดท', headerShown: false }} />
+    <ModalStack.Screen
+      name="Update"
+      component={UpdateStatus}
+      options={{
+        cardStyle: { backgroundColor: 'transparent' },
+        title: 'อัพเดท',
+        headerShown: false,
+      }}
+    />
   </ModalStack.Navigator>
 )
 
@@ -123,8 +138,12 @@ export default ({ userData }) => (
         component={ModalStackScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Profile" options={{ title: 'ข้อมูลส่วนตัว', headerShown: false }}>
-        {({ navigation }) => <Profile userData={userData} navigation={navigation} />}
+      <Stack.Screen
+        name="Profile"
+        options={{ title: 'ข้อมูลส่วนตัว', headerShown: false }}>
+        {({ navigation }) => (
+          <Profile userData={userData} navigation={navigation} />
+        )}
       </Stack.Screen>
       {/* <Stack.Screen name="Update" component={UpdateStatus} options={{ title: 'อัพเดท', headerShown: false }} /> */}
     </Stack.Navigator>
