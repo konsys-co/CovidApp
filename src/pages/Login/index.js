@@ -30,8 +30,7 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
             token 
           })
         })
-        const loginResJson = await loginRes.json()
-        const { access_token, refresh_token, token_type  } = loginResJson
+        const { access_token, refresh_token, token_type  } = await loginRes.json()
         await AsyncStorage.multiSet(
           ['@TidyoungUserToken:accessToken', access_token],
           ['@TidyoungUserToken:refreshToken', refresh_token],
