@@ -8,10 +8,10 @@ import {
 } from 'react-native'
 import moment from 'moment'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
 import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
 import { STATUS } from '../../constants/userStatus'
+import { GET_NOTIFICATIONS } from '../../api/query'
 
 const styles = StyleSheet.create({
   container: {
@@ -42,24 +42,6 @@ const styles = StyleSheet.create({
     marginBottom: 22,
   },
 })
-
-// TODO: filter by user
-const GET_NOTIFICATIONS = gql`
-  {
-    notifications(limit: 30) {
-      notifier
-      actor
-      timestamps
-      title
-      description
-      type
-      read
-      _id
-      updatedAt
-      createdAt
-    }
-  }
-`
 
 // TODO: implement with real data (for now the type of all is "infectedAlert")
 const mapTypeToStatus = type => STATUS.INFECTED

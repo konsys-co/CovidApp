@@ -137,11 +137,6 @@ export default () => {
 
   if (userData)
     return (
-      // <Root
-      //   userData={userData}
-      //   setLoggedinStatus={setLoggedinStatus}
-      //   setUserData={setUserData}
-      // />
       <NavigationContainer>
         <AppStack.Navigator mode="modal">
           <AppStack.Screen name="Main" options={{ headerShown: false }}>
