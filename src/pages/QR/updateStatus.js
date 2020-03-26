@@ -102,7 +102,12 @@ const AnimatedButtonPress = ({ navigation }) => {
             <Text>{textComplete}</Text>
           </>
         </View>
-        <Button onPress={() => navigation.navigate('QR')} titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }} buttonStyle={{ ...styles.button, borderColor: COLOR.TEXT_GRAY }} title='ปิดหน้านี้' />
+        <Button
+          onPress={() => navigation.navigate('QRDetail')}
+          titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }}
+          buttonStyle={{ ...styles.button, borderColor: COLOR.TEXT_GRAY }}
+          title='ปิดหน้านี้'
+        />
         <Modal
           isVisible={isVisible}
           onBackdropPress={() => setIsVisible(false)}
@@ -112,7 +117,12 @@ const AnimatedButtonPress = ({ navigation }) => {
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
               <Text style={styles.title}>อัพเดทสถานะ</Text>
               <Text style={{ ...styles.title, color: COLOR.MINT, fontSize: 30 }}>รักษาหายแล้ว</Text>
-              <Button onPress={() => setIsVisible(false)} titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }} title='กลับ' />
+              <Button
+                onPress={() => setIsVisible(false)}
+                titleStyle={styles.textStyle}
+                buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }}
+                title='กลับ'
+              />
             </View>
           </View>
         </Modal>
