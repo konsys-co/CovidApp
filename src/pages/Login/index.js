@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Alert, AsyncStorage, Image } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import * as Facebook from 'expo-facebook'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
@@ -31,11 +32,11 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
           })
         })
         const { access_token, refresh_token, token_type  } = await loginRes.json()
-        await AsyncStorage.multiSet(
+        await AsyncStorage.multiSet([
           ['@TidyoungUserToken:accessToken', access_token],
           ['@TidyoungUserToken:refreshToken', refresh_token],
           ['@TidyoungUserToken:tokenTypr', token_type]
-        )
+        ])
         await AsyncStorage.setItem('@FacebookOAuthKey:accessToken', token)
         fetchUserData()
       } else {

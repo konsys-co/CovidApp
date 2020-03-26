@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
-  AsyncStorage,
   Alert,
 } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
