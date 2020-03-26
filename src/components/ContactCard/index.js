@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 7,
     width: '100%',
-    paddingVertical: 16,
-    paddingHorizontal: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 22,
     marginVertical: 8,
   },
   avatar: {
@@ -58,11 +58,18 @@ export default ({ name, dateTime, location, imgURL, status }) => (
       <View style={{ marginLeft: 10, justifyContent: 'space-around' }}>
         <Text style={{ ...styles.title, color: NORMAL[status] }}>{name}</Text>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={{ ...styles.subtitle, marginRight: 8, fontWeight: '400' }}>{dateTime}</Text>
+          <Text
+            style={{ ...styles.subtitle, marginRight: 8, fontWeight: '400' }}>
+            {dateTime}
+          </Text>
           <Text style={styles.subtitle}>{location}</Text>
         </View>
       </View>
     </View>
-    <Button title='เจออีกครั้ง' titleStyle={styles.textStyle} buttonStyle={{ ...styles.button, borderColor: NORMAL[status] }} />
+    <Button
+      title="เจออีกครั้ง"
+      titleStyle={styles.textStyle}
+      buttonStyle={{ ...styles.button, borderColor: NORMAL[status] }}
+    />
   </View>
 )

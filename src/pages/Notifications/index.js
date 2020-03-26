@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react'
 import {
   StyleSheet,
@@ -11,6 +12,7 @@ import { useQuery } from '@apollo/react-hooks'
 import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
 import { STATUS } from '../../constants/userStatus'
+import { COLOR } from '../../constants/theme'
 import { GET_NOTIFICATIONS } from '../../api/query'
 
 const styles = StyleSheet.create({
@@ -23,7 +25,9 @@ const styles = StyleSheet.create({
     paddingTop: 72,
   },
   text: {
-    textAlign: 'center',
+    fontSize: 16,
+    fontFamily: 'Kanit-Regular',
+    color: COLOR.TEXT_GRAY,
   },
   likeButton: {
     marginVertical: 16,
@@ -62,8 +66,8 @@ const Notifications = () => {
           style={{ width: '100%' }}
           contentContainerStyle={{ alignItems: 'center' }}>
           {loading ? (
-            <Text>Loading...</Text>
-          ) : (
+            <Text style={styles.text}>Loading...</Text>
+          ) : data.notifications.length > 0 ? (
             data.notifications.map(({ _id, actor, type, timestamps }) => (
               <TouchableHighlight
                 key={_id}
@@ -78,6 +82,8 @@ const Notifications = () => {
                 />
               </TouchableHighlight>
             ))
+          ) : (
+            <Text style={styles.text}>ไม่พบการแจ้งเตือน</Text>
           )}
         </ScrollView>
       </GradientBackground>
