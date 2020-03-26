@@ -32,11 +32,11 @@ const LoginPage = ({ setLoggedinStatus, fetchUserData, setIsFetching }) => {
           })
         })
         const { access_token, refresh_token, token_type  } = await loginRes.json()
-        await AsyncStorage.multiSet(
+        await AsyncStorage.multiSet([
           ['@TidyoungUserToken:accessToken', access_token],
           ['@TidyoungUserToken:refreshToken', refresh_token],
           ['@TidyoungUserToken:tokenTypr', token_type]
-        )
+        ])
         await AsyncStorage.setItem('@FacebookOAuthKey:accessToken', token)
         fetchUserData()
       } else {
