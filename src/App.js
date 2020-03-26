@@ -2,7 +2,16 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react'
-import { Text, View, Image, TouchableOpacity, ActivityIndicator, StyleSheet, AsyncStorage, Alert } from 'react-native'
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+  StyleSheet,
+  AsyncStorage,
+  Alert,
+} from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
@@ -26,12 +35,15 @@ const Main = ({ userData }) => {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             if (route.name === 'QR') {
-              return <FontAwesome5 name='qrcode' size={size} color={color} />
-            } if (route.name === 'Scanner') {
-              return <Ionicons name='md-qr-scanner' size={size} color={color} />
-            } if (route.name === 'Contacts') {
-              return <AntDesign name='contacts' size={size} color={color} />
-            } if (route.name === 'Notifications') {
+              return <FontAwesome5 name="qrcode" size={size} color={color} />
+            }
+            if (route.name === 'Scanner') {
+              return <Ionicons name="md-qr-scanner" size={size} color={color} />
+            }
+            if (route.name === 'Contacts') {
+              return <AntDesign name="contacts" size={size} color={color} />
+            }
+            if (route.name === 'Notifications') {
               return <AntDesign name="bells" size={size} color={color} />
             }
             return null
@@ -40,14 +52,13 @@ const Main = ({ userData }) => {
         tabBarOptions={{
           activeTintColor: NORMAL[status],
           inactiveTintColor: 'gray',
-        }}
-      >
-        <BottomTab.Screen name='QR'>
+        }}>
+        <BottomTab.Screen name="QR">
           {() => <QR userData={userData} />}
         </BottomTab.Screen>
-        <BottomTab.Screen name='Scanner' component={Scanner} />
-        <BottomTab.Screen name='Contacts' component={Contacts} />
-        <BottomTab.Screen name='Notifications' component={Notifications} />
+        <BottomTab.Screen name="Scanner" component={Scanner} />
+        <BottomTab.Screen name="Contacts" component={Contacts} />
+        <BottomTab.Screen name="Notifications" component={Notifications} />
       </BottomTab.Navigator>
     </NavigationContainer>
   )
@@ -66,7 +77,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 20,
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
   },
 })
 
@@ -88,7 +99,9 @@ export default () => {
     try {
       const token = await AsyncStorage.getItem('@FacebookOAuthKey:accessToken')
       if (token) {
-        const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`)
+        const response = await fetch(
+          `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`,
+        )
         const data = await response.json()
         if (data.error) {
           setIsFetching(false)
@@ -108,13 +121,23 @@ export default () => {
     return null
   }
 
-  return (
-    isFetching
-      ? <View style={styles.container}><Text>Loading...</Text></View>
-      : isLoggedin
-        ? userData
-          ? <Main userData={userData} />
-          : <View style={styles.container}><Text>Error</Text></View>
-        : <Login fetchUserData={fetchUserData} setLoggedinStatus={setLoggedinStatus} setIsFetching={setIsFetching} />
+  return isFetching ? (
+    <View style={styles.container}>
+      <Text>Loading...</Text>
+    </View>
+  ) : isLoggedin ? (
+    userData ? (
+      <Main userData={userData} />
+    ) : (
+      <View style={styles.container}>
+        <Text>Error</Text>
+      </View>
+    )
+  ) : (
+    <Login
+      fetchUserData={fetchUserData}
+      setLoggedinStatus={setLoggedinStatus}
+      setIsFetching={setIsFetching}
+    />
   )
 }
