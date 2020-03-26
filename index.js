@@ -1,5 +1,6 @@
 import React from 'react'
-import { AppRegistry, AsyncStorage } from 'react-native'
+import { AppRegistry } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { HttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'

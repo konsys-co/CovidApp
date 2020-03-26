@@ -2,7 +2,8 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react'
-import { Text, View, Image, TouchableOpacity, ActivityIndicator, StyleSheet, AsyncStorage, Alert } from 'react-native'
+import { Text, View, Image, TouchableOpacity, ActivityIndicator, StyleSheet, Alert } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'

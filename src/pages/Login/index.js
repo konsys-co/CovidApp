@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
 import React, { useState } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Alert, AsyncStorage, Image } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import * as Facebook from 'expo-facebook'
 import { FontAwesome5 } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
