@@ -56,7 +56,9 @@ const Main = ({ userData }) => {
         <BottomTab.Screen name="QR">
           {() => <QR userData={userData} />}
         </BottomTab.Screen>
-        <BottomTab.Screen name="Scanner">{() => <Scanner />}</BottomTab.Screen>
+        <BottomTab.Screen name="Scanner">
+          {() => <Scanner userData={userData} />}
+        </BottomTab.Screen>
         {/* <BottomTab.Screen name="Scanner" component={Scanner} /> */}
         <BottomTab.Screen name="Contacts" component={Contacts} />
         <BottomTab.Screen name="Notifications" component={Notifications} />
