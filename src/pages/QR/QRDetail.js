@@ -1,5 +1,11 @@
 import React from 'react'
-import { StyleSheet, ScrollView, View, Text } from 'react-native'
+import {
+  StyleSheet,
+  ScrollView,
+  View,
+  Text,
+  ActivityIndicator,
+} from 'react-native'
 import { Button } from 'react-native-elements'
 import QRCode from 'react-native-qrcode-svg'
 import { useQuery } from '@apollo/react-hooks'
@@ -91,7 +97,7 @@ const QRDetail = ({ navigation }) => {
               borderRadius: 12,
             }}>
             {isFetchUserProfile ? (
-              <Text>Loading QR Code...</Text>
+              <ActivityIndicator size="large" color={COLOR.BLUE} />
             ) : (
               <QRCode
                 value={userId || 'user id'}

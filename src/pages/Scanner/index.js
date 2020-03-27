@@ -1,5 +1,12 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Platform,
+  ActivityIndicator,
+} from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
 
@@ -41,7 +48,10 @@ const QRScanner = () => {
     setShowCloseContactModal(true)
   }
 
-  const toggleShowCloseContactModal = () => setShowCloseContactModal(true)
+  const toggleShowCloseContactModal = () => {
+    setCloseContactID('5e7c4dae8674f9001835c6f8')
+    setShowCloseContactModal(true)
+  }
 
   const toggleShowScanner = () => setShowCloseContactModal(false)
 

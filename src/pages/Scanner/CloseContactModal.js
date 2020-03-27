@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image, ActivityIndicator } from 'react-native'
 import { Button } from 'react-native-elements'
 import { useQuery } from '@apollo/react-hooks'
 
@@ -98,7 +98,7 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
       </View>
     )
 
-  if (loading) return <Text>Loading...</Text>
+  if (loading) return <ActivityIndicator size="large" color={COLOR.BLUE} />
 
   return (
     <View style={styles.modalContainer}>
