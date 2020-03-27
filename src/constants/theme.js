@@ -19,4 +19,11 @@ export const COLOR = {
   BLACK: '#000000',
 }
 
-export default COLOR
+export const FONT_FAMILY = 'Kanit-Regular'
+
+export const FONT_SIZE = {
+  HEADER1: 40,
+  HEADER2: 24,
+  BODY1: 16,
+  BODY2: 14,
+}

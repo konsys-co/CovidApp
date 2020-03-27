@@ -12,7 +12,7 @@ import { useQuery } from '@apollo/react-hooks'
 import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
 import { STATUS } from '../../constants/userStatus'
-import { COLOR } from '../../constants/theme'
+import { COLOR, FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
 import { GET_NOTIFICATIONS } from '../../api/query'
 
 const styles = StyleSheet.create({
@@ -22,41 +22,26 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   background: {
-    paddingTop: 72,
+    paddingTop: 50,
   },
   text: {
-    fontSize: 16,
-    fontFamily: 'Kanit-Regular',
+    fontSize: FONT_SIZE.BODY1,
+    fontFamily: FONT_FAMILY,
     color: COLOR.TEXT_GRAY,
   },
-  likeButton: {
-    marginVertical: 16,
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    width: '100%',
-    alignItems: 'center',
-  },
   titleText: {
-    fontFamily: 'Kanit-Regular',
+    fontFamily: FONT_FAMILY,
     alignSelf: 'flex-start',
-    fontSize: 24,
+    fontSize: FONT_SIZE.HEADER2,
     paddingLeft: 20,
-    marginBottom: 22,
+    marginBottom: 18,
   },
 })
-
-// TODO: implement with real data (for now the type of all is "infectedAlert")
-const mapTypeToStatus = type => STATUS.INFECTED
 
 const Notifications = () => {
   const { loading, error, data } = useQuery(GET_NOTIFICATIONS)
 
   if (error) return <Text>Error!!! {JSON.stringify(error)}</Text>
-
-  // TODO: delete this
-  console.log('Notifications data', data)
 
   return (
     <View style={styles.container}>
@@ -68,17 +53,17 @@ const Notifications = () => {
           {loading ? (
             <Text style={styles.text}>Loading...</Text>
           ) : data.notifications.length > 0 ? (
-            data.notifications.map(({ _id, actor, type, timestamps }) => (
+            data.notifications.map(({ _id, user, type, timestamps }) => (
               <TouchableHighlight
                 key={_id}
                 underlayColor="#F1F1F1"
                 onPress={() => {}}
                 style={{ width: '100%' }}>
                 <NotificationCard
-                  name={actor.substring(15, actor.length - 1)}
-                  imgURL="https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg"
+                  name={[user?.firstName, user?.lastName].join(' ')}
+                  imgURL={user?.profilePicture}
                   dateTime={moment().from(timestamps)}
-                  status={mapTypeToStatus(type)}
+                  status={type.toUpperCase()}
                 />
               </TouchableHighlight>
             ))

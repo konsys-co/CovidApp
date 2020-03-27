@@ -35,11 +35,16 @@ export const TEXT = {
   HEALED: 'รักษาหายแล้ว',
 }
 
+export const SHORT_TEXT = {
+  NORMAL: 'ปกติ',
+  RISK: 'เฝ้าระวัง',
+  INFECTED: 'มีเชื้อ',
+  HEALED: 'หายแล้ว',
+}
+
 export const STATUS = {
   NORMAL: 'NORMAL',
   RISK: 'RISK',
   INFECTED: 'INFECTED',
   HEALED: 'HEALED',
 }
-
-export default TEXT
