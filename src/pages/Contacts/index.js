@@ -50,8 +50,11 @@ const Contacts = () => {
       <GradientBackground status={status} style={styles.background}>
         <Text style={styles.titleText}>รายชื่อคนที่พบ</Text>
         <ScrollView
-          style={{ width: '100%', paddingHorizontal: 20 }}
-          contentContainerStyle={{ alignItems: 'center' }}>
+          style={{ width: '100%' }}
+          contentContainerStyle={{
+            alignItems: 'center',
+            paddingHorizontal: 20,
+          }}>
           <Text style={styles.dateText}>{moment().fromNow()}</Text>
           <ContactCard
             name="Supasit"
