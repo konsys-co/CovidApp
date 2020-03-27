@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import {
-  StyleSheet,
-  View,
-  Text,
-  Linking,
-  Dimensions,
-  Platform,
-} from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
 
@@ -39,17 +32,13 @@ const styles = StyleSheet.create({
   },
 })
 
-const QRScanner = ({ userData }) => {
+const QRScanner = () => {
   const [showCloseContactModal, setShowCloseContactModal] = useState(false)
+  const [closeContactID, setCloseContactID] = useState(null)
 
-  // useEffect(() => {
-  // return () => {
-  //   setshowCloseContactModal(false)
-  // }
-  // }, [])
-
-  const onSuccess = e => {
-    Linking.openURL(e.data).catch(err => console.error('An error occured', err))
+  const onSuccess = QRCode => {
+    setCloseContactID(QRCode.data)
+    setShowCloseContactModal(true)
   }
 
   const toggleShowCloseContactModal = () => setShowCloseContactModal(true)
@@ -83,7 +72,7 @@ const QRScanner = ({ userData }) => {
           }}>
           {showCloseContactModal ? (
             <CloseContactModal
-              userData={userData}
+              closeContactID={closeContactID}
               toggleShowScanner={toggleShowScanner}
             />
           ) : (

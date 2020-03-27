@@ -20,11 +20,11 @@ const linkContext = setContext(async (_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : '',
-    }
+    },
   }
 })
 
-const client = new ApolloClient({ link: linkContext.concat(link), cache  })
+const client = new ApolloClient({ link: linkContext.concat(link), cache })
 
 const Root = () => (
   <ApolloProvider client={client}>

@@ -1,11 +1,14 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import { Button } from 'react-native-elements'
+import { useQuery } from '@apollo/react-hooks'
+
 import markCCExistingIcon from '../../../assets/images/mark-friend-exist.png'
 import markCCNotExistingIcon from '../../../assets/images/mark-friend-not-exist.png'
 import friendNotExistingImg from '../../../assets/images/friend-not-existing-img.png'
 import * as STATUS from '../../constants/userStatus'
 import { COLOR } from '../../constants/theme'
+import { GET_CONTACT_BY_ID } from '../../api/query'
 
 const styles = StyleSheet.create({
   subtitle: {
@@ -74,26 +77,48 @@ const styles = StyleSheet.create({
     fontFamily: 'Kanit-Regular',
     fontSize: 20,
   },
+  errorContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
-const CloseContactModal = ({ userData, toggleShowScanner }) => {
+const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
+  const { loading, error, data } = useQuery(GET_CONTACT_BY_ID, {
+    variables: { id: closeContactID },
+  })
+
+  const { user } = data || {}
+
+  if (error)
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error occur: {JSON.stringify(error)}</Text>
+      </View>
+    )
+
+  if (loading) return <Text>Loading...</Text>
+
   return (
     <View style={styles.modalContainer}>
-      {userData ? (
+      {user ? (
         <>
           <View style={styles.modalDetailContainer}>
             <Text style={styles.subtitle}>สแกนสำเร็จ</Text>
             <View style={styles.friendImgContainer}>
               <Image
                 style={styles.friendImg}
-                source={{ uri: userData.picture.data.url }}
+                source={{ uri: user.profilePicture }}
               />
               <Image
                 style={styles.friendExistingIcon}
                 source={markCCExistingIcon}
               />
             </View>
-            <Text style={styles.friendName}>{userData.name}</Text>
+            <Text style={styles.friendName}>
+              {user.firstName} {user.lastName}
+            </Text>
             <Text style={styles.modalText}>ถูกบันทึกลงในรายชื่อคนที่คุณพบ</Text>
           </View>
           <View style={styles.btnContainer}>

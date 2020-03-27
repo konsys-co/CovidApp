@@ -53,9 +53,7 @@ const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
           />
         )}
       </BottomTab.Screen>
-      <BottomTab.Screen name="Scanner">
-        {() => <Scanner userData={userData} />}
-      </BottomTab.Screen>
+      <BottomTab.Screen name="Scanner" component={Scanner} />
       <BottomTab.Screen name="Contacts" component={Contacts} />
       <BottomTab.Screen name="Notifications" component={Notifications} />
     </BottomTab.Navigator>
@@ -83,7 +81,6 @@ export default () => {
   const [isLoggedin, setLoggedinStatus] = useState(false)
   const [isFetching, setIsFetching] = useState(true)
   const [userData, setUserData] = useState(null)
-  const [isImageLoading, setImageLoadStatus] = useState(false)
 
   useEffect(() => {
     if (!isLoggedin) {
