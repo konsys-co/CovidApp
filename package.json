@@ -4,7 +4,8 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "generate-apk": "cd android && ./gradlew assembleRelease && open ./app/build/outputs/apk/"
   },
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
