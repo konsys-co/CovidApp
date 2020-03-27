@@ -1,69 +1,64 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable no-undef */
 import React, { useState, useEffect } from 'react'
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-  Alert,
-} from 'react-native'
+import { Text, View, StyleSheet, Alert } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
-// import * as Facebook from 'expo-facebook'
-import { COLOR } from './constants/theme'
-import { NORMAL } from './constants/userStatus'
 
+import { NORMAL } from './constants/userStatus'
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
 import Contacts from './pages/Contacts'
 import Login from './pages/Login'
 import Notifications from './pages/Notifications'
+// TODO: move UpdateStatus file to the outside of QR
+import UpdateStatus from './pages/QR/updateStatus'
 
 const BottomTab = createBottomTabNavigator()
+const AppStack = createStackNavigator()
 
-const Main = ({ userData }) => {
+const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
   const status = 'NORMAL' // TODO: Fetch from server later.
   return (
-    <NavigationContainer>
-      <BottomTab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            if (route.name === 'QR') {
-              return <FontAwesome5 name="qrcode" size={size} color={color} />
-            }
-            if (route.name === 'Scanner') {
-              return <Ionicons name="md-qr-scanner" size={size} color={color} />
-            }
-            if (route.name === 'Contacts') {
-              return <AntDesign name="contacts" size={size} color={color} />
-            }
-            if (route.name === 'Notifications') {
-              return <AntDesign name="bells" size={size} color={color} />
-            }
-            return null
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: NORMAL[status],
-          inactiveTintColor: 'gray',
-        }}>
-        <BottomTab.Screen name="QR">
-          {() => <QR userData={userData} />}
-        </BottomTab.Screen>
-        <BottomTab.Screen name="Scanner">
-          {() => <Scanner userData={userData} />}
-        </BottomTab.Screen>
-        {/* <BottomTab.Screen name="Scanner" component={Scanner} /> */}
-        <BottomTab.Screen name="Contacts" component={Contacts} />
-        <BottomTab.Screen name="Notifications" component={Notifications} />
-      </BottomTab.Navigator>
-    </NavigationContainer>
+    <BottomTab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          if (route.name === 'QR') {
+            return <FontAwesome5 name="qrcode" size={size} color={color} />
+          }
+          if (route.name === 'Scanner') {
+            return <Ionicons name="md-qr-scanner" size={size} color={color} />
+          }
+          if (route.name === 'Contacts') {
+            return <AntDesign name="contacts" size={size} color={color} />
+          }
+          if (route.name === 'Notifications') {
+            return <AntDesign name="bells" size={size} color={color} />
+          }
+          return null
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: NORMAL[status],
+        inactiveTintColor: 'gray',
+      }}>
+      <BottomTab.Screen name="QR">
+        {() => (
+          <QR
+            navigation={navigation}
+            userData={userData}
+            setLoggedinStatus={setLoggedinStatus}
+            setUserData={setUserData}
+          />
+        )}
+      </BottomTab.Screen>
+      <BottomTab.Screen name="Scanner">
+        {() => <Scanner userData={userData} />}
+      </BottomTab.Screen>
+      <BottomTab.Screen name="Contacts" component={Contacts} />
+      <BottomTab.Screen name="Notifications" component={Notifications} />
+    </BottomTab.Navigator>
   )
 }
 
@@ -102,45 +97,76 @@ export default () => {
     try {
       const token = await AsyncStorage.getItem('@FacebookOAuthKey:accessToken')
       if (token) {
+        setIsFetching(true)
+        // TODO: integrate with /me instead Facebook API
+        // eslint-disable-next-line no-undef
         const response = await fetch(
           `https://graph.facebook.com/me?access_token=${token}&fields=id,name,email,picture.height(500)`,
         )
         const data = await response.json()
         if (data.error) {
-          setIsFetching(false)
           Alert.alert(data.error.message)
           return null
         }
         if (data) {
-          setLoggedinStatus(true)
           setUserData(data)
-          // setIsFetching(false)
+          setLoggedinStatus(true)
         }
-        // setIsFetching(false)
       }
     } catch (error) {
       Alert.alert(error.message)
+    } finally {
+      setIsFetching(false)
     }
     return null
   }
 
-  return isFetching ? (
-    <View style={styles.container}>
-      <Text>Loading...</Text>
-    </View>
-  ) : isLoggedin ? (
-    userData ? (
-      <Main userData={userData} />
-    ) : (
+  if (isFetching)
+    return (
       <View style={styles.container}>
-        <Text>Error</Text>
+        <Text>Loading...</Text>
       </View>
     )
-  ) : (
-    <Login
-      fetchUserData={fetchUserData}
-      setLoggedinStatus={setLoggedinStatus}
-      setIsFetching={setIsFetching}
-    />
+
+  if (!isLoggedin)
+    return (
+      <Login
+        fetchUserData={fetchUserData}
+        setLoggedinStatus={setLoggedinStatus}
+        setIsFetching={setIsFetching}
+      />
+    )
+
+  if (userData)
+    return (
+      <NavigationContainer>
+        <AppStack.Navigator mode="modal">
+          <AppStack.Screen name="Main" options={{ headerShown: false }}>
+            {({ navigation }) => (
+              <Main
+                navigation={navigation}
+                userData={userData}
+                setLoggedinStatus={setLoggedinStatus}
+                setUserData={setUserData}
+              />
+            )}
+          </AppStack.Screen>
+          <AppStack.Screen name="UpdateStatus" options={{ headerShown: false }}>
+            {({ navigation }) => (
+              <UpdateStatus
+                navigation={navigation}
+                userData={userData}
+                options={{ transitionSpec: { open: {}, close: {} } }}
+              />
+            )}
+          </AppStack.Screen>
+        </AppStack.Navigator>
+      </NavigationContainer>
+    )
+
+  return (
+    <View style={styles.container}>
+      <Text>Error</Text>
+    </View>
   )
 }
