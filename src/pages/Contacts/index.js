@@ -4,6 +4,7 @@ import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import ContactCard from '../../components/ContactCard'
 import GradientBackground from '../../components/background'
+import { FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
 
 const Stack = createStackNavigator()
 
@@ -14,37 +15,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   background: {
-    paddingTop: 72,
-  },
-  text: {
-    textAlign: 'center',
+    paddingTop: 50,
   },
   likeButton: {
     marginVertical: 16,
   },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    width: '100%',
-    alignItems: 'center',
-  },
   dateText: {
     alignSelf: 'flex-start',
-    fontSize: 18,
-    fontFamily: 'Kanit-Regular',
-    marginTop: 16,
+    fontSize: FONT_SIZE.BODY1,
+    fontFamily: FONT_FAMILY,
+    marginVertical: 8,
   },
   titleText: {
-    fontFamily: 'Kanit-Regular',
+    fontFamily: FONT_FAMILY,
     alignSelf: 'flex-start',
-    fontSize: 24,
+    fontSize: FONT_SIZE.HEADER2,
     paddingLeft: 20,
-    marginBottom: 22,
+    marginBottom: 18,
   },
 })
 
 const Contacts = () => {
-  const status = 'RISK' // TODO: Fetch from server later.
+  const status = 'NORMAL' // TODO: Fetch from server later.
   return (
     <View style={styles.container}>
       <GradientBackground status={status} style={styles.background}>
@@ -57,7 +49,7 @@ const Contacts = () => {
           }}>
           <Text style={styles.dateText}>{moment().fromNow()}</Text>
           <ContactCard
-            name="Supasit"
+            name="John Doe"
             dateTime={moment().format('HH:mm')}
             imgURL="https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg"
             location="Ari"

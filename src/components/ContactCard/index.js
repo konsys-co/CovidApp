@@ -1,7 +1,7 @@
 import React from 'react'
-import { View, StyleSheet, Text, Image } from 'react-native'
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
 import { Button } from 'react-native-elements'
-import { COLOR } from '../../constants/theme'
+import { COLOR, FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
 import { NORMAL } from '../../constants/userStatus'
 
 const styles = StyleSheet.create({
@@ -11,65 +11,79 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 16,
     backgroundColor: 'white',
-    shadowColor: '#000',
+    shadowColor: 'rgba(0, 0, 0, 0.15)',
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 5,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
+    shadowOpacity: 1,
+    shadowRadius: 10,
     elevation: 7,
     width: '100%',
     paddingVertical: 12,
-    paddingHorizontal: 22,
-    marginVertical: 8,
+    paddingHorizontal: 10,
+    marginVertical: 7,
   },
   avatar: {
     width: 50,
     height: 50,
     borderRadius: 50 / 2,
   },
-  title: {
-    fontSize: 20,
-    fontFamily: 'Kanit-Regular',
+  name: {
+    fontSize: FONT_SIZE.BODY1,
+    fontFamily: FONT_FAMILY,
     color: COLOR.TEXT_GRAY,
   },
-  subtitle: {
+  status: {
     color: COLOR.TEXT_GRAY,
-    fontSize: 16,
-    fontFamily: 'Kanit-Regular',
+    fontSize: FONT_SIZE.BODY2,
+    fontFamily: FONT_FAMILY,
   },
-  textStyle: {
+  buttonTitle: {
     color: COLOR.TEXT_GRAY,
-    fontFamily: 'Kanit-Regular',
-    paddingHorizontal: 8,
+    fontFamily: FONT_FAMILY,
+    paddingHorizontal: 4,
+    fontSize: FONT_SIZE.BODY1,
+    lineHeight: 33,
   },
   button: {
     backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderRadius: 10,
+    height: 35,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 4,
   },
 })
 
 export default ({ name, dateTime, location, imgURL, status }) => (
   <View style={styles.cardWrapper}>
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Image style={styles.avatar} source={{ uri: imgURL }} />
-      <View style={{ marginLeft: 10, justifyContent: 'space-around' }}>
-        <Text style={{ ...styles.title, color: NORMAL[status] }}>{name}</Text>
-        <View style={{ flexDirection: 'row' }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%' }}>
+      <View style={{ width: '15%' }}>
+        <Image style={styles.avatar} source={{ uri: imgURL }} />
+      </View>
+      <View style={{ paddingHorizontal: 10, width: '55%' }}>
+        <View>
           <Text
-            style={{ ...styles.subtitle, marginRight: 8, fontWeight: '400' }}>
+            style={{ ...styles.name, color: NORMAL[status] }}
+            numberOfLines={1}
+            ellipsizeMode="tail">
+            {name}
+          </Text>
+        </View>
+        <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+          <Text style={{ ...styles.status, marginRight: 8, fontWeight: '400' }}>
             {dateTime}
           </Text>
-          <Text style={styles.subtitle}>{location}</Text>
+          <Text style={styles.status}>{location}</Text>
         </View>
       </View>
+      <View style={{ width: '30%' }}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={{ ...styles.button, borderColor: NORMAL[status] }}>
+          <Text style={styles.buttonTitle}>เจออีกครั้ง</Text>
+        </TouchableOpacity>
+      </View>
     </View>
-    <Button
-      title="เจออีกครั้ง"
-      titleStyle={styles.textStyle}
-      buttonStyle={{ ...styles.button, borderColor: NORMAL[status] }}
-    />
   </View>
 )
