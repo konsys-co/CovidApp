@@ -64,10 +64,9 @@ const QRDetail = ({ navigation }) => {
     )
 
   const { profile } = data || {}
-  const { _id: userId } = profile || {}
-
-  const status = 'NORMAL' // TODO: Fetch from server later.
-  const isInfected = status === STATUS.STATUS.INFECTED
+  const { _id: userId, status } = profile || {}
+  // const status =  // TODO: Fetch from server later.
+  const isInfected = status === STATUS.STATUS.infected
 
   return (
     <View style={styles.container}>
@@ -99,19 +98,19 @@ const QRDetail = ({ navigation }) => {
             {isFetchUserProfile ? (
               <ActivityIndicator size="large" color={COLOR.BLUE} />
             ) : (
-              <QRCode
-                value={userId || 'user id'}
-                color="#222"
-                backgroundColor="white"
-                // style={{ flex: 0.8 }}
-                size={250}
-                // logo={{ uri: 'https://cdn4.iconfinder.com/data/icons/social-icon-4/842/facebook-512.png' }} // or logo={{uri: base64logo}}
-                logoMargin={2}
-                logoSize={20}
-                logoBorderRadius={10}
-                logoBackgroundColor="transparent"
-              />
-            )}
+                <QRCode
+                  value={userId || 'user id'}
+                  color="#222"
+                  backgroundColor="white"
+                  // style={{ flex: 0.8 }}
+                  size={250}
+                  // logo={{ uri: 'https://cdn4.iconfinder.com/data/icons/social-icon-4/842/facebook-512.png' }} // or logo={{uri: base64logo}}
+                  logoMargin={2}
+                  logoSize={20}
+                  logoBorderRadius={10}
+                  logoBackgroundColor="transparent"
+                />
+              )}
           </View>
           <Button
             title="ดูข้อมูลส่วนตัว"
@@ -131,7 +130,7 @@ const QRDetail = ({ navigation }) => {
               borderColor: isInfected ? COLOR.MINT : COLOR.COPPER,
             }}
             onPress={() =>
-              navigation.navigate('UpdateStatus', { name: 'Jane' })
+              navigation.navigate('UpdateStatus', { status })
             }
           />
         </ScrollView>

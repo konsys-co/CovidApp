@@ -18,7 +18,7 @@ export const GET_NOTIFICATIONS = gql`
 `
 
 export const GET_USER_PROFILE = gql`
-  {
+  query profile {
     profile {
       _id
       facebookId

@@ -19,6 +19,8 @@ const BottomTab = createBottomTabNavigator()
 const AppStack = createStackNavigator()
 
 const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
+
+  // AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
   const status = 'NORMAL' // TODO: Fetch from server later.
   return (
     <BottomTab.Navigator
@@ -149,8 +151,9 @@ export default () => {
             )}
           </AppStack.Screen>
           <AppStack.Screen name="UpdateStatus" options={{ headerShown: false }}>
-            {({ navigation }) => (
+            {({ navigation, route }) => (
               <UpdateStatus
+                route={route}
                 navigation={navigation}
                 userData={userData}
                 options={{ transitionSpec: { open: {}, close: {} } }}

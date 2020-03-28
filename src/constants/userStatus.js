@@ -1,45 +1,45 @@
 import { COLOR } from './theme'
 
 export const VERY_DARK = {
-  NORMAL: COLOR.VERY_DARK_RED,
-  RISK: COLOR.VERY_DARK_RED,
-  INFECTED: COLOR.VERY_DARK_GREEN,
-  HEALED: COLOR.VERY_DARK_RED,
+  normal: COLOR.VERY_DARK_RED,
+  risk: COLOR.VERY_DARK_RED,
+  infected: COLOR.VERY_DARK_GREEN,
+  healed: COLOR.VERY_DARK_RED,
 }
 
 export const NORMAL = {
-  NORMAL: COLOR.BLUE,
-  RISK: COLOR.BUTTER,
-  INFECTED: COLOR.COPPER,
-  HEALED: COLOR.MINT,
+  normal: COLOR.BLUE,
+  risk: COLOR.BUTTER,
+  infected: COLOR.COPPER,
+  healed: COLOR.MINT,
 }
 
 export const DARK = {
-  NORMAL: COLOR.DARK_BLUE,
-  RISK: COLOR.DARK_BUTTER,
-  INFECTED: COLOR.DARK_COPPER,
-  HEALED: COLOR.DARK_MINT,
+  normal: COLOR.DARK_BLUE,
+  risk: COLOR.DARK_BUTTER,
+  infected: COLOR.DARK_COPPER,
+  healed: COLOR.DARK_MINT,
 }
 
 export const LIGHT = {
-  NORMAL: COLOR.PALE_BLUE,
-  RISK: COLOR.PALE_BUTTER,
-  INFECTED: COLOR.PALE_COPPER,
-  HEALED: COLOR.PALE_MINT,
+  normal: COLOR.PALE_BLUE,
+  risk: COLOR.PALE_BUTTER,
+  infected: COLOR.PALE_COPPER,
+  healed: COLOR.PALE_MINT,
 }
 
 export const TEXT = {
-  NORMAL: 'สุขภาพปกติ',
-  RISK: 'กำลังเฝ้าระวัง',
-  INFECTED: 'มีเชื้อ COVID-19',
-  HEALED: 'รักษาหายแล้ว',
+  normal: 'สุขภาพปกติ',
+  risk: 'กำลังเฝ้าระวัง',
+  infected: 'มีเชื้อ COVID-19',
+  healed: 'รักษาหายแล้ว',
 }
 
 export const STATUS = {
-  NORMAL: 'NORMAL',
-  RISK: 'RISK',
-  INFECTED: 'INFECTED',
-  HEALED: 'HEALED',
+  normal: 'normal',
+  risk: 'risk',
+  infected: 'infected',
+  healed: 'healed',
 }
 
 export default TEXT
