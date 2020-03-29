@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Modal from 'react-native-modal'
 import { Button } from 'react-native-elements'
+import { useMutation } from '@apollo/react-hooks'
 import {
   StyleSheet,
   Animated,
@@ -14,16 +15,23 @@ import GradientBackground from '../../components/background'
 import * as STATUS from '../../constants/userStatus'
 import cureImg from '../../../assets/images/cure.png'
 import infectedImg from '../../../assets/images/infected.png'
+import { UPDATE_STATUS } from '../../api/mutation'
 
 let value = 0
 const ACTION_TIMER = 5000
 
-const AnimatedButtonPress = ({ navigation }) => {
-  const status = 'INFECTED' // TODO: Fetch from server later.
-  const isInfected = status === STATUS.STATUS.INFECTED
+const STATUS_ENUM = {
+  healed: 'healed',
+  infected: 'infected',
+}
 
-  const actionColor = isInfected ? STATUS.DARK.HEALED : STATUS.DARK.INFECTED
-  const COLORS = [isInfected ? STATUS.NORMAL.HEALED : STATUS.NORMAL.INFECTED, isInfected ? STATUS.NORMAL.HEALED : STATUS.NORMAL.INFECTED]
+const AnimatedButtonPress = ({ navigation, route }) => {
+  const [doUpdate, { loading }] = useMutation(UPDATE_STATUS, { refetchQueries: 'profile' })
+  const { status } = route.params
+  const isInfected = status === STATUS.STATUS.infected
+
+  const actionColor = isInfected ? STATUS.DARK.healed : STATUS.DARK.infected
+  const COLORS = [isInfected ? STATUS.NORMAL.healed : STATUS.NORMAL.infected, isInfected ? STATUS.NORMAL.healed : STATUS.NORMAL.infected]
 
   const [pressAction, setPressAction] = useState(new Animated.Value(0))
   const [textComplete, setTextComplete] = useState('')
@@ -58,6 +66,13 @@ const AnimatedButtonPress = ({ navigation }) => {
       value = 0
     }
     setTextComplete(message)
+    doUpdate({
+      variables: {
+        status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected
+      }
+    }).then(resp => {
+      console.info(resp.data)
+    })
   }
 
   const getButtonWidthLayout = (e) => {
@@ -95,7 +110,7 @@ const AnimatedButtonPress = ({ navigation }) => {
           >
             <View style={{ ...styles.button, ...styles.updateButton, borderColor: actionColor }} onLayout={(e) => getButtonWidthLayout(e)}>
               <Animated.View style={[styles.bgFill, getProgressStyles()]} />
-              <Text style={{ ...styles.textStyle, color: value > 0 ? COLOR.WHITE : actionColor, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
+              <Text style={{ ...styles.textStyle, color: actionColor, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
             </View>
           </TouchableWithoutFeedback>
           <>
@@ -105,7 +120,7 @@ const AnimatedButtonPress = ({ navigation }) => {
         <Button
           onPress={() => navigation.navigate('QRDetail')}
           titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }}
-          buttonStyle={{ ...styles.button, borderColor: COLOR.TEXT_GRAY }}
+          buttonStyle={{ ...styles.button, borderColor: COLOR.TEXT_GRAY, marginBottom: 50 }}
           title='ปิดหน้านี้'
         />
         <Modal
@@ -115,12 +130,27 @@ const AnimatedButtonPress = ({ navigation }) => {
         >
           <View style={{ flex: 0.5, backgroundColor: 'white', borderRadius: 15 }}>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={styles.title}>อัพเดทสถานะ</Text>
-              <Text style={{ ...styles.title, color: COLOR.MINT, fontSize: 30 }}>รักษาหายแล้ว</Text>
+              <Text style={{ ...styles.title, fontSize: 24 }}>อัพเดทสถานะ</Text>
+              <View style={{
+                marginTop: 20,
+                shadowColor: COLOR.BLACK,
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.23,
+                shadowRadius: 2.62,
+              }}>
+                <Image source={isInfected ? cureImg : infectedImg} style={{ width: 100, height: 100 }} />
+              </View>
+              <Text style={{ ...styles.title, color: isInfected ? COLOR.MINT : COLOR.COPPER, fontSize: 30 }}>คุณ{isInfected ? STATUS.TEXT.healed : STATUS.TEXT.infected}</Text>
               <Button
-                onPress={() => setIsVisible(false)}
+                onPress={() => {
+                  setIsVisible(false)
+                  navigation.navigate('QRDetail')
+                }}
                 titleStyle={styles.textStyle}
-                buttonStyle={{ ...styles.button, borderColor: COLOR.MINT }}
+                buttonStyle={{ ...styles.button, borderColor: isInfected ? COLOR.MINT : COLOR.COPPER }}
                 title='กลับ'
               />
             </View>
