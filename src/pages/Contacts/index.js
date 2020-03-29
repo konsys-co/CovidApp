@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 })
 
 const Contacts = () => {
-  const status = 'NORMAL' // TODO: Fetch from server later.
+  const status = 'normal' // TODO: Fetch from server later.
   return (
     <View style={styles.container}>
       <GradientBackground status={status} style={styles.background}>
@@ -52,7 +52,7 @@ const Contacts = () => {
             name="John Doe"
             dateTime={moment().format('HH:mm')}
             imgURL="https://demo.nparoco.com/Vuexy/app-assets/images/profile/user-uploads/user-13.jpg"
-            location="Ari"
+            // location="Ari"
             status={status}
           />
           <Text style={styles.dateText}>{moment('2020/03/17').fromNow()}</Text>

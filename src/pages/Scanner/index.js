@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Platform,
+  ActivityIndicator,
+} from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 
 import * as STATUS from '../../constants/userStatus'
 import GradientBackground from '../../components/background'
 import CloseContactModal from './CloseContactModal'
+import { COLOR } from '../../constants/theme'
+import { GET_USER_PROFILE } from '../../api/query'
 import { ADD_CLOSE_CONTACT } from '../../api/mutation'
 
 const deviceHeight = Dimensions.get('window').height
@@ -43,7 +52,20 @@ const QRScanner = () => {
   const [showCloseContactModal, setShowCloseContactModal] = useState(false)
   const [closeContactID, setCloseContactID] = useState(null)
 
+  const { loading, error, data } = useQuery(GET_USER_PROFILE)
   const [toggleAddCloseContact] = useMutation(ADD_CLOSE_CONTACT)
+
+  const { profile } = data || {}
+  const { status } = profile || {}
+
+  if (error)
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error occur: {JSON.stringify(error)}</Text>
+      </View>
+    )
+
+  if (loading) return <ActivityIndicator size="large" color={COLOR.BLUE} />
 
   const onSuccess = async QRCode => {
     const { data: id } = QRCode
@@ -62,7 +84,7 @@ const QRScanner = () => {
 
   return (
     <View style={styles.container}>
-      <GradientBackground status="NORMAL">
+      <GradientBackground status={status}>
         <Text style={styles.title}>{STATUS.TEXT.normal}</Text>
         <Text
           style={styles.subtitle}
