@@ -2,9 +2,13 @@ import React from 'react'
 import moment from 'moment'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { useQuery } from '@apollo/react-hooks'
+
 import ContactCard from '../../components/ContactCard'
+import RNLoading from '../../components/Loading'
 import GradientBackground from '../../components/background'
 import { FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
+import { GET_USER_PROFILE } from '../../api/query'
 
 const Stack = createStackNavigator()
 
@@ -33,10 +37,28 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     marginBottom: 18,
   },
+  errorContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 const Contacts = () => {
-  const status = 'normal' // TODO: Fetch from server later.
+  const { loading, error, data } = useQuery(GET_USER_PROFILE)
+
+  const { profile } = data || {}
+  const { status } = profile || {}
+
+  if (error)
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error occur: {JSON.stringify(error)}</Text>
+      </View>
+    )
+
+  if (loading) return <RNLoading colorStatus="normal" />
+
   return (
     <View style={styles.container}>
       <GradientBackground status={status} style={styles.background}>

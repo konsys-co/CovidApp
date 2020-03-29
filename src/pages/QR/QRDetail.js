@@ -1,16 +1,11 @@
 import React from 'react'
-import {
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  ActivityIndicator,
-} from 'react-native'
+import { StyleSheet, ScrollView, View, Text } from 'react-native'
 import { Button } from 'react-native-elements'
 import QRCode from 'react-native-qrcode-svg'
 import { useQuery } from '@apollo/react-hooks'
 
 import GradientBackground from '../../components/background'
+import RNLoading from '../../components/Loading'
 import * as STATUS from '../../constants/userStatus'
 import { COLOR } from '../../constants/theme'
 import { GET_USER_PROFILE } from '../../api/query'
@@ -96,7 +91,7 @@ const QRDetail = ({ navigation }) => {
               borderRadius: 12,
             }}>
             {isFetchUserProfile ? (
-              <ActivityIndicator size="large" color={COLOR.BLUE} />
+              <RNLoading colorStatus="normal" />
             ) : (
               <QRCode
                 value={userId || 'user id'}

@@ -1,12 +1,5 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Platform,
-  ActivityIndicator,
-} from 'react-native'
+import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
 import { useMutation, useQuery } from '@apollo/react-hooks'
@@ -14,7 +7,7 @@ import { useMutation, useQuery } from '@apollo/react-hooks'
 import * as STATUS from '../../constants/userStatus'
 import GradientBackground from '../../components/background'
 import CloseContactModal from './CloseContactModal'
-import { COLOR } from '../../constants/theme'
+import RNLoading from '../../components/Loading'
 import { GET_USER_PROFILE } from '../../api/query'
 import { ADD_CLOSE_CONTACT } from '../../api/mutation'
 
@@ -65,7 +58,7 @@ const QRScanner = () => {
       </View>
     )
 
-  if (loading) return <ActivityIndicator size="large" color={COLOR.BLUE} />
+  if (loading) return <RNLoading colorStatus="normal" />
 
   const onSuccess = async QRCode => {
     const { data: id } = QRCode

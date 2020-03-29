@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Alert, ActivityIndicator } from 'react-native'
+import { Text, View, StyleSheet, Alert } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -14,7 +14,7 @@ import Login from './pages/Login'
 import Notifications from './pages/Notifications'
 // TODO: move UpdateStatus file to the outside of QR
 import UpdateStatus from './pages/QR/updateStatus'
-import { COLOR } from './constants/theme'
+import RNLoading from './components/Loading'
 
 const BottomTab = createBottomTabNavigator()
 const AppStack = createStackNavigator()
@@ -123,7 +123,7 @@ export default () => {
   if (isFetching)
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color={COLOR.BLACK} />
+        <RNLoading />
       </View>
     )
 

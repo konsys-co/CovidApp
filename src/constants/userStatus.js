@@ -28,6 +28,13 @@ export const LIGHT = {
   healed: COLOR.PALE_MINT,
 }
 
+export const LOADING_COLOR = {
+  normal: COLOR.DARK_BLUE,
+  risk: COLOR.BUTTER,
+  infected: COLOR.DARK_COPPER,
+  healed: COLOR.DARK_MINT,
+}
+
 export const TEXT = {
   normal: 'สุขภาพปกติ',
   risk: 'กำลังเฝ้าระวัง',
