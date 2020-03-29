@@ -86,12 +86,12 @@ export default () => {
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
-    SplashScreen.hide()
     if (!isLoggedin) {
       fetchUserData()
         .then(() => setIsFetching(false))
         .catch(e => console.log(e))
     }
+    SplashScreen.hide()
   }, [isLoggedin])
 
   const fetchUserData = async () => {
