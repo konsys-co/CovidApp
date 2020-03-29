@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Kanit-Regular',
     fontSize: 36,
     marginTop: 20,
-    color: STATUS.NORMAL.NORMAL,
+    color: STATUS.NORMAL.normal,
   },
   subtitle: {
     fontFamily: 'Kanit-Regular',
@@ -58,7 +58,7 @@ const QRScanner = () => {
   return (
     <View style={styles.container}>
       <GradientBackground status="NORMAL">
-        <Text style={styles.title}>{STATUS.TEXT.NORMAL}</Text>
+        <Text style={styles.title}>{STATUS.TEXT.normal}</Text>
         <Text
           style={styles.subtitle}
           onPress={() => toggleShowCloseContactModal()}>
@@ -66,7 +66,7 @@ const QRScanner = () => {
         </Text>
         <View
           style={{
-            shadowColor: STATUS.DARK.NORMAL,
+            shadowColor: STATUS.DARK.normal,
             shadowOffset: {
               width: 0,
               height: 12,

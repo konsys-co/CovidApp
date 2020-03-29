@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   friendName: {
     fontFamily: 'Kanit-Regular',
     fontSize: 20,
-    color: STATUS.NORMAL.NORMAL,
+    color: STATUS.NORMAL.normal,
   },
   modalText: {
     fontFamily: 'Kanit-Regular',
@@ -127,7 +127,7 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
               titleStyle={styles.btnText}
               buttonStyle={{
                 ...styles.button,
-                borderColor: STATUS.NORMAL.NORMAL,
+                borderColor: STATUS.NORMAL.normal,
               }}
               onPress={() => toggleShowScanner()}
             />
@@ -157,7 +157,7 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
               titleStyle={styles.btnText}
               buttonStyle={{
                 ...styles.button,
-                borderColor: STATUS.NORMAL.NORMAL,
+                borderColor: STATUS.NORMAL.normal,
               }}
               onPress={() => toggleShowScanner()}
             />
