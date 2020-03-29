@@ -75,7 +75,7 @@ const QRDetail = ({ navigation }) => {
           style={{ width: '100%' }}
           contentContainerStyle={{ alignItems: 'center' }}>
           <Text style={{ ...styles.title, color: STATUS.NORMAL[status] }}>
-            {STATUS.TEXT[status]}
+            {STATUS.TEXT[status] || STATUS.TEXT.fetching}
           </Text>
           <Text style={styles.subtitle}>แสกนเพื่อบันทึกว่าเราเจอกัน</Text>
           <View
@@ -98,19 +98,19 @@ const QRDetail = ({ navigation }) => {
             {isFetchUserProfile ? (
               <ActivityIndicator size="large" color={COLOR.BLUE} />
             ) : (
-                <QRCode
-                  value={userId || 'user id'}
-                  color="#222"
-                  backgroundColor="white"
-                  // style={{ flex: 0.8 }}
-                  size={250}
-                  // logo={{ uri: 'https://cdn4.iconfinder.com/data/icons/social-icon-4/842/facebook-512.png' }} // or logo={{uri: base64logo}}
-                  logoMargin={2}
-                  logoSize={20}
-                  logoBorderRadius={10}
-                  logoBackgroundColor="transparent"
-                />
-              )}
+              <QRCode
+                value={userId || 'user id'}
+                color="#222"
+                backgroundColor="white"
+                // style={{ flex: 0.8 }}
+                size={250}
+                // logo={{ uri: 'https://cdn4.iconfinder.com/data/icons/social-icon-4/842/facebook-512.png' }} // or logo={{uri: base64logo}}
+                logoMargin={2}
+                logoSize={20}
+                logoBorderRadius={10}
+                logoBackgroundColor="transparent"
+              />
+            )}
           </View>
           <Button
             title="ดูข้อมูลส่วนตัว"
@@ -129,9 +129,7 @@ const QRDetail = ({ navigation }) => {
               ...styles.button,
               borderColor: isInfected ? COLOR.MINT : COLOR.COPPER,
             }}
-            onPress={() =>
-              navigation.navigate('UpdateStatus', { status })
-            }
+            onPress={() => navigation.navigate('UpdateStatus', { status })}
           />
         </ScrollView>
       </GradientBackground>

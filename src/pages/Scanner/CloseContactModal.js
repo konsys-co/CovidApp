@@ -2,6 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, ActivityIndicator } from 'react-native'
 import { Button } from 'react-native-elements'
 import { useQuery } from '@apollo/react-hooks'
+import * as Animatable from 'react-native-animatable'
 
 import markCCExistingIcon from '../../../assets/images/mark-friend-exist.png'
 import markCCNotExistingIcon from '../../../assets/images/mark-friend-not-exist.png'
@@ -101,7 +102,10 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
   if (loading) return <ActivityIndicator size="large" color={COLOR.BLUE} />
 
   return (
-    <View style={styles.modalContainer}>
+    <Animatable.View
+      animation="jello"
+      duration={1200}
+      style={styles.modalContainer}>
       {user ? (
         <>
           <View style={styles.modalDetailContainer}>
@@ -164,7 +168,7 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
           </View>
         </>
       )}
-    </View>
+    </Animatable.View>
   )
 }
 

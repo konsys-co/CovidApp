@@ -33,6 +33,7 @@ export const TEXT = {
   risk: 'กำลังเฝ้าระวัง',
   infected: 'มีเชื้อ COVID-19',
   healed: 'รักษาหายแล้ว',
+  fetching: 'โหลดสถานะสุขภาพ',
 }
 
 export const STATUS = {
