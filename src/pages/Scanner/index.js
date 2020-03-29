@@ -1,18 +1,13 @@
 import React, { useState } from 'react'
-import {
-  StyleSheet,
-  View,
-  Text,
-  Dimensions,
-  Platform,
-  ActivityIndicator,
-} from 'react-native'
+import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
+import { useMutation } from '@apollo/react-hooks'
 
 import * as STATUS from '../../constants/userStatus'
 import GradientBackground from '../../components/background'
 import CloseContactModal from './CloseContactModal'
+import { ADD_CLOSE_CONTACT } from '../../api/mutation'
 
 const deviceHeight = Dimensions.get('window').height
 
@@ -37,17 +32,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
   },
+  errorContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 const QRScanner = () => {
   const [showCloseContactModal, setShowCloseContactModal] = useState(false)
   const [closeContactID, setCloseContactID] = useState(null)
 
-  const onSuccess = QRCode => {
-    setCloseContactID(QRCode.data)
+  const [toggleAddCloseContact] = useMutation(ADD_CLOSE_CONTACT)
+
+  const onSuccess = async QRCode => {
+    const { data: id } = QRCode
+    setCloseContactID(id)
     setShowCloseContactModal(true)
+    await toggleAddCloseContact({ variables: { id, type: 'CONTACT' } })
   }
 
+  // For mocking QR Scan in simulator
   const toggleShowCloseContactModal = () => {
     setCloseContactID('5e7c4dae8674f9001835c6f8')
     setShowCloseContactModal(true)

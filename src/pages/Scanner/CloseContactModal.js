@@ -86,25 +86,18 @@ const styles = StyleSheet.create({
 })
 
 const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
-  const { loading, error, data } = useQuery(GET_CONTACT_BY_ID, {
+  const { loading, data } = useQuery(GET_CONTACT_BY_ID, {
     variables: { id: closeContactID },
   })
 
   const { user } = data || {}
-
-  if (error)
-    return (
-      <View style={styles.errorContainer}>
-        <Text>Error occur: {JSON.stringify(error)}</Text>
-      </View>
-    )
 
   if (loading) return <ActivityIndicator size="large" color={COLOR.BLUE} />
 
   return (
     <Animatable.View
       animation="jello"
-      duration={1200}
+      duration={1000}
       style={styles.modalContainer}>
       {user ? (
         <>
