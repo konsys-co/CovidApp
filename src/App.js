@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
+import SplashScreen from 'react-native-splash-screen'
 
 import { NORMAL } from './constants/userStatus'
 import QR from './pages/QR'
@@ -90,6 +91,7 @@ export default () => {
         .then(() => setIsFetching(false))
         .catch(e => console.log(e))
     }
+    SplashScreen.hide()
   }, [isLoggedin])
 
   const fetchUserData = async () => {
