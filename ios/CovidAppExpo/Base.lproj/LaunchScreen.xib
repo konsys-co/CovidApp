@@ -14,11 +14,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SplashIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-Ce-dFX">
-                    <rect key="frame" x="90" y="90" width="300" height="300"/>
+                    <rect key="frame" x="139" y="46.666666666666657" width="202" height="387"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Izf-Ce-dFX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3dV-r4-SBh"/>
+                <constraint firstItem="Izf-Ce-dFX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Dkv-CU-UPg"/>
                 <constraint firstItem="Izf-Ce-dFX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="UL2-Mg-49n"/>
                 <constraint firstItem="Izf-Ce-dFX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="k0y-X0-BNn"/>
             </constraints>
@@ -28,6 +30,6 @@
         </view>
     </objects>
     <resources>
-        <image name="SplashIcon" width="300" height="300"/>
+        <image name="SplashIcon" width="202" height="387"/>
     </resources>
 </document>
