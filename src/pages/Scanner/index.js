@@ -8,7 +8,7 @@ import * as STATUS from '../../constants/userStatus'
 import GradientBackground from '../../components/background'
 import CloseContactModal from './CloseContactModal'
 import RNLoading from '../../components/Loading'
-import { GET_USER_PROFILE } from '../../api/query'
+import { GET_USER_PROFILE, GET_CLOSE_CONTACTS } from '../../api/query'
 import { ADD_CLOSE_CONTACT } from '../../api/mutation'
 
 const deviceHeight = Dimensions.get('window').height
@@ -46,7 +46,9 @@ const QRScanner = () => {
   const [closeContactID, setCloseContactID] = useState(null)
 
   const { loading, error, data } = useQuery(GET_USER_PROFILE)
-  const [toggleAddCloseContact] = useMutation(ADD_CLOSE_CONTACT)
+  const [toggleAddCloseContact] = useMutation(ADD_CLOSE_CONTACT, {
+    refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
+  })
 
   const { profile } = data || {}
   const { status } = profile || {}
@@ -69,8 +71,10 @@ const QRScanner = () => {
 
   // For mocking QR Scan in simulator
   const toggleShowCloseContactModal = () => {
-    setCloseContactID('5e7c4dae8674f9001835c6f8')
+    const bankFBID = '5e7c4dae8674f9001835c6f8'
+    setCloseContactID(bankFBID)
     setShowCloseContactModal(true)
+    toggleAddCloseContact({ variables: { id: bankFBID, type: 'CONTACT' } })
   }
 
   const toggleShowScanner = () => setShowCloseContactModal(false)
