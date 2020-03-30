@@ -13,7 +13,7 @@ import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
 import { STATUS } from '../../constants/userStatus'
 import { COLOR, FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
-import { GET_NOTIFICATIONS } from '../../api/query'
+import { GET_NOTIFICATIONS, GET_USER_PROFILE } from '../../api/query'
 
 const styles = StyleSheet.create({
   container: {
@@ -40,12 +40,16 @@ const styles = StyleSheet.create({
 
 const Notifications = () => {
   const { loading, error, data } = useQuery(GET_NOTIFICATIONS)
+  const { data: userProfileData } = useQuery(GET_USER_PROFILE)
+
+  const { profile } = userProfileData || {}
+  const { status } = profile || {}
 
   if (error) return <Text>Error!!! {JSON.stringify(error)}</Text>
 
   return (
     <View style={styles.container}>
-      <GradientBackground status={STATUS.NORMAL} style={styles.background}>
+      <GradientBackground status={status} style={styles.background}>
         <Text style={styles.titleText}>แจ้งเตือน</Text>
         <ScrollView
           style={{ width: '100%' }}
