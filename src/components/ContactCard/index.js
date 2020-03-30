@@ -1,6 +1,7 @@
 import React from 'react'
+import moment from 'moment'
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
-import { Button } from 'react-native-elements'
+
 import { COLOR, FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
 import { NORMAL } from '../../constants/userStatus'
 
@@ -53,37 +54,59 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
   },
+  dateText: {
+    alignSelf: 'flex-start',
+    fontSize: FONT_SIZE.BODY1,
+    fontFamily: FONT_FAMILY,
+    marginVertical: 8,
+  },
 })
 
-export default ({ name, dateTime, location, imgURL, status }) => (
-  <View style={styles.cardWrapper}>
-    <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%' }}>
-      <View style={{ width: '15%' }}>
-        <Image style={styles.avatar} source={{ uri: imgURL }} />
-      </View>
-      <View style={{ paddingHorizontal: 10, width: '55%' }}>
-        <View>
-          <Text
-            style={{ ...styles.name, color: NORMAL[status] }}
-            numberOfLines={1}
-            ellipsizeMode="tail">
-            {name}
-          </Text>
+export default ({ contactGroupData }) =>
+  contactGroupData.map(c => {
+    const { firstName, lastName, status, profilePicture, location } =
+      c.user || {}
+    const userName = `${firstName} ${lastName}`
+    return (
+      <View style={styles.cardWrapper}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: '100%',
+          }}>
+          <View style={{ width: '15%' }}>
+            <Image style={styles.avatar} source={{ uri: profilePicture }} />
+          </View>
+          <View style={{ paddingHorizontal: 10, width: '55%' }}>
+            <View>
+              <Text
+                style={{ ...styles.name, color: NORMAL[status] }}
+                numberOfLines={1}
+                ellipsizeMode="tail">
+                {userName}
+              </Text>
+            </View>
+            <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+              <Text
+                style={{
+                  ...styles.status,
+                  marginRight: 8,
+                  fontWeight: '400',
+                }}>
+                {moment(c.createdAt).format('HH:mm')}
+              </Text>
+              <Text style={styles.status}>{location}</Text>
+            </View>
+          </View>
+          <View style={{ width: '30%' }}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{ ...styles.button, borderColor: NORMAL[status] }}>
+              <Text style={styles.buttonTitle}>เจออีกครั้ง</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
-          <Text style={{ ...styles.status, marginRight: 8, fontWeight: '400' }}>
-            {dateTime}
-          </Text>
-          <Text style={styles.status}>{location}</Text>
-        </View>
       </View>
-      <View style={{ width: '30%' }}>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={{ ...styles.button, borderColor: NORMAL[status] }}>
-          <Text style={styles.buttonTitle}>เจออีกครั้ง</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View>
-)
+    )
+  })

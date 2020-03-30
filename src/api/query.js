@@ -43,3 +43,26 @@ export const GET_CONTACT_BY_ID = gql`
     }
   }
 `
+
+export const GET_CLOSE_CONTACTS = gql`
+  query getCloseContacts {
+    contacts(sort: _ID_DESC) {
+      contact
+      contactee
+      user {
+        status
+        profilePicture
+        firstName
+        lastName
+      }
+      location {
+        _id
+        coordinates
+        type
+      }
+      updatedAt
+      createdAt
+      type
+    }
+  }
+`
