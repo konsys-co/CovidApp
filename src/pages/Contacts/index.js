@@ -134,6 +134,25 @@ const CloseContactLists = () => {
           <RNLoading colorStatus="normal" />
         </View>
       )
+    return Object.entries(contactGroupData).map(([key, value]) => {
+      const isCurrentDay =
+        moment(value[0].createdAt).diff(moment(), 'days') === 0
+      const period = isCurrentDay
+        ? 'วันนี้'
+        : moment(value[0].createdAt).fromNow()
+      return (
+        <View key={key}>
+          <Text style={styles.dateText}>{period}</Text>
+          <ContactCard
+            contactGroupData={value}
+            addCloseContactAgain={addCloseContactAgain}
+          />
+        </View>
+      )
+    })
+  }
+
+  const renderContactWithScroll = () => {
     return (
       <ScrollView
         style={{ width: '100%' }}
@@ -144,22 +163,13 @@ const CloseContactLists = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        {Object.entries(contactGroupData).map(([key, value]) => {
-          const isCurrentDay =
-            moment(value[0].createdAt).diff(moment(), 'days') === 0
-          const period = isCurrentDay
-            ? 'วันนี้'
-            : moment(value[0].createdAt).fromNow()
-          return (
-            <View key={key}>
-              <Text style={styles.dateText}>{period}</Text>
-              <ContactCard
-                contactGroupData={value}
-                addCloseContactAgain={addCloseContactAgain}
-              />
-            </View>
-          )
-        })}
+        {contacts.length > 0 ? (
+          renderContactLists(contactGroupData)
+        ) : (
+          <View style={styles.centerContainer}>
+            <Text style={styles.noContactText}>คุณยังไม่มีการพบเจอผู้ใด</Text>
+          </View>
+        )}
       </ScrollView>
     )
   }
@@ -168,13 +178,7 @@ const CloseContactLists = () => {
     <View style={styles.container}>
       <GradientBackground status={status} style={styles.background}>
         <Text style={styles.titleText}>รายชื่อคนที่พบ</Text>
-        {contacts.length > 0 ? (
-          renderContactLists(contactGroupData)
-        ) : (
-          <View style={styles.centerContainer}>
-            <Text style={styles.noContactText}>คุณยังไม่มีการพบเจอผู้ใด</Text>
-          </View>
-        )}
+        {renderContactWithScroll()}
       </GradientBackground>
     </View>
   )
