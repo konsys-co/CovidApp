@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-import { StyleSheet, View, ScrollView, Text } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  RefreshControl,
+} from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 
@@ -53,13 +59,15 @@ const styles = StyleSheet.create({
 })
 
 const CloseContactLists = () => {
-  const { loading, error, data } = useQuery(GET_USER_PROFILE)
   const [contactGroupData, setContactGroupData] = useState(null)
+  const [refreshing, setRefreshing] = useState(false)
 
+  const { loading, error, data } = useQuery(GET_USER_PROFILE)
   const {
     loading: getCloseContactLoading,
     error: getCloseContactError,
     data: closeContacts,
+    refetch: refetchContactLists,
   } = useQuery(GET_CLOSE_CONTACTS)
 
   const [
@@ -92,6 +100,12 @@ const CloseContactLists = () => {
         <RNLoading colorStatus="normal" />
       </View>
     )
+
+  const onRefresh = () => {
+    setRefreshing(true)
+    refetchContactLists()
+    setRefreshing(false)
+  }
 
   const addCloseContactAgain = closeContactID =>
     toggleAddCloseContact({
@@ -126,7 +140,10 @@ const CloseContactLists = () => {
         contentContainerStyle={{
           alignItems: 'center',
           paddingHorizontal: 20,
-        }}>
+        }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {Object.entries(contactGroupData).map(([key, value]) => {
           const isCurrentDay =
             moment(value[0].createdAt).diff(moment(), 'days') === 0
