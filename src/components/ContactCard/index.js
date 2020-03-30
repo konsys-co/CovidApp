@@ -74,7 +74,7 @@ export default ({ contactGroupData, addCloseContactAgain }) =>
     } = c.user || {}
     const userName = `${firstName} ${lastName}`
     return (
-      <View style={styles.cardWrapper}>
+      <View key={userID.toString() + c.createdAt} style={styles.cardWrapper}>
         <View
           style={{
             flexDirection: 'row',

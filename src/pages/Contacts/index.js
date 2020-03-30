@@ -127,20 +127,20 @@ const CloseContactLists = () => {
           alignItems: 'center',
           paddingHorizontal: 20,
         }}>
-        {Object.entries(contactGroupData).map(([_, value]) => {
+        {Object.entries(contactGroupData).map(([key, value]) => {
           const isCurrentDay =
             moment(value[0].createdAt).diff(moment(), 'days') === 0
           const period = isCurrentDay
             ? 'วันนี้'
             : moment(value[0].createdAt).fromNow()
           return (
-            <>
+            <View key={key}>
               <Text style={styles.dateText}>{period}</Text>
               <ContactCard
                 contactGroupData={value}
                 addCloseContactAgain={addCloseContactAgain}
               />
-            </>
+            </View>
           )
         })}
       </ScrollView>
