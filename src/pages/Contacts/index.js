@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 
 import ContactCard from '../../components/ContactCard'
 import RNLoading from '../../components/Loading'
 import GradientBackground from '../../components/background'
 import { FONT_FAMILY, FONT_SIZE, COLOR } from '../../constants/theme'
 import { GET_USER_PROFILE, GET_CLOSE_CONTACTS } from '../../api/query'
+import { ADD_CLOSE_CONTACT } from '../../api/mutation'
 
 const Stack = createStackNavigator()
 
@@ -54,11 +55,19 @@ const styles = StyleSheet.create({
 const CloseContactLists = () => {
   const { loading, error, data } = useQuery(GET_USER_PROFILE)
   const [contactGroupData, setContactGroupData] = useState(null)
+
   const {
     loading: getCloseContactLoading,
     error: getCloseContactError,
     data: closeContacts,
   } = useQuery(GET_CLOSE_CONTACTS)
+
+  const [
+    toggleAddCloseContact,
+    { loading: addCloseContactLoading },
+  ] = useMutation(ADD_CLOSE_CONTACT, {
+    refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
+  })
 
   const { profile } = data || {}
   const { status } = profile || {}
@@ -77,8 +86,17 @@ const CloseContactLists = () => {
       </View>
     )
 
-  if (loading || getCloseContactLoading)
-    return <RNLoading colorStatus="normal" />
+  if (loading || getCloseContactLoading || addCloseContactLoading)
+    return (
+      <View style={styles.centerContainer}>
+        <RNLoading colorStatus="normal" />
+      </View>
+    )
+
+  const addCloseContactAgain = closeContactID =>
+    toggleAddCloseContact({
+      variables: { id: closeContactID, type: 'CONTACT' },
+    })
 
   const groupingContacts = contactData => {
     const result = contactData
@@ -118,7 +136,10 @@ const CloseContactLists = () => {
           return (
             <>
               <Text style={styles.dateText}>{period}</Text>
-              <ContactCard contactGroupData={value} />
+              <ContactCard
+                contactGroupData={value}
+                addCloseContactAgain={addCloseContactAgain}
+              />
             </>
           )
         })}

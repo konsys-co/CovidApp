@@ -62,10 +62,16 @@ const styles = StyleSheet.create({
   },
 })
 
-export default ({ contactGroupData }) =>
+export default ({ contactGroupData, addCloseContactAgain }) =>
   contactGroupData.map(c => {
-    const { firstName, lastName, status, profilePicture, location } =
-      c.user || {}
+    const {
+      _id: userID,
+      firstName,
+      lastName,
+      status,
+      profilePicture,
+      location,
+    } = c.user || {}
     const userName = `${firstName} ${lastName}`
     return (
       <View style={styles.cardWrapper}>
@@ -102,7 +108,8 @@ export default ({ contactGroupData }) =>
           <View style={{ width: '30%' }}>
             <TouchableOpacity
               activeOpacity={0.7}
-              style={{ ...styles.button, borderColor: NORMAL[status] }}>
+              style={{ ...styles.button, borderColor: NORMAL[status] }}
+              onPress={() => addCloseContactAgain(userID)}>
               <Text style={styles.buttonTitle}>เจออีกครั้ง</Text>
             </TouchableOpacity>
           </View>

@@ -46,6 +46,7 @@ const QRScanner = () => {
   const [closeContactID, setCloseContactID] = useState(null)
 
   const { loading, error, data } = useQuery(GET_USER_PROFILE)
+
   const [toggleAddCloseContact] = useMutation(ADD_CLOSE_CONTACT, {
     refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
   })

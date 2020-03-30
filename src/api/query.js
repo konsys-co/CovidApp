@@ -50,10 +50,11 @@ export const GET_CLOSE_CONTACTS = gql`
       contact
       contactee
       user {
-        status
-        profilePicture
+        _id
         firstName
         lastName
+        profilePicture
+        status
       }
       location {
         _id
