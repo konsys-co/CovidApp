@@ -16,6 +16,7 @@ import * as STATUS from '../../constants/userStatus'
 import cureImg from '../../../assets/images/cure.png'
 import infectedImg from '../../../assets/images/infected.png'
 import { UPDATE_STATUS } from '../../api/mutation'
+import { GET_CLOSE_CONTACTS } from '../../api/query'
 
 let value = 0
 const ACTION_TIMER = 5000
@@ -26,12 +27,17 @@ const STATUS_ENUM = {
 }
 
 const AnimatedButtonPress = ({ navigation, route }) => {
-  const [doUpdate, { loading }] = useMutation(UPDATE_STATUS, { refetchQueries: 'profile' })
+  const [doUpdate, { error }] = useMutation(UPDATE_STATUS, {
+    refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
+  })
   const { status } = route.params
   const isInfected = status === STATUS.STATUS.infected
 
   const actionColor = isInfected ? STATUS.DARK.healed : STATUS.DARK.infected
-  const COLORS = [isInfected ? STATUS.NORMAL.healed : STATUS.NORMAL.infected, isInfected ? STATUS.NORMAL.healed : STATUS.NORMAL.infected]
+  const COLORS = [
+    isInfected ? STATUS.NORMAL.healed : STATUS.NORMAL.infected,
+    isInfected ? STATUS.NORMAL.healed : STATUS.NORMAL.infected,
+  ]
 
   const [pressAction, setPressAction] = useState(new Animated.Value(0))
   const [textComplete, setTextComplete] = useState('')
@@ -41,20 +47,27 @@ const AnimatedButtonPress = ({ navigation, route }) => {
 
   useEffect(() => {
     // eslint-disable-next-line no-return-assign
-    pressAction.addListener((v) => value = v.value)
+    pressAction.addListener(v => (value = v.value))
   })
+
+  if (error)
+    return (
+      <View style={styles.errorContainer}>
+        <Text>Error occur: {JSON.stringify(error)}</Text>
+      </View>
+    )
 
   const handlePressIn = () => {
     Animated.timing(pressAction, {
       duration: ACTION_TIMER,
-      toValue: 1
+      toValue: 1,
     }).start(() => animationActionComplete())
   }
 
   const handlePressOut = () => {
     Animated.timing(pressAction, {
       duration: value * ACTION_TIMER,
-      toValue: 0
+      toValue: 0,
     }).start()
   }
 
@@ -68,14 +81,14 @@ const AnimatedButtonPress = ({ navigation, route }) => {
     setTextComplete(message)
     doUpdate({
       variables: {
-        status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected
-      }
+        status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected,
+      },
     }).then(resp => {
       console.info(resp.data)
     })
   }
 
-  const getButtonWidthLayout = (e) => {
+  const getButtonWidthLayout = e => {
     setButtonWidth(e.nativeEvent.layout.width - 6)
     setButtonHeight(e.nativeEvent.layout.height - 6)
   }
@@ -83,16 +96,16 @@ const AnimatedButtonPress = ({ navigation, route }) => {
   const getProgressStyles = () => {
     const width = pressAction.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, buttonWidth]
+      outputRange: [0, buttonWidth],
     })
     const bgColor = pressAction.interpolate({
       inputRange: [0, 1],
-      outputRange: COLORS
+      outputRange: COLORS,
     })
     return {
       width,
       height: buttonHeight,
-      backgroundColor: bgColor
+      backgroundColor: bgColor,
     }
   }
 
@@ -100,17 +113,38 @@ const AnimatedButtonPress = ({ navigation, route }) => {
     <View style={styles.container}>
       <GradientBackground status={status} dark>
         <View style={styles.actionSection}>
-          <Image source={isInfected ? cureImg : infectedImg} style={{ width: 150, height: 150, marginBottom: 40 }} />
-          <Text style={{ ...styles.statusTitle, color: actionColor }}>{isInfected ? 'ยืนยันว่าคุณหายแล้ว' : 'ยืนยันว่าคุณเป็น COVID-19 '}</Text>
-          <Text style={{ ...styles.statusSubTitle }}>ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย</Text>
-          <Text style={{ ...styles.statusSubTitle }}>พบเจอในช่วงเวลา 14 วัน</Text>
+          <Image
+            source={isInfected ? cureImg : infectedImg}
+            style={{ width: 150, height: 150, marginBottom: 40 }}
+          />
+          <Text style={{ ...styles.statusTitle, color: actionColor }}>
+            {isInfected ? 'ยืนยันว่าคุณหายแล้ว' : 'ยืนยันว่าคุณเป็น COVID-19 '}
+          </Text>
+          <Text style={{ ...styles.statusSubTitle }}>
+            ระบบจะทำการแจ้งเตือนไปยังทุกคนที่คุณเคย
+          </Text>
+          <Text style={{ ...styles.statusSubTitle }}>
+            พบเจอในช่วงเวลา 14 วัน
+          </Text>
           <TouchableWithoutFeedback
             onPressIn={() => handlePressIn()}
-            onPressOut={() => handlePressOut()}
-          >
-            <View style={{ ...styles.button, ...styles.updateButton, borderColor: actionColor }} onLayout={(e) => getButtonWidthLayout(e)}>
+            onPressOut={() => handlePressOut()}>
+            <View
+              style={{
+                ...styles.button,
+                ...styles.updateButton,
+                borderColor: actionColor,
+              }}
+              onLayout={e => getButtonWidthLayout(e)}>
               <Animated.View style={[styles.bgFill, getProgressStyles()]} />
-              <Text style={{ ...styles.textStyle, color: actionColor, fontWeight: '500' }}>แตะปุ่มนี้ค้างไว้ 5 วินาที</Text>
+              <Text
+                style={{
+                  ...styles.textStyle,
+                  color: actionColor,
+                  fontWeight: '500',
+                }}>
+                แตะปุ่มนี้ค้างไว้ 5 วินาที
+              </Text>
             </View>
           </TouchableWithoutFeedback>
           <>
@@ -120,44 +154,67 @@ const AnimatedButtonPress = ({ navigation, route }) => {
         <Button
           onPress={() => navigation.navigate('QRDetail')}
           titleStyle={{ ...styles.textStyle, color: COLOR.WHITE }}
-          buttonStyle={{ ...styles.button, borderColor: COLOR.TEXT_GRAY, marginBottom: 50 }}
-          title='ปิดหน้านี้'
+          buttonStyle={{
+            ...styles.button,
+            borderColor: COLOR.TEXT_GRAY,
+            marginBottom: 50,
+          }}
+          title="ปิดหน้านี้"
         />
         <Modal
           isVisible={isVisible}
           onBackdropPress={() => setIsVisible(false)}
-          onBackButtonPress={() => setIsVisible(false)}
-        >
-          <View style={{ flex: 0.5, backgroundColor: 'white', borderRadius: 15 }}>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              <Text style={{ ...styles.title, fontSize: 24 }}>อัพเดทสถานะ</Text>
-              <View style={{
-                marginTop: 20,
-                shadowColor: COLOR.BLACK,
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.23,
-                shadowRadius: 2.62,
+          onBackButtonPress={() => setIsVisible(false)}>
+          <View
+            style={{ flex: 0.5, backgroundColor: 'white', borderRadius: 15 }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
-                <Image source={isInfected ? cureImg : infectedImg} style={{ width: 100, height: 100 }} />
+              <Text style={{ ...styles.title, fontSize: 24 }}>อัพเดทสถานะ</Text>
+              <View
+                style={{
+                  marginTop: 20,
+                  shadowColor: COLOR.BLACK,
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.23,
+                  shadowRadius: 2.62,
+                }}>
+                <Image
+                  source={isInfected ? cureImg : infectedImg}
+                  style={{ width: 100, height: 100 }}
+                />
               </View>
-              <Text style={{ ...styles.title, color: isInfected ? COLOR.MINT : COLOR.COPPER, fontSize: 30 }}>คุณ{isInfected ? STATUS.TEXT.healed : STATUS.TEXT.infected}</Text>
+              <Text
+                style={{
+                  ...styles.title,
+                  color: isInfected ? COLOR.MINT : COLOR.COPPER,
+                  fontSize: 30,
+                }}>
+                คุณ{isInfected ? STATUS.TEXT.healed : STATUS.TEXT.infected}
+              </Text>
               <Button
                 onPress={() => {
                   setIsVisible(false)
                   navigation.navigate('QRDetail')
                 }}
                 titleStyle={styles.textStyle}
-                buttonStyle={{ ...styles.button, borderColor: isInfected ? COLOR.MINT : COLOR.COPPER }}
-                title='กลับ'
+                buttonStyle={{
+                  ...styles.button,
+                  borderColor: isInfected ? COLOR.MINT : COLOR.COPPER,
+                }}
+                title="กลับ"
               />
             </View>
           </View>
         </Modal>
       </GradientBackground>
-    </View >
+    </View>
   )
 }
 
@@ -203,7 +260,7 @@ const styles = StyleSheet.create({
   },
   text: {
     backgroundColor: 'transparent',
-    color: '#111'
+    color: '#111',
   },
   textStyle: {
     color: '#000',
@@ -213,8 +270,13 @@ const styles = StyleSheet.create({
   bgFill: {
     position: 'absolute',
     top: 0,
-    left: 0
-  }
+    left: 0,
+  },
+  errorContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 })
 
 export default AnimatedButtonPress
