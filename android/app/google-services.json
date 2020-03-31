@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "677066933098",
+    "firebase_url": "https://tidyoung-ba93b.firebaseio.com",
+    "project_id": "tidyoung-ba93b",
+    "storage_bucket": "tidyoung-ba93b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:677066933098:android:89d98ab7def04bf67a5b13",
+        "android_client_info": {
+          "package_name": "com.covidappexpo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "677066933098-eic05aalab7b3mmfkb7p3oc7vd4l31rf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.covidappexpo",
+            "certificate_hash": "74ab7f263ef2d10f746f7227e1a6650c48e13eb2"
+          }
+        },
+        {
+          "client_id": "677066933098-4t7k040c3u4bma51dedb2gb68bv7r5mb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7vsC0qU8ZHN-U_rg-XQc__v4hSH-QqYk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "677066933098-4t7k040c3u4bma51dedb2gb68bv7r5mb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
