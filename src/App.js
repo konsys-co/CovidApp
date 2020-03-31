@@ -8,6 +8,7 @@ import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
 import SplashScreen from 'react-native-splash-screen'
 
 import { NORMAL } from './constants/userStatus'
+import PushNotificationManager from './components/PushNotificationManager'
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
 import Contacts from './pages/Contacts'
@@ -140,30 +141,34 @@ export default () => {
 
   if (userData)
     return (
-      <NavigationContainer>
-        <AppStack.Navigator mode="modal">
-          <AppStack.Screen name="Main" options={{ headerShown: false }}>
-            {({ navigation }) => (
-              <Main
-                navigation={navigation}
-                userData={userData}
-                setLoggedinStatus={setLoggedinStatus}
-                setUserData={setUserData}
-              />
-            )}
-          </AppStack.Screen>
-          <AppStack.Screen name="UpdateStatus" options={{ headerShown: false }}>
-            {({ navigation, route }) => (
-              <UpdateStatus
-                route={route}
-                navigation={navigation}
-                userData={userData}
-                options={{ transitionSpec: { open: {}, close: {} } }}
-              />
-            )}
-          </AppStack.Screen>
-        </AppStack.Navigator>
-      </NavigationContainer>
+      <PushNotificationManager>
+        <NavigationContainer>
+          <AppStack.Navigator mode="modal">
+            <AppStack.Screen name="Main" options={{ headerShown: false }}>
+              {({ navigation }) => (
+                <Main
+                  navigation={navigation}
+                  userData={userData}
+                  setLoggedinStatus={setLoggedinStatus}
+                  setUserData={setUserData}
+                />
+              )}
+            </AppStack.Screen>
+            <AppStack.Screen
+              name="UpdateStatus"
+              options={{ headerShown: false }}>
+              {({ navigation, route }) => (
+                <UpdateStatus
+                  route={route}
+                  navigation={navigation}
+                  userData={userData}
+                  options={{ transitionSpec: { open: {}, close: {} } }}
+                />
+              )}
+            </AppStack.Screen>
+          </AppStack.Navigator>
+        </NavigationContainer>
+      </PushNotificationManager>
     )
 
   return (
