@@ -178,8 +178,8 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 3787C92P7R;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = L4X3RTD33C;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -330,11 +330,11 @@
 			baseConfigurationReference = 3B47C5AFCB8BDE514B7D1AC6 /* Pods-CovidAppExpo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 3787C92P7R;
+				DEVELOPMENT_TEAM = L4X3RTD33C;
 				INFOPLIST_FILE = CovidAppExpo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -342,9 +342,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = rsp.konsys.tidyoung;
+				PRODUCT_BUNDLE_IDENTIFIER = co.flipay.app.cv19;
 				PRODUCT_NAME = CovidAppExpo;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Provisioning 2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -354,10 +354,10 @@
 			baseConfigurationReference = 8AC623DBF3A3E2CB072F81F2 /* Pods-CovidAppExpo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3787C92P7R;
+				DEVELOPMENT_TEAM = L4X3RTD33C;
 				INFOPLIST_FILE = CovidAppExpo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -365,9 +365,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = rsp.konsys.tidyoung;
+				PRODUCT_BUNDLE_IDENTIFIER = co.flipay.app.cv19;
 				PRODUCT_NAME = CovidAppExpo;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Provisioning 2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
