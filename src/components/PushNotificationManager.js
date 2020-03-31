@@ -53,7 +53,7 @@ export default class PushNotificationManager extends React.Component {
       (notification, completion) => {
         console.log('Notification Received - Foreground', notification)
         // Calling completion on iOS with `alert: true` will present the native iOS inApp notification.
-        completion({ alert: false, sound: false, badge: false })
+        completion({ alert: true, sound: true, badge: true })
       },
     )
 
