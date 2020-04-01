@@ -87,7 +87,7 @@ export default () => {
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
-    SplashScreen.hide()
+    setTimeout(() => SplashScreen.hide(), 1500)
   }, [])
 
   useEffect(() => {

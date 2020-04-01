@@ -20,7 +20,6 @@ import expo.modules.permissions.PermissionsPackage;
 import expo.modules.filesystem.FileSystemPackage;
 
 import com.wix.reactnativenotifications.RNNotificationsPackage;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
