@@ -1,14 +1,16 @@
 import React from 'react'
 import moment from 'moment'
-import { Text, View, StyleSheet, Image, Button } from 'react-native'
+import { Text, View, StyleSheet, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { AntDesign } from '@expo/vector-icons'
+import { useQuery } from '@apollo/react-hooks'
+import { Button } from 'react-native-elements'
 
+import RNLoading from '../../components/Loading'
 import { COLOR } from '../../constants/theme'
 import GradientBackground from '../../components/background'
 import * as STATUS_COLOR from '../../constants/userStatus'
-
-const status = 'NORMAL' // TODO: Fetch from server later.
+import { GET_USER_PROFILE } from '../../api/query'
 
 const styles = StyleSheet.create({
   container: {
@@ -50,9 +52,51 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 8,
   },
+  centerContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  btnContainer: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+  button: {
+    marginVertical: 16,
+    backgroundColor: 'transparent',
+    borderWidth: 3,
+    width: 300,
+    borderRadius: 10,
+  },
+  textStyle: {
+    color: '#000',
+    fontFamily: 'Kanit-Regular',
+    fontSize: 20,
+  },
 })
 
 const Profile = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
+  const { loading: isFetchUserProfile, error, data } = useQuery(
+    GET_USER_PROFILE,
+  )
+
+  if (error)
+    return (
+      <View style={styles.centerContainer}>
+        <Text>Error occur: {JSON.stringify(error)}</Text>
+      </View>
+    )
+
+  if (isFetchUserProfile)
+    return (
+      <View style={styles.centerContainer}>
+        <RNLoading colorStatus="normal" />
+      </View>
+    )
+
+  const { profile } = data || {}
+  const { status, createdAt } = profile || {}
+
   const logout = () => {
     AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
     setLoggedinStatus(false)
@@ -85,7 +129,7 @@ const Profile = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
                   {userData.name}
                 </Text>
                 <Text style={styles.text}>
-                  เริ่มใช้งานเมื่อ {moment().fromNow()}
+                  เริ่มใช้งานเมื่อ {moment(createdAt).fromNow()}
                 </Text>
               </View>
             </View>
@@ -111,7 +155,7 @@ const Profile = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
               }}
             />
           </View>
-          <View style={{ flexDirection: 'column', width: '100%' }}>
+          {/* <View style={{ flexDirection: 'column', width: '100%' }}>
             <View style={styles.spaceBetweenRow}>
               <Text style={styles.text}>คนที่พบทั้งหมด</Text>
               <Text style={styles.text}>75</Text>
@@ -132,8 +176,18 @@ const Profile = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
               <Text style={styles.text}>รักษาหายแล้ว</Text>
               <Text style={{ ...styles.text }}>19</Text>
             </View>
+          </View> */}
+          <View style={styles.btnContainer}>
+            <Button
+              title="ออกจากระบบ"
+              titleStyle={styles.textStyle}
+              buttonStyle={{
+                ...styles.button,
+                borderColor: STATUS_COLOR.NORMAL[status],
+              }}
+              onPress={() => logout()}
+            />
           </View>
-          <Button onPress={() => logout()} title="ออกจากระบบ" />
         </View>
       </GradientBackground>
     </View>
