@@ -74,18 +74,18 @@ const AnimatedButtonPress = ({ navigation, route }) => {
   const animationActionComplete = () => {
     let message = ''
     if (value === 1) {
-      message = 'You held it long enough to fire the action!'
+      message = 'คุณได้ทำการอัพเดทสถานะเรียบร้อยแล้ว ✅'
+      setTextComplete(message)
+      doUpdate({
+        variables: {
+          status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected,
+        },
+      }).then(resp => {
+        console.info(resp.data)
+      })
       setIsVisible(true)
       value = 0
     }
-    setTextComplete(message)
-    doUpdate({
-      variables: {
-        status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected,
-      },
-    }).then(resp => {
-      console.info(resp.data)
-    })
   }
 
   const getButtonWidthLayout = e => {
@@ -148,7 +148,7 @@ const AnimatedButtonPress = ({ navigation, route }) => {
             </View>
           </TouchableWithoutFeedback>
           <>
-            <Text>{textComplete}</Text>
+            <Text style={{ ...styles.statusSubTitle }}>{textComplete}</Text>
           </>
         </View>
         <Button
