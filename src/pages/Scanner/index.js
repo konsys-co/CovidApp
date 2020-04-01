@@ -83,7 +83,9 @@ const QRScanner = () => {
   return (
     <View style={styles.container}>
       <GradientBackground status={status}>
-        <Text style={styles.title}>{STATUS.TEXT.normal}</Text>
+        <Text style={{ ...styles.title, color: STATUS.NORMAL[status] }}>
+          {STATUS.TEXT[status] || STATUS.TEXT.fetching}
+        </Text>
         <Text
           style={styles.subtitle}
           onPress={() => toggleShowCloseContactModal()}>
@@ -103,7 +105,14 @@ const QRScanner = () => {
             height: deviceHeight * 0.62,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: showCloseContactModal ? '#fff' : 'transparent',
+            // eslint-disable-next-line no-nested-ternary
+            backgroundColor: showCloseContactModal
+              ? isAndroid
+                ? '#fff !important'
+                : '#fff'
+              : isAndroid
+              ? 'transparent !important'
+              : 'transparent',
           }}>
           {showCloseContactModal ? (
             <CloseContactModal

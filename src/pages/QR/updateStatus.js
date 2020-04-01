@@ -16,7 +16,7 @@ import * as STATUS from '../../constants/userStatus'
 import cureImg from '../../../assets/images/cure.png'
 import infectedImg from '../../../assets/images/infected.png'
 import { UPDATE_STATUS } from '../../api/mutation'
-import { GET_CLOSE_CONTACTS } from '../../api/query'
+import { GET_USER_PROFILE } from '../../api/query'
 
 let value = 0
 const ACTION_TIMER = 5000
@@ -28,7 +28,7 @@ const STATUS_ENUM = {
 
 const AnimatedButtonPress = ({ navigation, route }) => {
   const [doUpdate, { error }] = useMutation(UPDATE_STATUS, {
-    refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
+    refetchQueries: [{ query: GET_USER_PROFILE }],
   })
   const { status } = route.params
   const isInfected = status === STATUS.STATUS.infected
@@ -74,18 +74,18 @@ const AnimatedButtonPress = ({ navigation, route }) => {
   const animationActionComplete = () => {
     let message = ''
     if (value === 1) {
-      message = 'You held it long enough to fire the action!'
+      message = 'คุณได้ทำการอัพเดทสถานะเรียบร้อยแล้ว ✅'
+      setTextComplete(message)
+      doUpdate({
+        variables: {
+          status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected,
+        },
+      }).then(resp => {
+        console.info(resp.data)
+      })
       setIsVisible(true)
       value = 0
     }
-    setTextComplete(message)
-    doUpdate({
-      variables: {
-        status: isInfected ? STATUS_ENUM.healed : STATUS_ENUM.infected,
-      },
-    }).then(resp => {
-      console.info(resp.data)
-    })
   }
 
   const getButtonWidthLayout = e => {
@@ -148,7 +148,7 @@ const AnimatedButtonPress = ({ navigation, route }) => {
             </View>
           </TouchableWithoutFeedback>
           <>
-            <Text>{textComplete}</Text>
+            <Text style={{ ...styles.statusSubTitle }}>{textComplete}</Text>
           </>
         </View>
         <Button

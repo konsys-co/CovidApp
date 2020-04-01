@@ -60,7 +60,6 @@ const QRDetail = ({ navigation }) => {
 
   const { profile } = data || {}
   const { _id: userId, status } = profile || {}
-  // const status =  // TODO: Fetch from server later.
   const isInfected = status === STATUS.STATUS.infected
 
   return (
@@ -115,7 +114,7 @@ const QRDetail = ({ navigation }) => {
               borderColor: STATUS.NORMAL[status],
               marginTop: 40,
             }}
-            onPress={() => navigation.navigate('Profile', { name: 'Jane' })}
+            onPress={() => navigation.navigate('Profile')}
           />
           <Button
             title={isInfected ? 'ฉันรักษาหายแล้ว' : 'ฉันตรวจพบ COVID-19'}

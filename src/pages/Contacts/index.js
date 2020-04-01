@@ -127,6 +127,18 @@ const CloseContactLists = () => {
     return result
   }
 
+  const formatDate = (onlyDate, dateTime) => {
+    const isToday = moment(onlyDate).diff(moment(), 'days') === 0
+    if (isToday) return 'วันนี้'
+    const isYesterday = moment(onlyDate).isSame(
+      moment()
+        .subtract(1, 'day')
+        .format('YYYY-MM-DD'),
+    )
+    if (isYesterday) return 'เมื่อวาน'
+    return moment(dateTime).fromNow()
+  }
+
   const renderContactLists = contactGroup => {
     if (!contactGroup)
       return (
@@ -135,14 +147,10 @@ const CloseContactLists = () => {
         </View>
       )
     return Object.entries(contactGroupData).map(([key, value]) => {
-      const isCurrentDay =
-        moment(value[0].createdAt).diff(moment(), 'days') === 0
-      const period = isCurrentDay
-        ? 'วันนี้'
-        : moment(value[0].createdAt).fromNow()
+      const { createdAtOrder: onlyDate, createdAt: dateTime } = value[0]
       return (
         <View key={key}>
-          <Text style={styles.dateText}>{period}</Text>
+          <Text style={styles.dateText}>{formatDate(onlyDate, dateTime)}</Text>
           <ContactCard
             contactGroupData={value}
             addCloseContactAgain={addCloseContactAgain}
