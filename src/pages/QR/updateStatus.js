@@ -16,7 +16,7 @@ import * as STATUS from '../../constants/userStatus'
 import cureImg from '../../../assets/images/cure.png'
 import infectedImg from '../../../assets/images/infected.png'
 import { UPDATE_STATUS } from '../../api/mutation'
-import { GET_CLOSE_CONTACTS } from '../../api/query'
+import { GET_USER_PROFILE } from '../../api/query'
 
 let value = 0
 const ACTION_TIMER = 5000
@@ -28,7 +28,7 @@ const STATUS_ENUM = {
 
 const AnimatedButtonPress = ({ navigation, route }) => {
   const [doUpdate, { error }] = useMutation(UPDATE_STATUS, {
-    refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
+    refetchQueries: [{ query: GET_USER_PROFILE }],
   })
   const { status } = route.params
   const isInfected = status === STATUS.STATUS.infected

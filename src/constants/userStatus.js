@@ -24,7 +24,7 @@ export const DARK = {
 export const LIGHT = {
   normal: COLOR.PALE_BLUE,
   risk: COLOR.PALE_BUTTER,
-  infected: COLOR.PALE_COPPER,
+  infected: COLOR.PALE_BUTTER,
   healed: COLOR.PALE_MINT,
 }
 
