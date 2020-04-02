@@ -366,7 +366,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
-  - react-native-notifications (from `../node_modules/react-native-notifications`)
+  - react-native-notifications (from `../node_modules/react-native-notifications/react-native-notifications.podspec`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -484,7 +484,7 @@ EXTERNAL SOURCES:
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
   react-native-notifications:
-    :path: "../node_modules/react-native-notifications"
+    :podspec: "../node_modules/react-native-notifications/react-native-notifications.podspec"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
@@ -632,6 +632,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: ee5b1ee1056eb338ff2d521ba79460d8cd0bae7d
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 449b665416b15b18b6503143a4d3ca1ca6711349
+PODFILE CHECKSUM: bcbb7b5dc07e92aaf0cc0ff1700ae0c934a4aec8
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.9.1
