@@ -50,4 +50,6 @@ target 'CovidAppExpo' do
 
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
 
+  pod 'Firebase/Analytics'
+
 end

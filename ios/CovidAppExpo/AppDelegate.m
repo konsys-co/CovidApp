@@ -17,6 +17,9 @@
 #import <UMReactNativeAdapter/UMModuleRegistryAdapter.h>
 #import "RNNotifications.h"
 
+@import UIKit;
+@import Firebase;
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -51,8 +54,13 @@
   [self.window makeKeyAndVisible];
 
   [super application:application didFinishLaunchingWithOptions:launchOptions];
+  
   [RNSplashScreen show];
+  
   [RNNotifications startMonitorNotifications];
+  
+  [FIRApp configure];
+  
   return YES;
 }
 

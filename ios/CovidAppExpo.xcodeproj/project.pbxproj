@@ -20,6 +20,7 @@
 		65BBB95E04A249EEA3CB37FB /* SukhumvitSet-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 179C95DFE71A4E0F8717B666 /* SukhumvitSet-SemiBold.ttf */; };
 		7283E8311FBF4EB7B7BF294D /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB91F4E54C247F9B0CCE933 /* Kanit-Medium.ttf */; };
 		96DF381F1C074C098C46E7A7 /* Kanit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C2376D7A53D45E9A9B94C98 /* Kanit-Regular.ttf */; };
+		9D127D8A2435CF4800835AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D127D892435CF4800835AE7 /* GoogleService-Info.plist */; };
 		B125D11F2AA24070838FF03D /* SukhumvitSet-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE924204C0754C66ACE01D2B /* SukhumvitSet-Medium.ttf */; };
 		B3A585CDC6AF4F789E69B9F3 /* SukhumvitSet-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C0D67B2F74F98AD5421E0 /* SukhumvitSet-Bold.ttf */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		7B9C0D67B2F74F98AD5421E0 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Bold.ttf"; path = "../assets/fonts/SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
 		8AC623DBF3A3E2CB072F81F2 /* Pods-CovidAppExpo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidAppExpo.release.xcconfig"; path = "Target Support Files/Pods-CovidAppExpo/Pods-CovidAppExpo.release.xcconfig"; sourceTree = "<group>"; };
 		9B280C6F248F4B419D753627 /* Kanit-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Kanit-Light.ttf"; path = "../assets/fonts/Kanit-Light.ttf"; sourceTree = "<group>"; };
+		9D127D892435CF4800835AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BF03FC0186FF481AA12F395B /* SukhumvitSet-Text.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Text.ttf"; path = "../assets/fonts/SukhumvitSet-Text.ttf"; sourceTree = "<group>"; };
 		D43FF9D506E70904424FA7E9 /* libPods-CovidAppExpo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CovidAppExpo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4988EC5409745539DF5DD90 /* SukhumvitSet-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Thin.ttf"; path = "../assets/fonts/SukhumvitSet-Thin.ttf"; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				9D127D892435CF4800835AE7 /* GoogleService-Info.plist */,
 			);
 			name = CovidAppExpo;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D127D8A2435CF4800835AE7 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				1344C1BF2B2642DEBAAA5122 /* Kanit-Light.ttf in Resources */,
