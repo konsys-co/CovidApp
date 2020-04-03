@@ -344,7 +344,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.flipay.app.cv19;
 				PRODUCT_NAME = CovidAppExpo;
-				PROVISIONING_PROFILE_SPECIFIER = "Provisioning 2";
+				PROVISIONING_PROFILE_SPECIFIER = "TidYoung App-Distribute Provisioning";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -367,7 +367,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.flipay.app.cv19;
 				PRODUCT_NAME = CovidAppExpo;
-				PROVISIONING_PROFILE_SPECIFIER = "Provisioning 2";
+				PROVISIONING_PROFILE_SPECIFIER = "TidYoung App-Distribute Provisioning";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
