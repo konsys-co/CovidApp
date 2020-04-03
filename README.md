@@ -1,4 +1,4 @@
-# COVID19 Close Contact App
+# TidYoung (COVID19 Close Contact App)
 
 ## Getting start
 
