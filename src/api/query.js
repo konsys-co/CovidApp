@@ -34,6 +34,15 @@ export const GET_USER_PROFILE = gql`
   }
 `
 
+export const GET_USER_STATUS = gql`
+query profile {
+  profile {
+    _id
+    status
+  }
+}
+`
+
 export const GET_CONTACT_BY_ID = gql`
   query getContactByID($id: MongoID!) {
     user(_id: $id) {

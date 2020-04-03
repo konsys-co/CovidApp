@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLazyQuery } from '@apollo/react-hooks'
 import { Text, View, StyleSheet, Alert } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -8,7 +9,8 @@ import { FontAwesome5, Ionicons, AntDesign } from '@expo/vector-icons'
 import SplashScreen from 'react-native-splash-screen'
 
 import { NORMAL } from './constants/userStatus'
-import PushNotificationManager from './components/PushNotificationManager'
+import { GET_USER_STATUS } from './api/query'
+// import PushNotificationManager from './components/PushNotificationManager'
 import QR from './pages/QR'
 import Scanner from './pages/Scanner'
 import Contacts from './pages/Contacts'
@@ -21,9 +23,7 @@ import RNLoading from './components/Loading'
 const BottomTab = createBottomTabNavigator()
 const AppStack = createStackNavigator()
 
-const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
-  // AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
-  const status = 'NORMAL' // TODO: Fetch from server later.
+const Main = ({ navigation, userData, setLoggedinStatus, setUserData, status }) => {
   return (
     <BottomTab.Navigator
       screenOptions={({ route }) => ({
@@ -85,6 +85,7 @@ export default () => {
   const [isLoggedin, setLoggedinStatus] = useState(false)
   const [isFetching, setIsFetching] = useState(true)
   const [userData, setUserData] = useState(null)
+  const [loadProfile, { loading, data: profile }] = useLazyQuery(GET_USER_STATUS)
 
   useEffect(() => {
     setTimeout(() => SplashScreen.hide(), 1500)
@@ -116,6 +117,7 @@ export default () => {
         if (data) {
           setUserData(data)
           setLoggedinStatus(true)
+          loadProfile()
         }
       }
     } catch (error) {
@@ -126,7 +128,7 @@ export default () => {
     return null
   }
 
-  if (isFetching)
+  if (isFetching || loading)
     return (
       <View style={styles.container}>
         <RNLoading />
@@ -144,34 +146,35 @@ export default () => {
 
   if (userData)
     return (
-      <PushNotificationManager>
-        <NavigationContainer>
-          <AppStack.Navigator mode="modal">
-            <AppStack.Screen name="Main" options={{ headerShown: false }}>
-              {({ navigation }) => (
-                <Main
-                  navigation={navigation}
-                  userData={userData}
-                  setLoggedinStatus={setLoggedinStatus}
-                  setUserData={setUserData}
-                />
-              )}
-            </AppStack.Screen>
-            <AppStack.Screen
-              name="UpdateStatus"
-              options={{ headerShown: false }}>
-              {({ navigation, route }) => (
-                <UpdateStatus
-                  route={route}
-                  navigation={navigation}
-                  userData={userData}
-                  options={{ transitionSpec: { open: {}, close: {} } }}
-                />
-              )}
-            </AppStack.Screen>
-          </AppStack.Navigator>
-        </NavigationContainer>
-      </PushNotificationManager>
+      // <PushNotificationManager>
+      <NavigationContainer>
+        <AppStack.Navigator mode="modal">
+          <AppStack.Screen name="Main" options={{ headerShown: false }}>
+            {({ navigation }) => (
+              <Main
+                status={profile.profile.status}
+                navigation={navigation}
+                userData={userData}
+                setLoggedinStatus={setLoggedinStatus}
+                setUserData={setUserData}
+              />
+            )}
+          </AppStack.Screen>
+          <AppStack.Screen
+            name="UpdateStatus"
+            options={{ headerShown: false }}>
+            {({ navigation, route }) => (
+              <UpdateStatus
+                route={route}
+                navigation={navigation}
+                userData={userData}
+                options={{ transitionSpec: { open: {}, close: {} } }}
+              />
+            )}
+          </AppStack.Screen>
+        </AppStack.Navigator>
+      </NavigationContainer>
+      // </PushNotificationManager>
     )
 
   return (
