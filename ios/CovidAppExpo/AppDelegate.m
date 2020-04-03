@@ -17,6 +17,9 @@
 #import <UMReactNativeAdapter/UMModuleRegistryAdapter.h>
 #import "RNNotifications.h"
 
+// RN-FCM
+#import "RNFIRMessaging.h"
+
 @import UIKit;
 @import Firebase;
 
@@ -60,10 +63,12 @@
   [RNNotifications startMonitorNotifications];
   
   [FIRApp configure];
+  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
   
   return YES;
 }
 
+// =============================================== Notification =========================================================
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   [RNNotifications didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
@@ -71,6 +76,35 @@
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
   [RNNotifications didFailToRegisterForRemoteNotificationsWithError:error];
 }
+
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+{
+  [RNFIRMessaging willPresentNotification:notification withCompletionHandler:completionHandler];
+}
+
+  #if defined(__IPHONE_11_0)
+  - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
+  {
+   [RNFIRMessaging didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
+  }
+  #else
+  - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler
+  {
+    [RNFIRMessaging didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
+  }
+  #endif
+
+  //You can skip this method if you don't want to use local notification
+  -(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [RNFIRMessaging didReceiveLocalNotification:notification];
+  }
+
+  - (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
+   [RNFIRMessaging didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+// ============================================ End Push Notifiction =======================================================
 
 - (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge
 {
