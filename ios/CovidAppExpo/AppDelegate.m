@@ -16,6 +16,8 @@
 #import <UMReactNativeAdapter/UMNativeModulesProxy.h>
 #import <UMReactNativeAdapter/UMModuleRegistryAdapter.h>
 
+#import <Firebase.h>
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -51,6 +53,9 @@
 
   [super application:application didFinishLaunchingWithOptions:launchOptions];
   [RNSplashScreen show];
+  if ([FIRApp defaultApp] == nil) {
+    [FIRApp configure];
+  }
   return YES;
 }
 
