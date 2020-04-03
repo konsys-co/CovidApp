@@ -43,6 +43,7 @@
 		7B9C0D67B2F74F98AD5421E0 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Bold.ttf"; path = "../assets/fonts/SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
 		8AC623DBF3A3E2CB072F81F2 /* Pods-CovidAppExpo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidAppExpo.release.xcconfig"; path = "Target Support Files/Pods-CovidAppExpo/Pods-CovidAppExpo.release.xcconfig"; sourceTree = "<group>"; };
 		9B280C6F248F4B419D753627 /* Kanit-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Kanit-Light.ttf"; path = "../assets/fonts/Kanit-Light.ttf"; sourceTree = "<group>"; };
+		A8BB6AF72435BAD2004C327D /* CovidAppExpo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CovidAppExpo.entitlements; path = CovidAppExpo/CovidAppExpo.entitlements; sourceTree = "<group>"; };
 		BF03FC0186FF481AA12F395B /* SukhumvitSet-Text.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Text.ttf"; path = "../assets/fonts/SukhumvitSet-Text.ttf"; sourceTree = "<group>"; };
 		D43FF9D506E70904424FA7E9 /* libPods-CovidAppExpo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CovidAppExpo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4988EC5409745539DF5DD90 /* SukhumvitSet-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Thin.ttf"; path = "../assets/fonts/SukhumvitSet-Thin.ttf"; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		13B07FAE1A68108700A75B9A /* CovidAppExpo */ = {
 			isa = PBXGroup;
 			children = (
+				A8BB6AF72435BAD2004C327D /* CovidAppExpo.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -178,7 +180,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 3787C92P7R;
+						DevelopmentTeam = PJU5AJRLKC;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -330,11 +332,12 @@
 			baseConfigurationReference = 3B47C5AFCB8BDE514B7D1AC6 /* Pods-CovidAppExpo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CovidAppExpo/CovidAppExpo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 3787C92P7R;
+				DEVELOPMENT_TEAM = PJU5AJRLKC;
 				INFOPLIST_FILE = CovidAppExpo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -342,7 +345,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = rsp.konsys.tidyoung;
+				PRODUCT_BUNDLE_IDENTIFIER = "rsp.konsys.tidyoung-ton";
 				PRODUCT_NAME = CovidAppExpo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -354,10 +357,11 @@
 			baseConfigurationReference = 8AC623DBF3A3E2CB072F81F2 /* Pods-CovidAppExpo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CovidAppExpo/CovidAppExpo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3787C92P7R;
+				DEVELOPMENT_TEAM = PJU5AJRLKC;
 				INFOPLIST_FILE = CovidAppExpo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -365,7 +369,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = rsp.konsys.tidyoung;
+				PRODUCT_BUNDLE_IDENTIFIER = "rsp.konsys.tidyoung-ton";
 				PRODUCT_NAME = CovidAppExpo;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
