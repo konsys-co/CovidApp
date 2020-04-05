@@ -62,7 +62,7 @@ const PushNotificationManager = ({ children }) => {
     // Foreground messages
     const unregisterOnMessage = messaging.onMessage(async remoteMessage => {
       console.log('Message handled in the foreground!', remoteMessage)
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage))
+      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage))
     })
 
     return () => {
