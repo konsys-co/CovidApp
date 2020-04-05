@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Platform, View } from 'react-native'
+import { Platform, View, Alert } from 'react-native'
 import fcm from '@react-native-firebase/messaging'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -11,6 +11,7 @@ const DEVICE_TOKEN_TYPE = {
 const messaging = fcm()
 
 const PushNotificationManager = ({ children }) => {
+  console.log('PushNotificationManager Running...')
   const registerAppWithFCM = async () => {
     await messaging.registerForRemoteNotifications()
 
@@ -61,6 +62,7 @@ const PushNotificationManager = ({ children }) => {
     // Foreground messages
     const unregisterOnMessage = messaging.onMessage(async remoteMessage => {
       console.log('Message handled in the foreground!', remoteMessage)
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage))
     })
 
     return () => {

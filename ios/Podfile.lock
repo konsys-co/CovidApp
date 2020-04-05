@@ -381,10 +381,10 @@ PODS:
     - React
   - RNCMaskedView (0.1.7):
     - React
-  - RNFBApp (6.3.4):
+  - RNFBApp (6.4.0-rc4):
     - Firebase/Core (~> 6.13.0)
     - React
-  - RNFBMessaging (6.3.4):
+  - RNFBMessaging (6.4.0-rc4):
     - Firebase/Messaging (~> 6.13.0)
     - React
     - RNFBApp
@@ -726,8 +726,8 @@ SPEC CHECKSUMS:
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCAsyncStorage: 00bdf63f7f1e0f11d3323533dba4f222e58bf092
   RNCMaskedView: 90dd32f5b786bd562e876e1421ea77c700cbf71e
-  RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
-  RNFBMessaging: 51cc7f6beaf4c4feac6f18ea941bba5854e3d9c6
+  RNFBApp: 59fc2bc4bfca503fbb6159d7a66223680a91cc12
+  RNFBMessaging: 0947a8aebb4a2125ff548e6cb058816f562545ca
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
   RNPermissions: 8afd37dbc1be65748363c6a90caffd1806567651
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
