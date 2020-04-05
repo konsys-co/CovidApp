@@ -40,6 +40,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  /// Initialize Firebase
+  if ([FIRApp defaultApp] == nil) {
+    NSLog(@"Configure FireBase Service...");
+    [FIRApp configure];
+  }
+  
   self.moduleRegistryAdapter = [[UMModuleRegistryAdapter alloc] initWithModuleRegistryProvider:[[UMModuleRegistryProvider alloc] init]];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge moduleName:@"CovidAppExpo" initialProperties:nil];
@@ -53,9 +60,7 @@
 
   [super application:application didFinishLaunchingWithOptions:launchOptions];
   [RNSplashScreen show];
-  if ([FIRApp defaultApp] == nil) {
-    [FIRApp configure];
-  }
+
   return YES;
 }
 
