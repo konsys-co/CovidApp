@@ -8,6 +8,7 @@ import {
   Text,
 } from 'react-native'
 import moment from 'moment'
+import 'moment/locale/th'
 import { useQuery } from '@apollo/react-hooks'
 
 import GradientBackground from '../../components/background'
@@ -67,7 +68,7 @@ const Notifications = () => {
                 <NotificationCard
                   name={[user?.firstName, user?.lastName].join(' ')}
                   imgURL={user?.profilePicture}
-                  dateTime={moment().from(timestamps)}
+                  dateTime={moment(timestamps).fromNow()}
                   status={type.toUpperCase()}
                 />
               </TouchableHighlight>

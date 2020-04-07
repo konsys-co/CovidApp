@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
   Alert,
+  Linking,
 } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import * as Facebook from 'expo-facebook'
@@ -55,6 +56,9 @@ const LoginPage = ({ fetchUserData }) => {
     }
   }
 
+  const navigateToPrivacyAndPolicy = () =>
+    Linking.openURL('https://tidyoung.devspree.xyz/privacy-policy')
+
   return (
     <View style={styles.container}>
       <Image
@@ -86,15 +90,17 @@ const LoginPage = ({ fetchUserData }) => {
       </TouchableOpacity>
       <View style={{ flexDirection: 'row', marginTop: 12 }}>
         <Text style={{ ...styles.label }}>เมื่อเข้าสู่ระบบ ฉันยอมรับ</Text>
-        <Text
-          style={{
-            ...styles.label,
-            textDecorationLine: 'underline',
-            textDecorationStyle: 'solid',
-            textDecorationColor: '#000',
-          }}>
-          เงื่อนไขในการใช้งาน
-        </Text>
+        <TouchableOpacity onPress={() => navigateToPrivacyAndPolicy()}>
+          <Text
+            style={{
+              ...styles.label,
+              textDecorationLine: 'underline',
+              textDecorationStyle: 'solid',
+              textDecorationColor: '#000',
+            }}>
+            เงื่อนไขในการใช้งาน
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   )
