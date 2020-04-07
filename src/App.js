@@ -129,7 +129,7 @@ export default () => {
   if (isFetching)
     return (
       <View style={styles.container}>
-        <RNLoading />
+        <RNLoading colorStatus="normal" />
       </View>
     )
 

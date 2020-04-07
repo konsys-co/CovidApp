@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import 'moment/locale/th'
 import { Text, View, StyleSheet, Image } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import { AntDesign } from '@expo/vector-icons'

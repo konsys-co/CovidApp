@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
+import 'moment/locale/th'
 import {
   StyleSheet,
   View,

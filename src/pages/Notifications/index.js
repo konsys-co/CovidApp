@@ -9,9 +9,10 @@ import {
 } from 'react-native'
 import moment from 'moment'
 import { useQuery } from '@apollo/react-hooks'
+
 import GradientBackground from '../../components/background'
 import NotificationCard from '../../components/NofiticationCard'
-import { STATUS } from '../../constants/userStatus'
+import RNLoading from '../../components/Loading'
 import { COLOR, FONT_FAMILY, FONT_SIZE } from '../../constants/theme'
 import { GET_NOTIFICATIONS, GET_USER_PROFILE } from '../../api/query'
 
@@ -55,7 +56,7 @@ const Notifications = () => {
           style={{ width: '100%' }}
           contentContainerStyle={{ alignItems: 'center' }}>
           {loading ? (
-            <Text style={styles.text}>Loading...</Text>
+            <RNLoading colorStatus="normal" />
           ) : data.notifications.length > 0 ? (
             data.notifications.map(({ _id, user, type, timestamps }) => (
               <TouchableHighlight
