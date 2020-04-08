@@ -28,16 +28,16 @@ const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
     <BottomTab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          if (route.name === 'QR') {
+          if (route.name === 'My QR') {
             return <FontAwesome5 name="qrcode" size={size} color={color} />
           }
-          if (route.name === 'Scanner') {
+          if (route.name === 'สแกน') {
             return <Ionicons name="md-qr-scanner" size={size} color={color} />
           }
-          if (route.name === 'Contacts') {
+          if (route.name === 'รายชื่อ') {
             return <AntDesign name="contacts" size={size} color={color} />
           }
-          if (route.name === 'Notifications') {
+          if (route.name === 'แจ้งเตือน') {
             return <AntDesign name="bells" size={size} color={color} />
           }
           return null
@@ -47,7 +47,7 @@ const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
         activeTintColor: NORMAL[status],
         inactiveTintColor: 'gray',
       }}>
-      <BottomTab.Screen name="QR">
+      <BottomTab.Screen name="My QR">
         {() => (
           <QR
             navigation={navigation}
@@ -57,9 +57,9 @@ const Main = ({ navigation, userData, setLoggedinStatus, setUserData }) => {
           />
         )}
       </BottomTab.Screen>
-      <BottomTab.Screen name="Scanner" component={Scanner} />
-      <BottomTab.Screen name="Contacts" component={Contacts} />
-      <BottomTab.Screen name="Notifications" component={Notifications} />
+      <BottomTab.Screen name="สแกน" component={Scanner} />
+      <BottomTab.Screen name="รายชื่อ" component={Contacts} />
+      <BottomTab.Screen name="แจ้งเตือน" component={Notifications} />
     </BottomTab.Navigator>
   )
 }
