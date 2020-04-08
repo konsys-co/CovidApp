@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
 
 export default ({ children, status, style, dark }) => {
   const colorSet = dark
-    ? [VERY_DARK[status], COLOR.BLACK, COLOR.BLACK]
-    : [LIGHT[status], COLOR.WHITE, COLOR.WHITE]
+    ? [VERY_DARK[status] || COLOR.BLACK, COLOR.BLACK, COLOR.BLACK]
+    : [LIGHT[status] || COLOR.WHITE, COLOR.WHITE, COLOR.WHITE]
   return (
     <LinearGradient
       colors={colorSet}
