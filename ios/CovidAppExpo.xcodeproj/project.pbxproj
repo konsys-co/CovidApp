@@ -20,7 +20,7 @@
 		65BBB95E04A249EEA3CB37FB /* SukhumvitSet-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 179C95DFE71A4E0F8717B666 /* SukhumvitSet-SemiBold.ttf */; };
 		7283E8311FBF4EB7B7BF294D /* Kanit-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AB91F4E54C247F9B0CCE933 /* Kanit-Medium.ttf */; };
 		96DF381F1C074C098C46E7A7 /* Kanit-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C2376D7A53D45E9A9B94C98 /* Kanit-Regular.ttf */; };
-		A864CCB32437622000C56152 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A864CCB22437622000C56152 /* GoogleService-Info.plist */; };
+		9D2D0C87243DA18D00159727 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D2D0C86243DA18C00159727 /* GoogleService-Info.plist */; };
 		B125D11F2AA24070838FF03D /* SukhumvitSet-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE924204C0754C66ACE01D2B /* SukhumvitSet-Medium.ttf */; };
 		B3A585CDC6AF4F789E69B9F3 /* SukhumvitSet-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B9C0D67B2F74F98AD5421E0 /* SukhumvitSet-Bold.ttf */; };
 /* End PBXBuildFile section */
@@ -44,7 +44,7 @@
 		7B9C0D67B2F74F98AD5421E0 /* SukhumvitSet-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Bold.ttf"; path = "../assets/fonts/SukhumvitSet-Bold.ttf"; sourceTree = "<group>"; };
 		8AC623DBF3A3E2CB072F81F2 /* Pods-CovidAppExpo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CovidAppExpo.release.xcconfig"; path = "Target Support Files/Pods-CovidAppExpo/Pods-CovidAppExpo.release.xcconfig"; sourceTree = "<group>"; };
 		9B280C6F248F4B419D753627 /* Kanit-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Kanit-Light.ttf"; path = "../assets/fonts/Kanit-Light.ttf"; sourceTree = "<group>"; };
-		A864CCB22437622000C56152 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9D2D0C86243DA18C00159727 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A8BB6AF72435BAD2004C327D /* CovidAppExpo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CovidAppExpo.entitlements; path = CovidAppExpo/CovidAppExpo.entitlements; sourceTree = "<group>"; };
 		BF03FC0186FF481AA12F395B /* SukhumvitSet-Text.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SukhumvitSet-Text.ttf"; path = "../assets/fonts/SukhumvitSet-Text.ttf"; sourceTree = "<group>"; };
 		D43FF9D506E70904424FA7E9 /* libPods-CovidAppExpo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CovidAppExpo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +69,7 @@
 		13B07FAE1A68108700A75B9A /* CovidAppExpo */ = {
 			isa = PBXGroup;
 			children = (
+				9D2D0C86243DA18C00159727 /* GoogleService-Info.plist */,
 				A8BB6AF72435BAD2004C327D /* CovidAppExpo.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -111,7 +112,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				A864CCB22437622000C56152 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* CovidAppExpo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -184,7 +184,7 @@
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = L4X3RTD33C;
+						DevelopmentTeam = QR7G68FPM4;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -213,7 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A864CCB32437622000C56152 /* GoogleService-Info.plist in Resources */,
+				9D2D0C87243DA18D00159727 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				1344C1BF2B2642DEBAAA5122 /* Kanit-Light.ttf in Resources */,
@@ -348,11 +348,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CovidAppExpo/CovidAppExpo.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = L4X3RTD33C;
+				DEVELOPMENT_TEAM = QR7G68FPM4;
 				INFOPLIST_FILE = CovidAppExpo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -360,9 +360,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.flipay.app.cv19;
+				PRODUCT_BUNDLE_IDENTIFIER = com.synphaet.tidyoung;
 				PRODUCT_NAME = CovidAppExpo;
-				PROVISIONING_PROFILE_SPECIFIER = "TidYoung App-Development Provisioning";
+				PROVISIONING_PROFILE_SPECIFIER = "TidYoung Production Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -376,7 +376,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L4X3RTD33C;
+				DEVELOPMENT_TEAM = QR7G68FPM4;
 				INFOPLIST_FILE = CovidAppExpo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -384,9 +384,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = co.flipay.app.cv19;
+				PRODUCT_BUNDLE_IDENTIFIER = com.synphaet.tidyoung;
 				PRODUCT_NAME = CovidAppExpo;
-				PROVISIONING_PROFILE_SPECIFIER = "TidYoung App-Distribute Provisioning";
+				PROVISIONING_PROFILE_SPECIFIER = "TidYoung Production Profile";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

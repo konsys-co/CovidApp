@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>677066933098-13oh996quo743bhbsmmbsbsua7h274hk.apps.googleusercontent.com</string>
+	<string>677066933098-3de6p3qghbb8r3ibboht9amev8sjgiv9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.677066933098-13oh996quo743bhbsmmbsbsua7h274hk</string>
+	<string>com.googleusercontent.apps.677066933098-3de6p3qghbb8r3ibboht9amev8sjgiv9</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>677066933098-eic05aalab7b3mmfkb7p3oc7vd4l31rf.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>co.flipay.app.cv19</string>
+	<string>com.synphaet.tidyoung</string>
 	<key>PROJECT_ID</key>
 	<string>tidyoung-ba93b</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:677066933098:ios:89cb22fac081dcdb7a5b13</string>
+	<string>1:677066933098:ios:80373de1d33349717a5b13</string>
 	<key>DATABASE_URL</key>
 	<string>https://tidyoung-ba93b.firebaseio.com</string>
 </dict>

@@ -37,6 +37,7 @@ target 'CovidAppExpo' do
   pod 'DoubleConversion', :podspec => "#{rnPrefix}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rnPrefix}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rnPrefix}/third-party-podspecs/Folly.podspec"
+  pod 'Firebase/Analytics'
   pod 'Firebase/Messaging', '~> 6.13.0'
 
   # Other native modules
