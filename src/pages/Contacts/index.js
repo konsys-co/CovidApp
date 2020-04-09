@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useQuery, useMutation } from '@apollo/react-hooks'
+import Geolocation from '@react-native-community/geolocation'
 
 import ContactCard from '../../components/ContactCard'
 import RNLoading from '../../components/Loading'
@@ -107,23 +108,45 @@ const CloseContactLists = () => {
     setRefreshing(false)
   }
 
-  const addCloseContactAgain = closeContactID =>
-    toggleAddCloseContact({
-      variables: { id: closeContactID, type: 'CONTACT' },
-    })
+  const addCloseContactAgain = async closeContactID => {
+    await Geolocation.getCurrentPosition((info, geoError) => {
+      if (geoError === undefined) {
+        toggleAddCloseContact({ variables: { id: closeContactID, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] } } })
+      }
+    }
+    )
+  }
 
-  const groupingContacts = contactData => {
-    const result = contactData
-      .reduce((a, c) => {
-        a.push({ ...c, createdAtOrder: c.createdAt.slice(0, 10) })
-        return a
-      }, [])
+  // eslint-disable-next-line no-undef
+  const getLocationName = ({ lat, long }) => new Promise(() => fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${long}&key=AIzaSyCIDqNV99P21nHXemvTP732PpoQxp7oILY`)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      // console.info(JSON.stringify(responseJson))
+      console.info(responseJson.results[0].address_components[2].short_name)
+      return responseJson.results[0].address_components[2].short_name
+      // console.log(JSON.stringify(responseJson).results[0].address_components[2].short_name)
+      // return JSON.stringify(responseJson).results[0].address_components[2].short_name
+    }))
+
+  const groupingContacts = async contactData => {
+    const result = await contactData.reduce(async (a, c) => {
+      const accumulator = await a
+      accumulator.push({
+        ...c,
+        // eslint-disable-next-line no-undef
+        // TODO fetch location name from google service
+        // location: await getLocationName({ lat: 37.785834, long: -122.406417 }),
+        createdAtOrder: c.createdAt.slice(0, 10)
+      })
+      return accumulator
+    }, [])
       .reduce((a, c) => {
         // eslint-disable-next-line no-param-reassign
         a[c.createdAtOrder] = [...(a[c.createdAtOrder] || []), c]
         return a
       }, {})
     setContactGroupData(result)
+    // console.info(result)
     return result
   }
 
@@ -174,10 +197,10 @@ const CloseContactLists = () => {
         {contacts.length > 0 ? (
           renderContactLists(contactGroupData)
         ) : (
-          <View style={styles.centerContainer}>
-            <Text style={styles.noContactText}>คุณยังไม่มีการพบเจอผู้ใด</Text>
-          </View>
-        )}
+            <View style={styles.centerContainer}>
+              <Text style={styles.noContactText}>คุณยังไม่มีการพบเจอผู้ใด</Text>
+            </View>
+          )}
       </ScrollView>
     )
   }

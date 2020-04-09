@@ -73,6 +73,16 @@ export default ({ contactGroupData, addCloseContactAgain }) =>
       location,
     } = c.user || {}
     const userName = `${firstName} ${lastName}`
+
+    // console.info(closeContacts)
+    // if (!(loading || getCloseContactLoading || addCloseContactLoading)) {
+    //   // eslint-disable-next-line no-undef
+    //   fetch('https://maps.googleapis.com/maps/api/geocode/json?address=37.785834,-122.406417&key=AIzaSyCIDqNV99P21nHXemvTP732PpoQxp7oILY')
+    //     .then((response) => response.json())
+    //     .then((responseJson) => {
+    //       console.log(`ADDRESS GEOCODE is BACK!! => ${JSON.stringify(responseJson)}`)
+    //     })
+    // }
     return (
       <View key={userID.toString() + c.createdAt} style={styles.cardWrapper}>
         <View

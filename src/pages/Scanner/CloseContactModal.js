@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
+const CloseContactModal = ({ closeContactID, toggleShowScanner, locationError, setLocationError }) => {
   const { loading, data } = useQuery(GET_CONTACT_BY_ID, {
     variables: { id: closeContactID },
   })
@@ -93,7 +93,6 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
   const { user } = data || {}
 
   if (loading) return <ActivityIndicator size="large" color={COLOR.BLUE} />
-
   return (
     <Animatable.View
       animation="jello"
@@ -126,41 +125,47 @@ const CloseContactModal = ({ closeContactID, toggleShowScanner }) => {
                 ...styles.button,
                 borderColor: STATUS.NORMAL.normal,
               }}
-              onPress={() => toggleShowScanner()}
+              onPress={() => {
+                toggleShowScanner()
+                setLocationError(false)
+              }}
             />
           </View>
         </>
       ) : (
-        <>
-          <View style={styles.modalDetailContainer}>
-            <Text style={styles.subtitle}>สแกนไม่สำเร็จ</Text>
-            <View style={styles.friendImgContainer}>
-              <Image style={styles.friendImg} source={friendNotExistingImg} />
-              <Image
-                style={styles.friendExistingIcon}
-                source={markCCNotExistingIcon}
+          <>
+            <View style={styles.modalDetailContainer}>
+              <Text style={styles.subtitle}>สแกนไม่สำเร็จ</Text>
+              <View style={styles.friendImgContainer}>
+                <Image style={styles.friendImg} source={friendNotExistingImg} />
+                <Image
+                  style={styles.friendExistingIcon}
+                  source={markCCNotExistingIcon}
+                />
+              </View>
+              <Text style={{ ...styles.friendName, color: COLOR.TEXT_GRAY }}>
+                {locationError ? 'เกิดข้อผิดพลาด' : 'ไม่พบผู้ใช้'}
+              </Text>
+              <Text style={styles.modalText}>
+                {locationError ? 'ลองสแกนใหม่อีกครั้ง' : 'QR ไม่ถูกต้อง ลองสแกนใหม่อีกครั้ง'}
+              </Text>
+            </View>
+            <View style={styles.btnContainer}>
+              <Button
+                title="สแกนใหม่"
+                titleStyle={styles.btnText}
+                buttonStyle={{
+                  ...styles.button,
+                  borderColor: STATUS.NORMAL.normal,
+                }}
+                onPress={() => {
+                  toggleShowScanner()
+                  setLocationError(false)
+                }}
               />
             </View>
-            <Text style={{ ...styles.friendName, color: COLOR.TEXT_GRAY }}>
-              ไม่พบผู้ใช้
-            </Text>
-            <Text style={styles.modalText}>
-              QR ไม่ถูกต้อง ลองสแกนใหม่อีกครั้ง
-            </Text>
-          </View>
-          <View style={styles.btnContainer}>
-            <Button
-              title="สแกนใหม่"
-              titleStyle={styles.btnText}
-              buttonStyle={{
-                ...styles.button,
-                borderColor: STATUS.NORMAL.normal,
-              }}
-              onPress={() => toggleShowScanner()}
-            />
-          </View>
-        </>
-      )}
+          </>
+        )}
     </Animatable.View>
   )
 }
