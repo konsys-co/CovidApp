@@ -118,7 +118,7 @@ const CloseContactLists = () => {
   }
 
   // eslint-disable-next-line no-undef
-  const getLocationName = ({ lat, long }) => new Promise(() => fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${long}&key=AIzaSyCIDqNV99P21nHXemvTP732PpoQxp7oILY`)
+  const getLocationName = ({ lat, long }) => new Promise(() => fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${long}&key=YOUR_KEY`)
     .then((response) => response.json())
     .then((responseJson) => {
       // console.info(JSON.stringify(responseJson))
