@@ -150,7 +150,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - Permission-Camera (2.0.10):
+  - Permission-Camera (2.1.0):
     - RNPermissions
   - Protobuf (3.11.4)
   - RCTRequired (0.61.5)
@@ -392,7 +392,7 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.6.0):
     - React
-  - RNPermissions (2.0.10):
+  - RNPermissions (2.1.0):
     - React
   - RNReanimated (1.7.0):
     - React
@@ -703,7 +703,7 @@ SPEC CHECKSUMS:
   GoogleDataTransportCCTSupport: 6f15a89b0ca35d6fa523e1f752ef818588885988
   GoogleUtilities: ad0f3b691c67909d03a3327cc205222ab8f42e0e
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  Permission-Camera: a8f6007d17b02ed8a2d6bac1c37c2fd5df9b4e8a
+  Permission-Camera: 1e569ca13fe65357c0ad22776b1f3ce81586c488
   Protobuf: 176220c526ad8bd09ab1fb40a978eac3fef665f7
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
@@ -734,7 +734,7 @@ SPEC CHECKSUMS:
   RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
   RNFBMessaging: 51cc7f6beaf4c4feac6f18ea941bba5854e3d9c6
   RNGestureHandler: dde546180bf24af0b5f737c8ad04b6f3fa51609a
-  RNPermissions: 1008d3511fee0e25739cf81c4af0d1b2248f1053
+  RNPermissions: 48da5fbe2d85ed8d29c7e623576fc4632054f800
   RNReanimated: 031fe8d9ea93c2bd689a40f05320ef9d96f74d7f
   RNScreens: 03bf608b92ac0acf323f47d8f5b63a8f829340c8
   RNSVG: 7e16ddfc6e00d5aa69c9eb83e699bcce5dcb85d4

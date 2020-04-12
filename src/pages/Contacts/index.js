@@ -65,6 +65,7 @@ const CloseContactLists = () => {
   const [refreshing, setRefreshing] = useState(false)
 
   const { loading, error, data } = useQuery(GET_USER_PROFILE)
+  const [location, setLocation] = useState({})
   const {
     loading: getCloseContactLoading,
     error: getCloseContactError,
@@ -85,6 +86,21 @@ const CloseContactLists = () => {
 
   useEffect(() => {
     if (contacts && contacts.length > 0) groupingContacts(contacts)
+    Geolocation.getCurrentPosition(
+      info => {
+        // eslint-disable-next-line no-undef
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            setLocation({
+              position: { coordinates: [info.coords.latitude, info.coords.longitude] },
+              name: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`
+            })
+          })
+      },
+      err => console.info('Error', err),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    )
   }, [contacts])
 
   if (error || getCloseContactError)
@@ -110,26 +126,12 @@ const CloseContactLists = () => {
   }
 
   const addCloseContactAgain = async closeContactID => {
-    await Geolocation.getCurrentPosition((info, geoError) => {
-      if (geoError === undefined) {
-        // eslint-disable-next-line no-undef
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
-          .then((response) => response.json())
-          .then((responseJson) => {
-            toggleAddCloseContact({
-              variables: {
-                id: closeContactID,
-                type: 'CONTACT',
-                location: {
-                  coordinates: [info.coords.latitude, info.coords.longitude]
-                },
-                locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
-              }
-            })
-          })
+    toggleAddCloseContact({
+      variables: {
+        id: closeContactID, type: 'CONTACT', location: location.position,
+        locationName: location.name,
       }
-    }
-    )
+    })
   }
 
   const groupingContacts = contactData => {

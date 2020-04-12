@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
@@ -47,11 +47,29 @@ const QRScanner = () => {
   const [showCloseContactModal, setShowCloseContactModal] = useState(false)
   const [closeContactID, setCloseContactID] = useState(null)
   const [locationError, setLocationError] = useState(false)
+  const [location, setLocation] = useState({})
 
   const { loading, error, data } = useQuery(GET_USER_PROFILE)
-
   const [toggleAddCloseContact] = useMutation(ADD_CLOSE_CONTACT, {
     refetchQueries: [{ query: GET_CLOSE_CONTACTS }],
+  })
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      info => {
+        // eslint-disable-next-line no-undef
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            setLocation({
+              position: { coordinates: [info.coords.latitude, info.coords.longitude] },
+              name: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`
+            })
+          })
+      },
+      err => console.info('Error', err),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    )
   })
 
   const { profile } = data || {}
@@ -70,23 +88,10 @@ const QRScanner = () => {
     const { data: id } = QRCode
     setCloseContactID(id)
     setShowCloseContactModal(true)
-    await Geolocation.getCurrentPosition((info, geoError) => {
-      if (geoError === undefined) {
-        // eslint-disable-next-line no-undef
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
-          .then((response) => response.json())
-          .then((responseJson) => {
-            toggleAddCloseContact({
-              variables: {
-                id,
-                type: 'CONTACT',
-                location: { coordinates: [info.coords.latitude, info.coords.longitude] },
-                locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
-              }
-            })
-          })
-      } else {
-        setLocationError(true)
+    toggleAddCloseContact({
+      variables: {
+        id, type: 'CONTACT', location: location.position,
+        locationName: location.name,
       }
     })
   }
@@ -96,25 +101,46 @@ const QRScanner = () => {
     const bankFBID = '5e7c4dae8674f9001835c6f8'
     setCloseContactID(bankFBID)
     setShowCloseContactModal(true)
-    await Geolocation.getCurrentPosition((info, geoError) => {
-      if (geoError === undefined) {
-        // eslint-disable-next-line no-undef
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
-          .then((response) => response.json())
-          .then((responseJson) => {
-            toggleAddCloseContact({
-              variables: {
-                id: bankFBID, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] },
-                locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
-              }
-            })
-          })
-      } else {
-        setLocationError(true)
+    // checkMultiple(
+    //   [PERMISSIONS.IOS.LOCATION_WHEN_IN_USE, PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION]
+    // ).then(async (statuses) => {
+    //   console.info(isAndroid, statuses)
+    //   if (
+    //     (isAndroid && isPermissionGranted(statuses[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION])) || (!isAndroid && isPermissionGranted(statuses[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE]))
+    //   ) {
+    //     await Geolocation.getCurrentPosition((info, geoError) => {
+    //       if (geoError === undefined) {
+    //         // eslint-disable-next-line no-undef
+    //         fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
+    //           .then((response) => response.json())
+    //           .then((responseJson) => {
+    //             toggleAddCloseContact({
+    //               variables: {
+    //                 id: bankFBID, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] },
+    //                 locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
+    //               }
+    //             })
+    //           })
+    //       } else {
+    //         setLocationError(true)
+    //       }
+    //     })
+    //   } else {
+    //     toggleAddCloseContact({
+    //       variables: {
+    //         id: bankFBID, type: 'CONTACT',
+    //       }
+    //     })
+    //   }
+    // })
+    toggleAddCloseContact({
+      variables: {
+        id: bankFBID, type: 'CONTACT', location: location.position,
+        locationName: location.name,
       }
     })
-    // toggleAddCloseContact({ variables: { id: bankFBID, type: 'CONTACT' } })
   }
+
 
   const toggleShowScanner = () => setShowCloseContactModal(false)
 
