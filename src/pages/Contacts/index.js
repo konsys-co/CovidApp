@@ -111,34 +111,33 @@ const CloseContactLists = () => {
   const addCloseContactAgain = async closeContactID => {
     await Geolocation.getCurrentPosition((info, geoError) => {
       if (geoError === undefined) {
-        toggleAddCloseContact({ variables: { id: closeContactID, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] } } })
+        // eslint-disable-next-line no-undef
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=37.785834,-122.406417&key=AIzaSyCFoAuYoZlthPtvHa7ZDgVSuCqE9FnC5QY')
+          .then((response) => response.json())
+          .then((responseJson) => {
+            toggleAddCloseContact({
+              variables: {
+                id: closeContactID,
+                type: 'CONTACT',
+                location: {
+                  coordinates: [info.coords.latitude, info.coords.longitude]
+                },
+                locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
+              }
+            })
+          })
       }
     }
     )
   }
 
-  // eslint-disable-next-line no-undef
-  const getLocationName = ({ lat, long }) => new Promise(() => fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${lat},${long}&key=YOUR_KEY`)
-    .then((response) => response.json())
-    .then((responseJson) => {
-      // console.info(JSON.stringify(responseJson))
-      console.info(responseJson.results[0].address_components[2].short_name)
-      return responseJson.results[0].address_components[2].short_name
-      // console.log(JSON.stringify(responseJson).results[0].address_components[2].short_name)
-      // return JSON.stringify(responseJson).results[0].address_components[2].short_name
-    }))
-
-  const groupingContacts = async contactData => {
-    const result = await contactData.reduce(async (a, c) => {
-      const accumulator = await a
-      accumulator.push({
+  const groupingContacts = contactData => {
+    const result = contactData.reduce((a, c) => {
+      a.push({
         ...c,
-        // eslint-disable-next-line no-undef
-        // TODO fetch location name from google service
-        // location: await getLocationName({ lat: 37.785834, long: -122.406417 }),
         createdAtOrder: c.createdAt.slice(0, 10)
       })
-      return accumulator
+      return a
     }, [])
       .reduce((a, c) => {
         // eslint-disable-next-line no-param-reassign
@@ -146,7 +145,6 @@ const CloseContactLists = () => {
         return a
       }, {})
     setContactGroupData(result)
-    // console.info(result)
     return result
   }
 

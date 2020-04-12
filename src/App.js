@@ -88,6 +88,7 @@ export default () => {
   const [loadProfile, { loading, data: profile }] = useLazyQuery(GET_USER_STATUS)
 
   useEffect(() => {
+    // AsyncStorage.removeItem('@FacebookOAuthKey:accessToken')
     setTimeout(() => SplashScreen.hide(), 1500)
   }, [])
 

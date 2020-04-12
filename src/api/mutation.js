@@ -10,8 +10,8 @@ export const UPDATE_STATUS = gql`
 `
 
 export const ADD_CLOSE_CONTACT = gql`
-  mutation makeContact($id: MongoID!, $type: ContactType!, $location: CloseContactLocationInput) {
-    makeContact(contact: $id, type: $type, location: $location) {
+  mutation makeContact($id: MongoID!, $type: ContactType!, $location: CloseContactLocationInput, $locationName: String) {
+    makeContact(contact: $id, type: $type, location: $location, locationName: $locationName) {
       recordId
       record {
         contact

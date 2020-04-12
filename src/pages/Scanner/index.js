@@ -71,7 +71,19 @@ const QRScanner = () => {
     setShowCloseContactModal(true)
     await Geolocation.getCurrentPosition((info, geoError) => {
       if (geoError === undefined) {
-        toggleAddCloseContact({ variables: { id, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] } } })
+        // eslint-disable-next-line no-undef
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=37.785834,-122.406417&key=AIzaSyCFoAuYoZlthPtvHa7ZDgVSuCqE9FnC5QY')
+          .then((response) => response.json())
+          .then((responseJson) => {
+            toggleAddCloseContact({
+              variables: {
+                id,
+                type: 'CONTACT',
+                location: { coordinates: [info.coords.latitude, info.coords.longitude] },
+                locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
+              }
+            })
+          })
       } else {
         setLocationError(true)
       }
@@ -85,7 +97,17 @@ const QRScanner = () => {
     setShowCloseContactModal(true)
     await Geolocation.getCurrentPosition((info, geoError) => {
       if (geoError === undefined) {
-        toggleAddCloseContact({ variables: { id: bankFBID, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] } } })
+        // eslint-disable-next-line no-undef
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=AIzaSyCFoAuYoZlthPtvHa7ZDgVSuCqE9FnC5QY`)
+          .then((response) => response.json())
+          .then((responseJson) => {
+            toggleAddCloseContact({
+              variables: {
+                id: bankFBID, type: 'CONTACT', location: { coordinates: [info.coords.latitude, info.coords.longitude] },
+                locationName: `${responseJson.results[0].address_components[2].short_name} ${responseJson.results[0].address_components[3].short_name} ${responseJson.results[0].address_components[4].short_name}`,
+              }
+            })
+          })
       } else {
         setLocationError(true)
       }

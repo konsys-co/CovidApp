@@ -70,6 +70,7 @@ export const GET_CLOSE_CONTACTS = gql`
         coordinates
         type
       }
+      locationName
       updatedAt
       createdAt
       type
