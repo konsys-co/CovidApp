@@ -4,6 +4,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner'
 import { RNCamera as Camera } from 'react-native-camera'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import Geolocation from '@react-native-community/geolocation'
+import { GOOGLE_KEY } from 'react-native-dotenv'
 
 import * as STATUS from '../../constants/userStatus'
 import GradientBackground from '../../components/background'
@@ -72,7 +73,7 @@ const QRScanner = () => {
     await Geolocation.getCurrentPosition((info, geoError) => {
       if (geoError === undefined) {
         // eslint-disable-next-line no-undef
-        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=37.785834,-122.406417&key=AIzaSyCFoAuYoZlthPtvHa7ZDgVSuCqE9FnC5QY')
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
           .then((response) => response.json())
           .then((responseJson) => {
             toggleAddCloseContact({
@@ -98,7 +99,7 @@ const QRScanner = () => {
     await Geolocation.getCurrentPosition((info, geoError) => {
       if (geoError === undefined) {
         // eslint-disable-next-line no-undef
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=AIzaSyCFoAuYoZlthPtvHa7ZDgVSuCqE9FnC5QY`)
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
           .then((response) => response.json())
           .then((responseJson) => {
             toggleAddCloseContact({

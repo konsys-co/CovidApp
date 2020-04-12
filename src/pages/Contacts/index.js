@@ -10,6 +10,7 @@ import {
 import { createStackNavigator } from '@react-navigation/stack'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import Geolocation from '@react-native-community/geolocation'
+import { GOOGLE_KEY } from 'react-native-dotenv'
 
 import ContactCard from '../../components/ContactCard'
 import RNLoading from '../../components/Loading'
@@ -112,7 +113,7 @@ const CloseContactLists = () => {
     await Geolocation.getCurrentPosition((info, geoError) => {
       if (geoError === undefined) {
         // eslint-disable-next-line no-undef
-        fetch('https://maps.googleapis.com/maps/api/geocode/json?address=37.785834,-122.406417&key=AIzaSyCFoAuYoZlthPtvHa7ZDgVSuCqE9FnC5QY')
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${info.coords.latitude},${info.coords.longitude}&key=${GOOGLE_KEY}`)
           .then((response) => response.json())
           .then((responseJson) => {
             toggleAddCloseContact({
