@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, Dimensions, Platform } from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner'
@@ -12,6 +13,8 @@ import { GET_USER_PROFILE, GET_CLOSE_CONTACTS } from '../../api/query'
 import { ADD_CLOSE_CONTACT } from '../../api/mutation'
 
 const deviceHeight = Dimensions.get('window').height
+const isIPhone6s = !!(deviceHeight === 667)
+const isIPhone8Plus = !!(deviceHeight === 736)
 
 const isAndroid = !!(Platform.OS === 'android')
 
@@ -133,7 +136,13 @@ const QRScanner = () => {
                 height: deviceHeight * 0.62,
                 alignSelf: 'center',
                 justifyContent: 'center',
-                marginTop: isAndroid ? 0 : '-20%',
+                marginTop: isAndroid
+                  ? 0
+                  : isIPhone6s
+                  ? '-8%'
+                  : isIPhone8Plus
+                  ? '-5%'
+                  : '-20%',
               }}
               showMarker
               markerStyle={{
